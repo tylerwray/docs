@@ -1,15 +1,14 @@
-on: push
+on:
+  push:
+    branches:
+      - master
 name: Build and Index Files
 jobs:
-  master:
-    name: Master
+  index:
+    name: Index ZEIT Docs
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
-    - name: Master
-      uses: actions/bin/filter@master
-      with:
-        args: branch master && not deleted
+    - users: actions/checkout@master
     - name: Install
       uses: docker://mhart/alpine-node:10
       with:
