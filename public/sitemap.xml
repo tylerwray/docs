@@ -304,19 +304,7 @@
     <changefreq>hourly</changefreq>
   </url>
   <url>
-    <loc>https://zeit.co/docs/v2/.DS_Store/</loc>
-    <changefreq>hourly</changefreq>
-  </url>
-  <url>
-    <loc>https://zeit.co/docs/v2/advanced/.DS_Store/</loc>
-    <changefreq>hourly</changefreq>
-  </url>
-  <url>
     <loc>https://zeit.co/docs/v2/advanced/builds/</loc>
-    <changefreq>hourly</changefreq>
-  </url>
-  <url>
-    <loc>https://zeit.co/docs/v2/advanced/concepts/.DS_Store/</loc>
     <changefreq>hourly</changefreq>
   </url>
   <url>
@@ -376,7 +364,7 @@
   </url>
   <url>
     <loc>https://zeit.co/docs/v2/advanced/domains/transferring-a-domain/</loc>
-    <lastmod>2019-08-22T10:47:21.000Z</lastmod>
+    <lastmod>2019-09-30T14:13:19.000Z</lastmod>
     <changefreq>hourly</changefreq>
   </url>
   <url>
@@ -391,10 +379,6 @@
   <url>
     <loc>https://zeit.co/docs/v2/advanced/now-for-gitlab/</loc>
     <lastmod>2019-08-22T10:47:21.000Z</lastmod>
-    <changefreq>hourly</changefreq>
-  </url>
-  <url>
-    <loc>https://zeit.co/docs/v2/advanced/platform/.DS_Store/</loc>
     <changefreq>hourly</changefreq>
   </url>
   <url>
@@ -458,14 +442,6 @@
   <url>
     <loc>https://zeit.co/docs/v2/custom-domains/</loc>
     <lastmod>2019-09-27T10:24:08.000Z</lastmod>
-    <changefreq>hourly</changefreq>
-  </url>
-  <url>
-    <loc>https://zeit.co/docs/v2/domains/.DS_Store/</loc>
-    <changefreq>hourly</changefreq>
-  </url>
-  <url>
-    <loc>https://zeit.co/docs/v2/domains-and-aliases/.DS_Store/</loc>
     <changefreq>hourly</changefreq>
   </url>
   <url>
@@ -582,10 +558,6 @@
   <url>
     <loc>https://zeit.co/docs/v2/serverless-functions/supported-languages/</loc>
     <lastmod>2019-09-24T17:47:39.000Z</lastmod>
-    <changefreq>hourly</changefreq>
-  </url>
-  <url>
-    <loc>https://zeit.co/guides/.DS_Store/</loc>
     <changefreq>hourly</changefreq>
   </url>
   <url>
