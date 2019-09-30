@@ -8,7 +8,7 @@ jobs:
     name: Index ZEIT Docs
     runs-on: ubuntu-latest
     steps:
-    - users: actions/checkout@master
+    - uses: actions/checkout@master
     - name: Install
       uses: docker://mhart/alpine-node:10
       with:
