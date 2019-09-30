@@ -1,12 +1,16 @@
 const { exec: execSync } = require('child_process')
 const { promisify } = require('util')
-var algoliasearch = require('algoliasearch')
+const algoliasearch = require('algoliasearch')
 const fs = require('fs')
 const cheerio = require('cheerio')
 const globby = require('globby')
 const md5 = require('md5')
+
 const execP = promisify(execSync)
 const exec = cmd => execP(cmd)
+const readFile = promisify(fs.readFile)
+const writeFile = promisify(fs.writeFile)
+const nextConfigPath = 'next.config.js'
 
 // Main function
 async function main() {
@@ -19,8 +23,16 @@ async function main() {
   // Array to store object with content from pages
   let index = []
 
+  const nextConfig = await readFile(nextConfigPath, 'utf8')
+
+  // next export only works with the server target
+  await writeFile(
+    nextConfigPath,
+    nextConfig.replace(`target: 'serverless'`, `target: 'server'`)
+  )
   // Build project
   await exec(`next build && next export -o dist`)
+  await writeFile(nextConfigPath, nextConfig)
 
   // Scan pages and add titles and content as objects in an `index` array
   let files
