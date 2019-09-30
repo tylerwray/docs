@@ -7,8 +7,7 @@ import Note from '~/components/text/note'
 import { GenericLink } from '~/components/text/link'
 
 export const meta = {
-  title:
-    'Create a Next.js and Contentful App That Builds and Deploys with ZEIT Now',
+  title: 'Create a Next.js App with Contentful and Deploy It with ZEIT Now',
   description:
     'Deploy your Next.js and Contentful app with ZEIT Now in a serverless environment.',
   published: '2019-06-18T16:51:04.000Z',
@@ -18,7 +17,7 @@ export const meta = {
     process.env.ASSETS
   }/guides/deploying-next-contentful-with-now/deploying-next-contentful-with-now.png`,
   editUrl: 'pages/guides/deploying-next-and-contentful-with-now.mdx',
-  lastEdited: '2019-08-30T09:17:58.000Z'
+  lastEdited: '2019-09-30T14:31:07.000Z'
 }
 
 In this guide, you will discover how to create a [Next.js](https://nextjs.org/) app that displays links to posts from the [ZEIT blog](/blog) by utilizing the [Contentful](https://www.contentful.com/) client, before deploying **with a single command** to [ZEIT Now](/docs/v2).
@@ -44,8 +43,8 @@ From your [Contentful Spaces dashboard](https://app.contentful.com/spaces/), cre
   src={`${
     process.env.ASSETS
   }/guides/deploying-next-contentful-with-now/creating-content-model.png`}
-  width={699/2}
-  height={568/2}
+  width={1390 / 2}
+  height={1130 / 2}
   oversize
   shadow
 />
@@ -65,8 +64,8 @@ Your **Post Content Model** should look like this:
   src={`${
     process.env.ASSETS
   }/guides/deploying-next-contentful-with-now/completed-content-model.png`}
-  width={790/2}
-  height={508/2}
+  width={1564 / 2}
+  height={786 / 2}
   oversize
   shadow
 />
@@ -132,6 +131,7 @@ function HomePage() {
     if (types.items) return types.items
     console.log('Error getting Content Types.')
   }
+
   async function fetchEntriesForContentType(contentType) {
     const entries = await client.getEntries({
       content_type: contentType.sys.id
@@ -139,7 +139,9 @@ function HomePage() {
     if (entries.items) return entries.items
     console.log(`Error getting Entries for ${contentType.name}.`)
   }
+
   const [posts, setPosts] = useState([])
+
   useEffect(() => {
     async function getPosts() {
       const contentTypes = await fetchContentTypes()
@@ -148,6 +150,7 @@ function HomePage() {
     }
     getPosts()
   }, [])
+
   return (
     <>
       <Head>

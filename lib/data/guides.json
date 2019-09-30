@@ -86,14 +86,14 @@
     "lastEdited": "2019-08-30T09:17:58.000Z"
   },
   {
-    "title": "Create a Next.js and Contentful App That Builds and Deploys with ZEIT Now",
+    "title": "Create a Next.js App with Contentful and Deploy It with ZEIT Now",
     "description": "Deploy your Next.js and Contentful app with ZEIT Now in a serverless environment.",
     "published": "2019-06-18T16:51:04.000Z",
     "authors": ["msweeneydev"],
     "url": "/guides/deploying-next-and-contentful-with-now",
     "image": "undefined/guides/deploying-next-contentful-with-now/deploying-next-contentful-with-now.png",
     "editUrl": "pages/guides/deploying-next-and-contentful-with-now.mdx",
-    "lastEdited": "2019-08-30T09:17:58.000Z"
+    "lastEdited": "2019-09-30T14:31:07.000Z"
   },
   {
     "title": "Create a Next.js App with a MySQL Database That Builds and Deploys with ZEIT Now",
@@ -156,14 +156,14 @@
     "lastEdited": "2019-09-25T20:27:19.000Z"
   },
   {
-    "title": "Create and deploy a Preact App with ZEIT Now",
+    "title": "Create and Deploy a Preact App with ZEIT Now",
     "description": "Create your Preact app and deploy it with ZEIT Now.",
     "published": "2019-08-16T12:00:00.860Z",
     "authors": ["msweeneydev"],
     "url": "/guides/deploying-preact-with-zeit-now",
     "editUrl": "pages/guides/deploying-preact-with-zeit-now.mdx",
     "image": "https://og-image.now.sh/**Deploy%20a%20Preact%20App**%20%3Cbr%3E%20with%20ZEIT%20Now.png?theme=light&md=1&fontSize=100px&images=https%3A%2F%2Fassets.zeit.co%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fnow-black.svg&images=https%3A%2F%2Fwww.stickpng.com%2Fassets%2Fimages%2F584815e7cef1014c0b5e4978.png",
-    "lastEdited": "2019-09-25T20:27:19.000Z"
+    "lastEdited": "2019-09-30T09:35:44.000Z"
   },
   {
     "title": "Deploying Real-Time Apps with Pusher Channels and ZEIT Now",
