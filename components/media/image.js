@@ -69,6 +69,7 @@ class Image extends Component {
       borderRadius = false,
       children,
       shadow,
+      align = 'center',
       layout
     } = this.props
 
@@ -111,7 +112,6 @@ class Image extends Component {
             <style jsx>{`
               figure {
                 display: block;
-                text-align: center;
               }
 
               main {
@@ -141,19 +141,6 @@ class Image extends Component {
                 margin: 0;
                 text-align: center;
               }
-            `}</style>
-            <style jsx>{`
-              figure {
-                margin: ${margin}px 0;
-              }
-
-              main {
-                margin: 0 auto;
-              }
-
-              img {
-                ${borderRadius ? `border-radius: 5px;` : ''};
-              }
 
               .has-shadow + :global(.caption) {
                 margin: 0 0 40px;
@@ -162,6 +149,15 @@ class Image extends Component {
             <style jsx>{`
               figure {
                 margin: ${margin}px 0;
+                text-align: ${align};
+              }
+
+              main {
+                ${align === 'center'
+                  ? 'margin: 0 auto'
+                  : align === 'right'
+                  ? 'margin-left: auto'
+                  : 'margin: 0'};
               }
 
               img {
