@@ -3,12 +3,10 @@ import React, { Component } from 'react'
 import fetchAPI from '~/lib/fetch-api'
 import { getToken } from '~/lib/authenticate'
 import { API_DOCS_FEEDBACK } from '~/lib/constants'
-import PropTypes from 'prop-types'
 import cn from 'classnames'
 
 // Components
 import Button from '~/components/buttons'
-import EmojiIcon from '~/components/icons/emoji'
 import ClickOutside from '~/components/click-outside'
 import { H5 } from '~/components/text'
 
@@ -218,7 +216,7 @@ export default class GuidesFeedback extends Component {
 
   render() {
     const { focused, value } = this.state
-    const { darkBg, className, textAreaStyle, ...props } = this.props
+    const { className, textAreaStyle, ...props } = this.props
 
     return (
       <div className="feedback">
@@ -230,13 +228,16 @@ export default class GuidesFeedback extends Component {
             <div
               ref={innerRef}
               title="Share any feedback about our products and services"
-              className={`geist-feedback-input ${focused ? 'focused' : ''}
-                ${this.state.errorMessage != null ? 'error' : ''}
-                ${this.state.loading ? 'loading' : ''}
-                ${this.state.success ? 'success' : ''}
-                ${this.context.darkBg || darkBg ? 'dark' : ''}
-                ${className}
-                `}
+              className={cn(
+                'geist-feedback-input',
+                {
+                  focused,
+                  error: this.state.errorMessage,
+                  loading: this.state.loading,
+                  success: this.state.success
+                },
+                className
+              )}
               {...props}
             >
               <span className="emojis">
@@ -335,11 +336,11 @@ export default class GuidesFeedback extends Component {
               width: 408px;
             }
 
-            .geist-feedback-input textarea {
+            textarea {
               appearance: none;
               border-width: 0;
               background: #f9f9f9;
-              padding: 0 8px;
+              padding: var(--geist-gap-half);
               height: 0px;
               width: 100%;
               opacity: 0;
@@ -377,25 +378,11 @@ export default class GuidesFeedback extends Component {
               color: #ccc;
             }
 
-            .geist-feedback-input.dark textarea {
-              background: #282828;
-              box-shadow: none;
-              color: #fff;
-            }
-
-            .geist-feedback-input textarea::placeholder {
+            textarea::placeholder {
               color: #666;
             }
 
-            .geist-feedback-input.dark textarea::placeholder {
-              color: #999;
-            }
-
-            div.focused {
-              transform: translate3d(-60%, -20%);
-            }
-
-            .geist-feedback-input .textarea-wrapper {
+            .textarea-wrapper {
               height: 100%;
               margin-top: 16px;
             }
@@ -421,19 +408,14 @@ export default class GuidesFeedback extends Component {
               opacity: 1;
             }
 
-            .geist-feedback-input.dark.focused textarea {
-              background: #282828;
-              box-shadow: none;
-            }
-
-            .geist-feedback-input .error-message,
-            .geist-feedback-input .success-message {
+            .error-message,
+            .success-message {
               position: absolute;
               left: 0;
               top: 0;
               z-index: 1001;
               width: 100%;
-              font-size: 12px;
+              font-size: 14px;
               height: 100%;
               line-height: 20px;
               display: flex;
@@ -444,46 +426,36 @@ export default class GuidesFeedback extends Component {
               flex-direction: column;
             }
 
-            .geist-feedback-input .error-message span {
+            .success-message p {
+              margin: 0;
+              opacity: 0;
+              animation: appear 500ms ease forwards;
+            }
+
+            .success-message p:first-of-type {
+              margin-bottom: var(--geist-gap-half);
+              animation-delay: 100ms;
+            }
+
+            .success-message p:nth-of-type(2) {
+              animation-delay: 500ms;
+            }
+
+            .error-message span {
               color: #eb5757;
               margin-bottom: 20px;
             }
 
-            .geist-feedback-input .success-message p {
-              opacity: 0;
-            }
-
-            .geist-feedback-input .success-message p:first-child {
-              animation: appear 500ms ease;
-              animation-delay: 100ms;
-              animation-fill-mode: forwards;
-            }
-
-            .geist-feedback-input .success-message p:last-child {
-              animation: appear 500ms ease;
-              animation-delay: 1s;
-              animation-fill-mode: forwards;
-            }
-
-            .geist-feedback-input.dark .error-message span {
-              color: #999;
-            }
-
-            .geist-feedback-input .error-message a {
+            .error-message a {
               color: #000;
               text-decoration: none;
             }
 
-            .geist-feedback-input.dark .error-message a {
-              color: #fff;
-            }
-
-            .geist-feedback-input.focused .controls,
-            .geist-feedback-input.dark.focused .controls {
+            .geist-feedback-input.focused .controls {
               display: flex;
             }
 
-            .geist-feedback-input .controls {
+            .controls {
               pointer-events: none;
               position: absolute;
               visibility: hidden;
@@ -497,19 +469,19 @@ export default class GuidesFeedback extends Component {
               border-bottom-right-radius: 5px;
             }
 
-            .geist-feedback-input .emojis {
+            .emojis {
               width: 100%;
               display: flex;
               justify-content: center;
             }
 
-            .geist-feedback-input .controls .buttons {
+            .controls .buttons {
               flex: 1;
               text-align: right;
               transition: opacity 200ms ease;
             }
 
-            .geist-feedback-input .controls .buttons.hidden {
+            .controls .buttons.hidden {
               opacity: 0;
             }
 
@@ -525,10 +497,6 @@ export default class GuidesFeedback extends Component {
               visibility: visible;
               bottom: 0;
               top: auto;
-            }
-
-            .geist-feedback-input.dark .controls {
-              background-color: #282828;
             }
 
             @keyframes appear {
@@ -547,18 +515,12 @@ export default class GuidesFeedback extends Component {
 }
 
 class EmojiSelector extends Component {
-  static contextTypes = {
-    darkBg: PropTypes.bool
-  }
-
   render() {
-    const darkBg = this.props.darkBg || this.context.darkBg
-
     return (
       <main
-        className={`geist-emoji-selector shown ${
-          this.props.loading || this.props.success ? 'loading' : ''
-        } ${darkBg ? 'dark' : ''}`}
+        className={cn('geist-emoji-selector', 'shown', {
+          loading: this.props.loading || this.props.success
+        })}
       >
         {Array.from(EMOJIS.values()).map(emoji => (
           <button
@@ -639,20 +601,6 @@ class EmojiSelector extends Component {
 
             .geist-emoji-selector > button .inner.icon {
               padding: 3px 2px 2px 2px;
-            }
-
-            .geist-emoji-selector.dark {
-              background: transparent !important;
-            }
-
-            .geist-emoji-selector.dark > button .inner {
-              border-color: #000000;
-              background-color: #000000;
-            }
-
-            .geist-emoji-selector.dark.loading > button .inner {
-              border-color: #666666;
-              background-color: #666666;
             }
 
             .geist-emoji-selector > button.active .inner,

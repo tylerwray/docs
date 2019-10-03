@@ -139,7 +139,7 @@ class Button extends React.Component {
             border: 1px solid ${bgColor};
             font-size: 12px;
             justify-content: center;
-            text-transform: uppercase;
+            text-transform: capitalize;
             cursor: pointer;
             text-align: center;
             user-select: none;

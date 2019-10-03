@@ -26,7 +26,7 @@ function AmpUserFeedback() {
   return (
     <>
       <a href={router.pathname} className="feedback-link">
-        <HeaderFeedback textAreaStyle={{ height: 24, top: 0 }} />
+        <HeaderFeedback loggedOut />
       </a>
       <NavigationItem customLink>
         <a href="/blog">Blog</a>
@@ -342,7 +342,7 @@ class Header extends Component {
                         <Fragment>
                           <HeaderFeedback
                             onFeedback={this.handleFeedbackSubmit}
-                            hideHeader={hideHeader}
+                            loggedOut
                           />
                           <NavigationItem href="/blog">Blog</NavigationItem>
                           <NavigationItem className="chat" href="/support">

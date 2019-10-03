@@ -1,13 +1,14 @@
 // Packages
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import cn from 'classnames'
 
 // Components
 import Button from '~/components/buttons'
 import EmojiIcon from '~/components/icons/emoji'
 import ClickOutside from '~/components/click-outside'
-
-/* eslint-disable react/no-multi-comp */
+import X from '~/components/icons/cross'
+import Checkmark from '~/components/icons/checkmark-in-circle'
 
 const EMOJIS = new Map([
   ['🤩', 'f929'],
@@ -27,21 +28,7 @@ function getEmoji(code) {
   return EMOJI_CODES.get(code)
 }
 
-const WIDTH = 256
-
 class HeaderFeedback extends Component {
-  static contextTypes = {
-    darkBg: PropTypes.bool
-  }
-
-  static childContextTypes = {
-    darkBg: PropTypes.bool
-  }
-
-  getChildContext = () => ({
-    darkBg: this.props.darkBg || this.context.darkBg
-  })
-
   state = {
     emoji: null,
     loading: false,
@@ -156,24 +143,6 @@ class HeaderFeedback extends Component {
 
       // If a value exists, add it back to the textarea when focused
       this.textAreaRef.value = this.state.value
-
-      if (this.props.hideHeader !== prevProps.hideHeader) {
-        this.textAreaRef.blur()
-
-        if (prevState.errorMessage && this.textAreaRef) {
-          this.setState({ errorMessage: null }) // eslint-disable-line react/no-did-update-set-state
-        }
-
-        // if we had a success message
-        // clear it
-        if (prevState.success) {
-          this.setState({ success: false }) // eslint-disable-line react/no-did-update-set-state
-        }
-
-        this.setState({ focused: false }) // eslint-disable-line react/no-did-update-set-state
-
-        window.removeEventListener('keypress', this.onKeyPress)
-      }
     } else if (prevState.focused && this.textAreaRef) {
       // needed for when we e.g.: unfocus based on pressing escape
       this.textAreaRef.blur()
@@ -228,11 +197,9 @@ class HeaderFeedback extends Component {
   }
 
   render() {
-    const { darkBg, className, textAreaStyle, ...props } = this.props
+    const { className, open, loggedOut, ...props } = this.props
     const { focused } = this.state
     delete props.onFeedback
-    delete props.textAreaStyle
-    delete props.hideHeader
 
     return (
       <ClickOutside
@@ -242,20 +209,22 @@ class HeaderFeedback extends Component {
           <div
             ref={innerRef}
             title="Share any feedback about our products and services"
-            className={`geist-feedback-input ${focused ? 'focused' : ''}
-              ${this.state.errorMessage != null ? 'error' : ''}
-              ${this.state.loading ? 'loading' : ''}
-              ${this.state.success ? 'success' : ''}
-              ${this.context.darkBg || darkBg ? 'dark' : ''}
-              ${className}
-              `}
+            className={cn(
+              'geist-feedback-input',
+              {
+                focused: focused || open,
+                error: this.state.errorMessage,
+                loading: this.state.loading,
+                success: this.state.success
+              },
+              className
+            )}
             {...props}
           >
             <div className="textarea-wrapper">
               <textarea
-                style={textAreaStyle}
                 ref={this.handleTextAreaRef}
-                placeholder={focused ? '' : 'Feedback...'}
+                placeholder={focused ? '' : 'Feedback'}
                 onFocus={this.onFocus}
                 onKeyDown={e => {
                   if (e.key === 'Enter' && e.metaKey) {
@@ -286,6 +255,7 @@ class HeaderFeedback extends Component {
 
               {this.state.success && (
                 <div className="success-message">
+                  <Checkmark size="2rem" className="checkmark" />
                   <p>Your feedback has been received!</p>
                   <p>Thank you for your help.</p>
                 </div>
@@ -303,63 +273,79 @@ class HeaderFeedback extends Component {
                       />
                     ) : null}
                   </span>
-                  {
-                    <span
-                      className={`buttons ${
-                        this.state.emojiShown ? 'hidden' : ''
-                      }`}
+                  <span
+                    className={`buttons ${
+                      this.state.emojiShown ? 'hidden' : ''
+                    }`}
+                  >
+                    <Button
+                      small
+                      loading={this.state.loading}
+                      onClick={this.onSubmit}
+                      width={60}
                     >
-                      <Button
-                        small
-                        loading={this.state.loading}
-                        onClick={this.onSubmit}
-                        width={60}
-                      >
-                        Send
-                      </Button>
-                    </span>
-                  }
+                      Send
+                    </Button>
+                  </span>
                 </div>
               )}
             </div>
 
+            {/* Dyanmic Styles */}
+            <style jsx>{`
+              .geist-feedback-input {
+                --open-width: ${loggedOut ? '262px' : '252px'};
+              }
+            `}</style>
+
             <style jsx>
               {`
                 .geist-feedback-input {
+                  --open-height: 174px;
+                  --closed-width: 90px;
+                  --closed-height: 32px;
+                  --padding: 4px 12px;
+
+                  margin-right: 8px;
                   padding: 0;
-                  margin-right: 9px;
                   position: relative;
-                  height: 24px;
-                  width: 84px;
+                  height: var(--closed-height);
+                  width: var(--closed-width);
                   display: inline-block;
-                  transition: all 150ms ease-out;
                   font-family: var(--font-sans);
                   text-rendering: optimizeLegibility;
                   -webkit-font-smoothing: antialiased;
                 }
 
-                .geist-feedback-input textarea {
+                textarea {
                   appearance: none;
                   border-width: 0;
-                  background: #f9f9f9;
-                  padding: 0 8px;
-                  line-height: 26px;
-                  font-size: 12px;
-                  border-radius: 4px;
+                  background: var(--geist-background);
+                  border: 1px solid var(--accents-2);
+                  padding: var(--padding);
+                  line-height: 1.5;
+                  font-size: 0.875rem;
+                  border-radius: var(--geist-radius);
                   font-family: var(--font-sans);
-                  width: 84px;
+                  width: var(--closed-width);
+                  height: var(--closed-height);
                   resize: none;
-                  vertical-align: top;
                   height: 100%;
-                  transition: all 150ms ease-out;
                   /* fixes a bug in ff where the animation of the chat
                 * counter appears on top of our input during its transition */
                   z-index: 100;
                   outline: 0;
-                  color: #000;
+                  color: var(--geist-foreground);
                   overflow-y: hidden;
-                  text-rendering: optimizeLegibility;
-                  -webkit-font-smoothing: antialiased;
+                  transition: border-color 0.2s ease-in-out;
+                }
+
+                .geist-feedback-input:hover textarea {
+                  border-color: var(--geist-foreground);
+                }
+
+                .geist-feedback-input:hover textarea::placeholder {
+                  color: var(--geist-foreground);
                 }
 
                 .geist-feedback-input.error textarea,
@@ -375,66 +361,53 @@ class HeaderFeedback extends Component {
                 }
 
                 .geist-feedback-input.loading textarea {
-                  color: #ccc;
+                  color: var(--accents-3);
                 }
 
-                .geist-feedback-input.dark textarea {
-                  background: #282828;
-                  box-shadow: none;
-                  color: #fff;
+                textarea::placeholder {
+                  color: var(--accents-5);
+                  transition: color 0.2s ease-in-out;
                 }
 
-                .geist-feedback-input textarea::placeholder {
-                  color: #666;
-                }
-
-                .geist-feedback-input.dark textarea::placeholder {
-                  color: #999;
-                }
-
-                div.focused {
-                  transform: translate3d(-60%, -20%);
-                }
-
-                .geist-feedback-input .textarea-wrapper {
-                  height: 100%;
+                .textarea-wrapper {
+                  height: var(--closed-height);
+                  width: var(--closed-width);
+                  transition: all 150ms ease-in-out;
                 }
 
                 .geist-feedback-input.focused .textarea-wrapper {
-                  display: block;
-                  width: ${WIDTH}px;
-                  height: 150px;
-                  background: #fff;
-                  padding-bottom: 40px;
-                  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.12);
+                  display: flex;
+                  flex-direction: column;
+                  border: none;
+                  width: var(--open-width);
+                  height: var(--open-height);
+                  box-shadow: var(--shadow-large);
+                  background: var(--geist-background);
                   border-radius: 4px;
                   overflow: hidden;
                   position: relative;
-                  transition: all 150ms ease-out;
                   z-index: 1000;
                 }
 
                 .geist-feedback-input.focused .textarea-wrapper textarea {
-                  width: 256px;
-                  background: #fff;
+                  width: var(--open-width);
+                  border-color: var(--geist-background);
+                  border-radius: var(--geist-radius) var(--geist-radius) 0 0;
+                  background: var(--geist-background);
+                  padding: var(--padding);
                   overflow-y: visible;
+                  transition: none;
                 }
 
-                .geist-feedback-input.dark.focused textarea {
-                  background: #282828;
-                  box-shadow: none;
-                }
-
-                .geist-feedback-input .error-message,
-                .geist-feedback-input .success-message {
+                .error-message,
+                .success-message {
+                  z-index: 1001;
                   position: absolute;
                   left: 0;
                   top: 0;
-                  z-index: 1001;
-                  width: ${WIDTH}px;
-                  font-size: 12px;
+                  width: var(--open-width);
+                  font-size: 0.875rem;
                   height: 100%;
-                  line-height: 20px;
                   display: flex;
                   align-items: center;
                   justify-content: center;
@@ -443,90 +416,81 @@ class HeaderFeedback extends Component {
                   flex-direction: column;
                 }
 
-                .geist-feedback-input .error-message span {
-                  color: #eb5757;
-                  margin-bottom: 20px;
-                }
-
-                .geist-feedback-input .success-message p {
+                .success-message p {
+                  margin: 0;
                   opacity: 0;
+                  white-space: nowrap;
+                  animation: appear 500ms ease forwards;
                 }
 
-                .geist-feedback-input .success-message p:first-child {
-                  animation: appear 500ms ease;
-                  animation-delay: 100ms;
-                  animation-fill-mode: forwards;
+                .success-message :global(.checkmark) {
+                  opacity: 0;
+                  animation: appear 200ms 100ms ease forwards;
                 }
 
-                .geist-feedback-input .success-message p:last-child {
-                  animation: appear 500ms ease;
-                  animation-delay: 1s;
-                  animation-fill-mode: forwards;
+                .success-message p:first-of-type {
+                  margin-top: var(--geist-gap-half);
+                  margin-bottom: var(--geist-gap-quarter);
+                  animation-delay: 300ms;
                 }
 
-                .geist-feedback-input.dark .error-message span {
-                  color: #999;
+                .success-message p:nth-of-type(2) {
+                  animation-delay: 500ms;
                 }
 
-                .geist-feedback-input .error-message a {
-                  color: #000;
+                .error-message span {
+                  color: var(--geist-error);
+                  margin-bottom: var(--geist-gap-half);
+                }
+
+                .error-message a {
+                  color: var(--geist-foreground);
                   text-decoration: none;
                 }
 
-                .geist-feedback-input.dark .error-message a {
-                  color: #fff;
-                }
-
-                .geist-feedback-input.focused .controls,
-                .geist-feedback-input.dark.focused .controls {
+                .geist-feedback-input.focused .controls {
                   display: flex;
                 }
 
-                .geist-feedback-input .controls {
+                .controls {
                   pointer-events: none;
-                  position: absolute;
                   visibility: hidden;
-                  top: -2000px;
-                  opacity: 0;
-                  width: ${WIDTH}px;
-                  background-color: white;
+                  width: var(--open-width);
+                  background-color: var(--geist-background);
                   display: flex;
                   align-items: center;
                   border-bottom-left-radius: 5px;
                   border-bottom-right-radius: 5px;
                 }
 
-                .geist-feedback-input .controls .emojis {
+                .controls .emojis {
                   width: 160px;
-                  z-index: 1002;
                 }
 
-                .geist-feedback-input .controls .buttons {
+                .controls .buttons {
                   flex: 1;
                   text-align: right;
                   transition: opacity 200ms ease;
                 }
 
-                .geist-feedback-input .controls .buttons.hidden {
+                .emojis,
+                .buttons {
+                  opacity: 0;
+                }
+
+                .geist-feedback-input.focused .emojis,
+                .geist-feedback-input.focused .buttons {
+                  animation: appear 150ms 250ms ease-in-out forwards;
+                }
+
+                .buttons.hidden {
                   opacity: 0;
                 }
 
                 .geist-feedback-input.focused .controls {
-                  animation-name: appear;
-                  animation-delay: 250ms;
-                  animation-duration: 150ms;
-                  animation-timing-function: ease-out;
-                  animation-fill-mode: forwards;
+                  padding: var(--geist-gap-half);
                   pointer-events: inherit;
-                  z-index: 1001;
-                  padding: 8px;
                   visibility: visible;
-                  bottom: 0;
-                  top: auto;
-                }
-
-                .geist-feedback-input.dark .controls {
-                  background-color: #282828;
                 }
 
                 @keyframes appear {
@@ -546,19 +510,22 @@ class HeaderFeedback extends Component {
   }
 }
 
-class EmojiSelector extends Component {
-  static contextTypes = {
-    darkBg: PropTypes.bool
-  }
+HeaderFeedback.propTypes = {
+  dryRun: PropTypes.bool,
+  open: PropTypes.bool,
+  currentTeamSlug: PropTypes.string,
+  className: PropTypes.string,
+  loggedOut: PropTypes.bool
+}
 
+class EmojiSelector extends Component {
   state = {
     shown: false,
     current: null,
-    currentSetAt: null // eslint-disable-line react/no-unused-state
+    currentSetAt: null
   }
 
   onMouseEnter = () => {
-    // eslint-disable-next-line no-console
     this.setState(prevState => {
       if (
         !prevState.shown &&
@@ -571,7 +538,6 @@ class EmojiSelector extends Component {
   }
 
   onMouseLeave = () => {
-    // eslint-disable-next-line no-console
     this.setState(prevState => {
       if (prevState.shown) {
         return { shown: false }
@@ -598,19 +564,18 @@ class EmojiSelector extends Component {
   onSelect = current => {
     this.setState({
       current,
-      currentSetAt: Date.now(), // eslint-disable-line react/no-unused-state
+      currentSetAt: Date.now(),
       shown: false
     })
   }
 
   render() {
-    const darkBg = this.props.darkBg || this.context.darkBg
-
     return (
       <main
-        className={`geist-emoji-selector ${this.state.shown ? 'shown' : ''} ${
-          this.props.loading ? 'loading' : ''
-        } ${darkBg ? 'dark' : ''}`}
+        className={cn('geist-emoji-selector', {
+          shown: this.state.shown,
+          loading: this.props.loading
+        })}
       >
         <button
           className={this.state.current !== null ? 'active' : ''}
@@ -628,11 +593,7 @@ class EmojiSelector extends Component {
         >
           <span className="inner icon">
             {this.state.current === null ? (
-              <EmojiIcon
-                width="16px"
-                height="16px"
-                darkBg={this.context.darkBg}
-              />
+              <EmojiIcon width="16px" height="16px" />
             ) : this.state.shown ? (
               <X />
             ) : (
@@ -673,6 +634,7 @@ class EmojiSelector extends Component {
             }
 
             .geist-emoji-selector > button {
+              outline: none;
               background: transparent;
               border: 0;
               padding: 0;
@@ -715,7 +677,7 @@ class EmojiSelector extends Component {
               height: 24px;
               width: 24px;
               border-radius: 4px;
-              border: 1px solid #eaeaea;
+              border: 1px solid var(--accents-2);
               justify-content: center;
               align-items: center;
               padding: 3px;
@@ -725,23 +687,9 @@ class EmojiSelector extends Component {
               padding: 3px 2px 2px 2px;
             }
 
-            .geist-emoji-selector.dark {
-              background: transparent;
-            }
-
-            .geist-emoji-selector.dark > button .inner {
-              border-color: #000000;
-              background-color: #000000;
-            }
-
-            .geist-emoji-selector.dark.loading > button .inner {
-              border-color: #666666;
-              background-color: #666666;
-            }
-
             .geist-emoji-selector > button.active .inner,
             .geist-emoji-selector > button:hover .inner {
-              border-color: #f8e71c;
+              border-color: var(--geist-warning-light);
             }
 
             .geist-emoji-selector > button.option {
@@ -779,27 +727,5 @@ const Emoji = React.memo(({ code }) => (
     }}
   />
 ))
-
-const X = () => (
-  <svg
-    width="8px"
-    height="8px"
-    viewBox="0 0 8 8"
-    version="1.1"
-    xmlnsXlink="http://www.w3.org/1999/xlink"
-  >
-    <g
-      transform="translate(-704.000000, -190.000000) translate(704.000000, 190.000000)"
-      stroke="#979797"
-      strokeWidth={1}
-      fill="none"
-      fillRule="evenodd"
-      strokeLinecap="square"
-    >
-      <path d="M.5.5l7 7" />
-      <path d="M7.5.5l-7 7" />
-    </g>
-  </svg>
-)
 
 export default HeaderFeedback
