@@ -494,7 +494,7 @@ Each deployment is an object with the following keys:
 | Key         | <HelpLink href="#api-basics/types" hasIcon>Type</HelpLink> | Description                                                                                                                                             |
 | ----------- | ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **uid**     | <HelpLink href="#api-basics/types">ID</HelpLink>           | A string with the unique deployment ID you can use to get more information or remove it.                                                                |
-| **name**    | <HelpLink href="#api-basics/types">String</HelpLink>       | A string with the deployment under which the deployment was created.                                                                                    |
+| **name**    | <HelpLink href="#api-basics/types">String</HelpLink>       | A string with the project under which the deployment was created.                                                                                    |
 | **url**     | <HelpLink href="#api-basics/types">String</HelpLink>       | A string with the unique URL of the deployment. If it hasn't finished uploading (is incomplete), the value will be `null`.                              |
 | **created** | <HelpLink href="#api-basics/types">String</HelpLink>       | A number containing the date when the deployment was created (_in timestamp_).                                                                          |
 | **creator** | <HelpLink href="#api-basics/types">Map</HelpLink>          | A map with the ID of the user who created the deployment.                                                                                               |
@@ -600,7 +600,7 @@ You can obtain the ID, for example, by [listing all deployments](#endpoints/depl
 
 <Request
   method="DELETE"
-  url="https://api.zeit.co/v5/now/deployments/dpl_5WJWYSyB7BpgTj3EuwF37WMRBXBtPQ2iTMJHJBJyRfd"
+  url="https://api.zeit.co/v9/now/deployments/dpl_5WJWYSyB7BpgTj3EuwF37WMRBXBtPQ2iTMJHJBJyRfd"
   auth
 />
 
@@ -614,7 +614,7 @@ You can obtain the ID, for example, by [listing all deployments](#endpoints/depl
 
 ### List Deployment Files
 
-<Endpoint method="GET" url="/v5/now/deployments/:id/files" />
+<Endpoint method="GET" url="/v9/now/deployments/:id/files" />
 
 This API allows you to retrieve the file structure of a deployment by supplying its **:id** in the URL.
 
@@ -633,7 +633,7 @@ The body will contain entries for each child and directory, coupled with an ID o
   <P>Example request:</P>
 
 <Request
-  url="https://api.zeit.co/v5/now/deployments/dpl_BRGyoU2Jzzwx7myBnqv3xjRDD2GnHTwUWyFybnrUvjDD/files"
+  url="https://api.zeit.co/v9/now/deployments/dpl_BRGyoU2Jzzwx7myBnqv3xjRDD2GnHTwUWyFybnrUvjDD/files"
   auth
 />
 
@@ -664,7 +664,7 @@ Example successful (**200**) response:
 
 ### Get Single File Contents
 
-<Endpoint method="GET" url="/v5/now/deployments/:id/files/:fileId" />
+<Endpoint method="GET" url="/v9/now/deployments/:id/files/:fileId" />
 
 This API allows you to retrieve the file data of a file associated with a deployment by supplying its **:id** and **:fileId** in the URL.
 

@@ -10,12 +10,22 @@ export const meta = {
   description:
     'Create proxies, redirects, cache-control headers, and more with ZEIT Now routes, easily.',
   editUrl: 'pages/docs/v2/advanced/routes.mdx',
-  lastEdited: '2019-09-24T17:47:39.000Z'
+  lastEdited: '2019-10-04T11:26:48.000Z'
 }
 
 ZEIT Now uses routes to define the behavior of how a request is handled on the routing side. For example, you might use a route to proxy a URL to another, redirect a client, or apply a header with the response to a request.
 
 By default, routing is defined by the filesystem of your deployment. For example, if a user makes a request to `/123.png`, and your [`now.json` file](/docs/v2/advanced/configuration/#routes) does not contain any routes with a valid `src` matching that path, it will fallback to the filesystem and serve `/123.png` if it exists.
+
+<Note>
+  For Serverless Function routes, you can configure an{' '}
+  <InlineCode>/api</InlineCode> directory to provide filesystem routing and
+  handle dynamic routing with{' '}
+  <GenericLink href="/docs/v2/serverless-functions/introduction/#path-segments">
+    path segments, without the need for configuration
+  </GenericLink>
+  .
+</Note>
 
 A route can be defined within a project's [`now.json` configuration file](/docs/v2/advanced/configuration/#routes) as an object within an array assigned to the `routes` property, like the following which creates a simple proxy from one path to another:
 

@@ -1,0 +1,36 @@
+import Standard from '~/components/layout/standard'
+import Note from '~/components/text/note'
+import { InlineCode } from '~/components/text/code'
+
+export const meta = {
+  title: 'Internal Function Rate Limit',
+  description:
+    'The application received too many requests and was rate limited.',
+  editUrl: 'pages/docs/error/application/INTERNAL_FUNCTION_RATE_LIMIT.mdx',
+  lastEdited: '2019-10-07T13:32:43.000Z'
+}
+
+#### Application Error
+
+An error occurred because requests were being made too quickly and were subsuquently rate limited by our upstream provider.
+
+<br />
+
+<Note label={false}>
+  <b>429</b>: Too Many Requests
+  <br />
+  Code: <InlineCode>INTERNAL_FUNCTION_RATE_LIMIT</InlineCode>
+</Note>
+
+---
+
+#### Troubleshoot
+
+- Try again in a few seconds.
+- If waiting does not solve this issue, **[Contact Support](mailto:support@zeit.co)** along with the ID on the error page from your deployment.
+
+export default ({ children }) => <Standard meta={meta}>{children}</Standard>
+
+export const config = {
+  amp: 'hybrid'
+}

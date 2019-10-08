@@ -12,7 +12,7 @@ export const meta = {
   authors: ['timothy', 'timneutkens'],
   url: '/guides/custom-next-js-server-to-routes',
   editUrl: 'pages/guides/custom-next-js-server-to-routes.mdx',
-  lastEdited: '2019-08-30T09:17:58.000Z'
+  lastEdited: '2019-10-04T11:42:17.000Z'
 }
 
 Next.js offers developers [a built-in routing system](https://nextjs.org/docs/#routing) that allows you to link to other pages whilst also giving those pages a custom URL. When a user refreshes the custom URL, however, the browser will not be able to load the link because the page was previously routed client-side. To resolve this, we need to also handle routing server-side.
@@ -29,7 +29,7 @@ This is an amazing feature of Next.js, however, it cannot control how the server
 
 ### The Old Custom Server Method
 
-The solution to this problem was previously using a custom server. For example, you could create an Express app and catch the request to `/product/<product_name>` and route it to the `/product?name=<product_name>` file behind the scenes so that you can keep the custom URL:
+The solution to this problem was previously using a custom server. For example, you could create an Express app, catch the request to `/product/<product_name>` and route it to the `/product?name=<product_name>` file behind the scenes so that you can keep the custom URL:
 
 ```js
 server.get('/products/:name', (req, res) => {
@@ -38,6 +38,10 @@ server.get('/products/:name', (req, res) => {
 ```
 
 <Caption>An example custom server route capture and render method.</Caption>
+
+<Note type="warning">
+  The custom server method will not work with the ZEIT Now 2.0 platform.
+</Note>
 
 ### The New Routes Method
 
