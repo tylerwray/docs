@@ -17,7 +17,7 @@ import Note from '~/components/text/note'
 
 export const meta = {
   editUrl: 'pages/docs/api/v1/api-docs-mdx/endpoints/deployments.mdx',
-  lastEdited: '2019-05-25T14:12:19.000Z'
+  lastEdited: '2019-10-08T20:49:56.000Z'
 }
 
 ## Deployments
@@ -168,8 +168,7 @@ In the case you want to inline each file inside the create deployment request ea
     <BooleanCell status={false} />
     <Cell>
       The file encoding, it must be <InlineCode>base64</InlineCode> or{' '}
-      <InlineCode>utf-8</InlineCode>. Defaults to <InlineCode>utf-8</InlineCode>
-      .
+      <InlineCode>utf-8</InlineCode>. Defaults to <InlineCode>utf-8</InlineCode>.
     </Cell>
   </Row>
 </InputTable>
@@ -345,12 +344,13 @@ If a deployment has not finished uploading (is incomplete), the `url` property w
 
 The response of this API can be controlled with the following query parameters. All of them are optional.
 
-| Key            | Description                                                                                                |
-| -------------- | ---------------------------------------------------------------------------------------------------------- |
-| **limit**      | Maximum number of deployments to list from a request. (default: 5, max: 100)                                    |
-| **from**       | Get the deployment created after this [Date](#api-basics/types) timestamp. (default: current time)                                   |
-| **projectId**  | Filter deployments from the given `projectId`.                                                                |
-| **meta-[KEY]** | Filter deployments by the given meta key value pairs. e.g., `meta-githubDeployment=1`. |
+| Key            | Description                                                                                        |
+| -------------- | -------------------------------------------------------------------------------------------------- |
+| **limit**      | Maximum number of deployments to list from a request. (default: 5, max: 100)                       |
+| **from**       | Get the deployment created after this [Date](#api-basics/types) timestamp. (default: current time) |
+| **projectId**  | Filter deployments from the given `projectId`.                                                     |
+| **meta-[KEY]** | Filter deployments by the given meta key value pairs. e.g., `meta-githubDeployment=1`.             |
+| **hasAlias**   | Filter deployments with asigned alias with `hasAlias=1`.                                           |
 
 Each deployment is an object with the following keys:
 
@@ -377,7 +377,8 @@ Each deployment is an object with the following keys:
     <TypeCell>String</TypeCell>
     <Cell>
       A string with the unique URL of the deployment. If it hasn't finished
-      uploading (is incomplete), the value will be <InlineCode>null</InlineCode>.
+      uploading (is incomplete), the value will be <InlineCode>null</InlineCode>
+      .
     </Cell>
   </Row>
   <Row>
@@ -399,10 +400,9 @@ Each deployment is an object with the following keys:
     <Cell>
       A string with the current deployment state, it could be one of the
       following <InlineCode>DEPLOYING</InlineCode>,{' '}
-      <InlineCode>DEPLOYMENT_ERROR</InlineCode>, <InlineCode>BOOTED</InlineCode>,{' '}
-      <InlineCode>BUILDING</InlineCode>, <InlineCode>READY</InlineCode>, <InlineCode>
-        BUILD_ERROR
-      </InlineCode>, or <InlineCode>FROZEN</InlineCode>.
+      <InlineCode>DEPLOYMENT_ERROR</InlineCode>, <InlineCode>BOOTED</InlineCode>
+      , <InlineCode>BUILDING</InlineCode>, <InlineCode>READY</InlineCode>,{' '}
+      <InlineCode>BUILD_ERROR</InlineCode>, or <InlineCode>FROZEN</InlineCode>.
     </Cell>
   </Row>
   <Row>
@@ -546,8 +546,7 @@ You can obtain this, for example, by [listing all deployments](#endpoints/deploy
     <TypeCell>String</TypeCell>
     <Cell>
       A string with the unique URL of the deployment. If it hasn't finished
-      uploading (is incomplete), the value will be <InlineCode>null</InlineCode>
-      .
+      uploading (is incomplete), the value will be <InlineCode>null</InlineCode>.
     </Cell>
   </Row>
   <Row>
@@ -556,10 +555,9 @@ You can obtain this, for example, by [listing all deployments](#endpoints/deploy
     <Cell>
       A string with the current deployment state, it could be one of the
       following: <InlineCode>DEPLOYING</InlineCode>,{' '}
-      <InlineCode>DEPLOYMENT_ERROR</InlineCode>, <InlineCode>BOOTED</InlineCode>,{' '}
-      <InlineCode>BUILDING</InlineCode>, <InlineCode>READY</InlineCode>, <InlineCode>
-        BUILD_ERROR
-      </InlineCode>, or <InlineCode>FROZEN</InlineCode>.
+      <InlineCode>DEPLOYMENT_ERROR</InlineCode>, <InlineCode>BOOTED</InlineCode>
+      , <InlineCode>BUILDING</InlineCode>, <InlineCode>READY</InlineCode>,{' '}
+      <InlineCode>BUILD_ERROR</InlineCode>, or <InlineCode>FROZEN</InlineCode>.
     </Cell>
   </Row>
   <Row>
@@ -790,7 +788,8 @@ Get the list of instances unique URL of a deployment.
     <TypeCell>String</TypeCell>
     <Cell>
       The instance unique url. Is the deployment unique URL with the instance{' '}
-      <InlineCode>uid</InlineCode> added before <InlineCode>.now.sh</InlineCode>.
+      <InlineCode>uid</InlineCode> added before <InlineCode>.now.sh</InlineCode>
+      .
     </Cell>
   </Row>
 </OutputTable>
