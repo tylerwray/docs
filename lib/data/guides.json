@@ -48,6 +48,16 @@
     "lastEdited": "2019-10-02T14:07:07.000Z"
   },
   {
+    "title": "Create and Deploy a Crystallize E-commerce Site with ZEIT Now",
+    "description": "How to launch an e-commerce site using Next.js and Crystallize on ZEIT Now in minutes.",
+    "published": "2019-10-16T12:00:00.860Z",
+    "authors": ["msweeneydev"],
+    "url": "/guides/deploying-crystallize-with-zeit-now",
+    "image": "https://og-image.now.sh/**Deploy%20Crystallize%20Sites**%20%3Cbr%2F%3E%20with%20ZEIT%20Now.png?theme=light&md=1&fontSize=100px&images=https%3A%2F%2Fassets.zeit.co%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fzeit-black-triangle.svg&images=https%3A%2F%2Fcrystallize.com%2Fstatic%2Fimages%2Flogo_crystallize_symbol.svg&widths=300&widths=350&heights=300&heights=350",
+    "editUrl": "pages/guides/deploying-crystallize-with-zeit-now.mdx",
+    "lastEdited": "2019-10-16T21:16:06.000Z"
+  },
+  {
     "title": "Deploy Docusaurus Sites with ZEIT Now",
     "description": "Docusaurus with ZEIT Now makes it easy to create and deploy open source project documentation.",
     "published": "2019-10-09T12:00:00.860Z",
