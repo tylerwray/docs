@@ -10,7 +10,7 @@ export const meta = {
   title: 'Deployments',
   description: 'Understanding and making deployments with ZEIT Now.',
   editUrl: 'pages/docs/v2/advanced/platform/deployments.mdx',
-  lastEdited: '2019-10-21T10:30:32.000Z'
+  lastEdited: '2019-10-21T10:38:07.000Z'
 }
 
 A deployment is the end result of building your [Project](/docs/v2/advanced/platform/projects/) and making it available through a live URL.
@@ -63,6 +63,8 @@ To make a [production deployment](/docs/v2/advanced/platform/deployments/#stagin
 
 [Deploy Hooks](/docs/v2/advanced/deploy-hooks/) allow you to create URLs that accept HTTP POST requests in order to trigger deployments, to re-run the [Build Step](/docs/v2/build-step), from outside of ZEIT.
 
+There are many use cases for Deploy Hooks, for example, rebuilding your site to reflect changes in a Headless CMS or scheduling deployments with Cron Jobs.
+
 To create a Deploy Hook, visit the settings page of your [Project](/docs/v2/advanced/platform/projects/), there you will be able to choose the branch to deploy when the HTTP endpoint receives a POST request.
 
 <Note>
@@ -79,19 +81,11 @@ The ZEIT Now API can be used to make deployments by making a HTTP POST request t
 
 You can find more information about the Now API in the [API Reference](/docs/api/#endpoints/deployments).
 
-## Managing Deployments
-
-You can manage your deployments either via the [ZEIT Dashboard](/dashboard) or [Now CLI](/download).
-
-### ZEIT Dashboard
-
-### Now CLI
-
-## Deployment Types
+### Deployment Types
 
 There are two types of deployment on the ZEIT Now platform, **staging** and **production**.
 
-### Staging
+#### Staging
 
 **Staging deployments** are the default for all deployments. Each time you push to a branch or make a deployment using the `now` command, this is a **staging deployment**.
 
@@ -99,13 +93,25 @@ By making a **staging deployment**, the **staging domain** will be updated to re
 
 The **staging domain** is provided either by the deployment output from Now CLI or on a pull request when using a git integration and contains the name of the user or team the [Project](/docs/v2/advanced/platform/projects/) belongs to.
 
-### Production
+#### Production
 
 **Production deployments** are made in two different circumstances. Each time you merge to the default branch (commonly `master`) or make a deployment using the `now --prod` command, this is a **production deployment**.
 
 By making a **production deployment**, the **production domain(s)** will be updated to reflect that of the latest deployment made.
 
 The **production domain(s)** are defined from the **Domains** tab of a Project on the ZEIT Dashboard.
+
+To add a **production domain** to a [Project](/docs/v2/advanced/platform/projects/), visit **Domains** from the Project Overview page, you can read more about this in the [custom domains documentation](/docs/v2/custom-domains/).
+
+## Managing Deployments
+
+You can manage your deployments either via the [ZEIT Dashboard](/dashboard) or [Now CLI](/download).
+
+### ZEIT Dashboard
+
+The [ZEIT Dashboard](/dashboard) is the easiest way for you to manage your deployments,
+
+### Now CLI
 
 ## Special Paths
 
