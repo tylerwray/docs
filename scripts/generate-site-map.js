@@ -44,7 +44,8 @@ function recursiveReadDirSync(dir, arr = [], rootDir = dir) {
 
 function isV2Page(pagePath) {
   return (
-    !pagePath.endsWith('-mdx') &&
+    !pagePath.includes('-mdx/') &&
+    !pagePath.includes('.DS_Store') &&
     SITE_PATHS.some(
       dir =>
         pagePath.startsWith(dir + '/index') || pagePath.startsWith(dir + '/v2')
