@@ -14,10 +14,6 @@ module.exports = withMDX({
 
   exportTrailingSlash: true,
 
-  experimental: {
-    publicDirectory: true
-  },
-
   // Allow mdx and md files to be pages
   pageExtensions: ['jsx', 'js', 'mdx', 'md'],
 

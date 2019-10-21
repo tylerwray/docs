@@ -10,12 +10,12 @@ import Snippet from '~/components/snippet'
 export const meta = {
   title: 'Deploy Button',
   description:
-    'The Deploy Button can be used to deploy GitHub repositories to ZEIT Now.',
+    'The Deploy Button can be used to deploy GitHub repositories and GitLab projects to ZEIT Now.',
   editUrl: 'pages/docs/v2/advanced/deploy-button.mdx',
-  lastEdited: '2019-09-30T18:53:49.000Z'
+  lastEdited: '2019-10-15T18:42:16.000Z'
 }
 
-Use the deploy button to create a ZEIT Project from any GitHub repository, including branches and subdirectories, and optionally create a copy of the original repository in your Git account.
+Use the deploy button to create a ZEIT Project from any GitHub repository or GitLab project, including branches and subdirectories, and optionally create a copy of the original repository in your Git account.
 
 ## Example
 
@@ -27,9 +27,9 @@ The example below shows how the deploy button looks when rendered, clicking it a
 
 ## Usage
 
-Consisting of an `.svg` asset and an associated link to a public GitHub repository, the deploy button can be used wherever its rendering is supported.
+Consisting of an `.svg` asset and an associated link to a public GitHub repository or GitLab project, the deploy button can be used wherever its rendering is supported.
 
-When implementing the deploy button, provide a link with it to the `/new/project` endpoint and pass a GitHub repository as the template query parameter like so:
+When implementing the deploy button, provide a link with it to the `/new/project` endpoint and pass a GitHub repository or GitLab project as the template query parameter like so:
 
 <Snippet dark text="https://zeit.co/new/project?template=https://github.com/zeit/now-examples/tree/master/gatsby" />
 <Caption>The URL for deploying GitHub repositories to ZEIT Now.</Caption>

@@ -64,7 +64,6 @@ class Layout extends React.Component {
     if (event.which === 18) {
       this.altKeyDown = false
     }
-    this.altKeyDown = false
   }
 
   onScroll() {
@@ -79,7 +78,7 @@ class Layout extends React.Component {
 
   componentDidMount() {
     document.addEventListener('keydown', this.onKeyDown.bind(this), false)
-    document.addEventListener('keyUp', this.onKeyUp.bind(this), false)
+    document.addEventListener('keyup', this.onKeyUp.bind(this), false)
     window.addEventListener('scroll', this.onScroll.bind(this))
   }
 

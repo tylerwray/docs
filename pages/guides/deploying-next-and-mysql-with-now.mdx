@@ -18,7 +18,7 @@ export const meta = {
     process.env.ASSETS
   }/guides/deploying-next-mysql-with-now/deploying-next-mysql-with-now.png`,
   editUrl: 'pages/guides/deploying-next-and-mysql-with-now.mdx',
-  lastEdited: '2019-09-24T17:47:39.000Z'
+  lastEdited: '2019-10-14T12:32:29.000Z'
 }
 
 In this guide, we will walk you through creating and [deploying](/docs/v2/deployments/basics/) a [Next.js](https://nextjs.org/) app with the most popular open source database in the world, [MySQL](https://www.mysql.com/), on [ZEIT Now](/docs/v2).
@@ -267,7 +267,7 @@ Your `profile.js` file performs the following functions:
 - Uses the query parameter to select a single profile from the database
 - Sends the retrieved profile as a response
 
-You now have an API that will give you either all profiles or just a single one, dependent on the [route](/docs/v2/deployments/routes/). You now need to create the app interface to display them.
+You now have an API that will give you either all profiles or just a single one, dependent on the [Route](/docs/configuration#routes). You now need to create the app interface to display them.
 
 ## Step 5: Creating Your Next.js Client
 
@@ -402,7 +402,7 @@ You now have a **complete app** with both an API and interface, the next section
 
 Getting your project ready to [deploy](/docs/v2/deployments/basics/) with [Now](/docs/v2/getting-started/introduction-to-now) could hardly be simpler, all that's required is the inclusion of [environment variables](/docs/v2/deployments/environment-variables-and-secrets).
 
-Create a [`now.json` file](/docs/v2/advanced/configuration) with the following configuration to make the environment variables available to your Serverless Functions:
+Create a [`now.json` file](/docs/configuration) with the following configuration to make the environment variables available to your Serverless Functions:
 
 ```json
 {

@@ -14,7 +14,7 @@ export const meta = {
   authors: ['msweeneydev'],
   url: '/guides/zero-downtime-domain-migration',
   editUrl: 'pages/guides/zero-downtime-domain-migration.mdx',
-  lastEdited: '2019-08-27T14:52:10.000Z'
+  lastEdited: '2019-10-02T14:07:07.000Z'
 }
 
 When migrating to another set of nameservers, there can often be downtime incurred. In this guide we will walk you through adding your domain to ZEIT and setting it up before migrating the nameservers, ensuring no downtime at any point.
@@ -123,7 +123,7 @@ Select a project from your dashboard and click the **Domains** tab. Add your cus
 
 If the domain is **registered to your account and available for use** it will be indicated below the input box and you can continue. Otherwise, if the domain is **not registered to your account**, it will automatically be added and we will attempt to verify it for you.
 
-When the domain is verified and you're ready to deploy your project to production, you can use the production target with Now CLI in your terminal:
+When the domain is verified, you can deploy your project to production with Now CLI:
 
 <Snippet dark text="now --prod" />
 <Caption>Deploying a project to production with Now CLI.</Caption>

@@ -1,3 +1,3 @@
 import redirect from '~/lib/redirect'
 
-export default redirect('/docs/v2/deployments/configuration#version')
+export default redirect('/docs/configuration#project/version')

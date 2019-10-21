@@ -8,7 +8,7 @@ export const meta = {
   description:
     'Learn how Serverless Function responses are cached with ZEIT Now and how you can define the cache behavior.',
   editUrl: 'pages/docs/v2/serverless-functions/edge-caching.mdx',
-  lastEdited: '2019-09-24T17:47:39.000Z'
+  lastEdited: '2019-10-09T12:56:09.000Z'
 }
 
 The ZEIT Smart CDN is active for all deployments and domains on your account and caches your content at [the edge](/docs/v2/advanced/platform/regions-and-providers/) to serve data to your users as fast as possible.
@@ -84,7 +84,7 @@ When the CDN receives a request with `Pragma: no-cache` (such as when the browse
 
 ## Cache Invalidation and Purging
 
-Every time you deploy with [a target](/docs/v2/custom-domains#deploying-with-your-domain) (production or staging custom domain), the cache for that target is purged. This means that users will never see content from a previous deployment on your custom domain and there is no need to invalidate it manually when deploying.
+Every time you deploy with [a custom domain](/docs/v2/custom-domains#deploying-with-your-domain) (production or staging custom domain), the cache for that domain is purged. This means that users will never see content from a previous deployment on your custom domain and there is no need to invalidate it manually when deploying.
 
 export default ({ children }) => <Doc meta={meta}>{children}</Doc>
 

@@ -9,7 +9,7 @@ export const meta = {
   title: 'Custom Domains',
   description: 'How to add and use a custom domain with your project.',
   editUrl: 'pages/docs/v2/custom-domains.mdx',
-  lastEdited: '2019-10-02T14:55:32.000Z'
+  lastEdited: '2019-10-17T18:48:32.000Z'
 }
 
 By default, all deployments are assigned a `.now.sh` prefixed domain.
@@ -60,15 +60,33 @@ From the **Project Domains** page, enter the domain you wish to add to the proje
 
 ### Step 4: Verifying the Domain
 
-Once the domain has been added, you will be presented with two methods for verifying it, either through **Nameservers** or **TXT**.
+Once the domain has been added, you will be presented with different methods for verifying it, depending on whether it is an **apex domain** (zeit.co) or **subdomain** (docs.zeit.co).
+
+Both domain types can be verified using the **Nameservers** method, however **apex domains** also allow for verification via the **ANAME** record, whilst **subdomains** allow for verification via the **CNAME** record.
+
+#### Apex Domains
+
+You can verify apex domains either through the **Nameservers** or **ANAME** methods.
 
 <Image
-  src={`${process.env.ASSETS}/docs/custom-domains/verify-domain.png`}
+  src={`${process.env.ASSETS}/docs/custom-domains/verify-apex-domain.png`}
+  width={1350 / 2}
+  height={939 / 2}
+  shadow
+/>
+<Caption>Instructions on verifying an <strong>apex domain</strong> from the Project Domains page.</Caption>
+
+#### Subdomains
+
+You can verify subdomains either through the **Nameservers** or **CNAME** methods.
+
+<Image
+  src={`${process.env.ASSETS}/docs/custom-domains/verify-subdomain.png`}
   width={1350 / 2}
   height={989 / 2}
   shadow
 />
-<Caption>Instructions on verifying the domain from the Project Domains page.</Caption>
+<Caption>Instructions on verifying a <strong>subdomain</strong> from the Project Domains page.</Caption>
 
 ### Step 5: Domain Verified
 
@@ -124,7 +142,7 @@ To update your production deployment, you can use the `--prod` argument with the
 
 ### With Git
 
-When a custom domain is assigned as a production domain to a project with a [Now for Git integration](/docs/v2/git-integration) enabled, each push (including merges) to the default branch (commonly `master`) will trigger a deployment that targets the defined domain.
+When a custom domain is assigned as a production domain to a project with a [Now for Git integration](/docs/v2/git-integration) enabled, each push (including merges) to the default branch (commonly `master`) will trigger a deployment to the defined domain.
 
 Reverts take effect immediately, assigning the custom domain to the deployment made prior to the point the revert is effective from.
 
@@ -143,6 +161,13 @@ To remove a domain that is assigned to your ZEIT account or team, navigate to th
 ## Related
 
 For more information on what to do next, we recommend the following article:
+
+<Card
+  title="Transferring Your Domain"
+  href="/guides/transferring-domains-to-zeit-now"
+>
+  Learn how to transfer a domain to ZEIT Now.
+</Card>
 
 <Card
   title="Serverless Functions"

@@ -6,7 +6,7 @@ export const meta = {
   title: 'Headers',
   description: 'The list of headers included with deployments with ZEIT Now.',
   editUrl: 'pages/docs/v2/network/headers.mdx',
-  lastEdited: '2019-09-24T17:47:39.000Z'
+  lastEdited: '2019-10-14T12:32:29.000Z'
 }
 
 [HTTP headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers) can be found in both the HTTP Request and HTTP Response.
@@ -17,7 +17,7 @@ The following headers are sent to each ZEIT Now deployment and can be used to pr
 
 ### `host`
 
-This header represents the domain name as it was accessed by the client. If the deployment has been aliased and the client visited the alias URL, it contains the alias instead of the underlying deployment URL.
+This header represents the domain name as it was accessed by the client. If the deployment has been assigned to a staging or production domain and the client visits the domain URL, it contains the custom domain instead of the underlying deployment URL.
 
 ### `now-id`
 
@@ -37,7 +37,7 @@ The public `ip address` of the client that made the request.
 
 ### `x-now-deployment-url`
 
-This header represents the unique deployment, not the alias. For example, `test-5uyfnapzg.now.sh`.
+This header represents the unique deployment, not the staging or production domain. For example, `test-5uyfnapzg.now.sh`.
 
 ### `x-now-trace`
 
@@ -146,7 +146,7 @@ If you need to do a synchronous revalidation you can set the `pragma: no-cache` 
 
 ## Custom Headers
 
-Custom headers can be added dynamically to the [Response](https://nodejs.org/api/http.html#http_response_setheader_name_value) object in your [Serverless Function](/docs/v2/advanced/concepts/serverless-functions/) or they can be added statically to the [routes](/docs/v2/advanced/routes/#headers) property in your `now.json` file.
+Custom headers can be added dynamically to the [Response](https://nodejs.org/api/http.html#http_response_setheader_name_value) object in your [Serverless Function](/docs/v2/advanced/concepts/serverless-functions/) or they can be added statically to the [Routes](/docs/configuration#routes/headers) property in your `now.json` file.
 
 export default ({ children }) => <Doc meta={meta}>{children}</Doc>
 

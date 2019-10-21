@@ -1,10 +1,8 @@
 import React from 'react'
-import Link from 'next/link'
 import { useAmp } from 'next/amp'
 import { withRouter } from 'next/router'
 import { MDXProvider } from '@mdx-js/tag'
 
-import * as bodyLocker from '~/lib/utils/body-locker'
 import Head from '~/components/layout/head'
 import Layout from '~/components/layout/layout'
 import Main from '~/components/layout/main'

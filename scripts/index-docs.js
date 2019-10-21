@@ -42,7 +42,10 @@ async function main() {
       'dist/guides/**/*.html',
       'dist/docs/v2/**/*.html',
       'dist/docs/api/v2/**/*.html',
-      'dist/docs/integrations/v2/**/*.html'
+      'dist/docs/integrations/v2/**/*.html',
+      'dist/docs/now-cli/**/*.html',
+      'dist/docs/configuration/**/*.html',
+      'dist/docs/builders/**/*.html'
     ])
     // filter out AMP pages
     files = files.filter(f => f.indexOf('.amp/index.html') < 0)
@@ -53,7 +56,11 @@ async function main() {
   // Loop through files
   files.forEach(file => {
     const isAPISection = !!file.startsWith('dist/docs/api/v2')
-    const isIntegrations = !!file.startsWith('dist/docs/integrations/v2')
+    const isRefSection =
+      !!file.startsWith('dist/docs/now-cli') ||
+      !!file.startsWith('dist/docs/builders') ||
+      !!file.startsWith('dist/docs/configuration') ||
+      !!file.startsWith('dist/docs/integrations/v2')
     const isDocs = !!file.startsWith('dist/docs/v2')
     const isGuides = !!file.startsWith('dist/guides')
 
@@ -66,6 +73,7 @@ async function main() {
 
     // Current heading and element, initially null
     let currentHeading = null
+    let currentCategory = null
     let currentSection = null
     let currentSubSection = null
     let currentEl = null
@@ -88,7 +96,9 @@ async function main() {
             .attr('href')
         }
 
-        if (tag === 'h2') {
+        if (tag === 'h1') {
+          currentCategory = currentEl.text()
+        } else if (tag === 'h2') {
           currentSection = currentEl.text()
         } else if (tag === 'h3') {
           currentSubSection = currentEl.text()
@@ -101,8 +111,11 @@ async function main() {
 
         // Create record with title, (if it exists) section heading, url (inferred), paragraph content, and order
         const record = {
-          title: isAPISection || isIntegrations ? currentSection : pageTitle,
-          ...(isAPISection || isIntegrations
+          title:
+            isAPISection || isRefSection
+              ? currentSection || currentCategory
+              : pageTitle,
+          ...(isAPISection || isRefSection
             ? currentSubSection && { section: currentSubSection }
             : currentHeading && { section: currentHeading.text }),
           url,
@@ -113,7 +126,7 @@ async function main() {
           objectID: `v2-${url}-${md5(currentEl.text())}`,
           _tags: [
             (isAPISection && 'api') ||
-              (isIntegrations && 'integrations') ||
+              (isRefSection && 'reference') ||
               (isDocs && 'docs') ||
               (isGuides && 'guide')
           ]

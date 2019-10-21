@@ -12,7 +12,7 @@ export const meta = {
   authors: ['timothy', 'grovesjoseph'],
   url: '/guides/deploying-react-with-now-cra',
   editUrl: 'pages/guides/deploying-react-with-now-cra.mdx',
-  lastEdited: '2019-09-30T18:53:49.000Z'
+  lastEdited: '2019-10-02T14:07:07.000Z'
 }
 
 [React](https://reactjs.org/) is a popular open-source JavaScript framework, maintained by Facebook, for easily creating interactive [single-page apps](https://en.wikipedia.org/wiki/Single-page_application) (SPAs).
@@ -44,7 +44,7 @@ If you have not yet installed Now, you can do so by [installing Now CLI](/downlo
 
 With Now, you can deploy your app to [different environments](/docs/v2/custom-domains#deploying-with-your-domain), depending on what stage your app is at; either staging or production.
 
-To deploy to a unique alias, use the following [Now CLI](/download) command from your terminal:
+To deploy your React project, use the following [Now CLI](/download) command from your terminal:
 
 <Snippet dark text="now" />
 
@@ -52,7 +52,7 @@ To deploy to a unique alias, use the following [Now CLI](/download) command from
   Deploying the app with the <InlineCode>now</InlineCode> command.
 </Caption>
 
-If you want to deploy your React project when you push to a Git repository, you can use either [Now for GitHub](/docs/v2/integrations/now-for-github/) or [Now for GitLab](/docs/v2/integrations/now-for-gitlab/) to have your project automatically deployed on every push, and aliased on push to master.
+If you want to deploy your React project when you push to a Git repository, you can use either [Now for GitHub](/docs/v2/integrations/now-for-github/) or [Now for GitLab](/docs/v2/integrations/now-for-gitlab/) to have your project automatically deployed on every push, and the [production domain](https://zeit.co/docs/v2/custom-domains/#adding-a-domain) updated on push to master.
 
 export default ({ children }) => <Guide meta={meta}>{children}</Guide>
 

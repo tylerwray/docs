@@ -5,7 +5,7 @@ export const meta = {
   title: 'Limits',
   description: 'A list of rate limits that apply on the ZEIT Now platform.',
   editUrl: 'pages/docs/v2/advanced/platform/limits.mdx',
-  lastEdited: '2019-08-16T15:05:32.000Z'
+  lastEdited: '2019-10-14T14:51:37.000Z'
 }
 
 This page outlines all relevant limits on the ZEIT Now platform.
@@ -36,6 +36,32 @@ For the username update rate limit, you are able to change your username up to `
 ---
 
 <Limits />
+
+---
+
+## Reserved Variables
+
+The following environment variable names are [reserved](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#lambda-environment-variables) and therefore unavailable for use:
+
+- `AWS_REGION`
+- `AWS_DEFAULT_REGION`
+- `AWS_ACCESS_KEY_ID`
+- `AWS_SECRET_KEY`
+- `AWS_SECRET_ACCESS_KEY`
+- `AWS_EXECUTION_ENV`
+- `AWS_LAMBDA_LOG_GROUP_NAME`
+- `AWS_LAMBDA_LOG_STREAM_NAME`
+- `AWS_LAMBDA_FUNCTION_NAME`
+- `AWS_LAMBDA_FUNCTION_MEMORY_SIZE`
+- `AWS_LAMBDA_FUNCTION_VERSION`
+- `AWS_SESSION_TOKEN`
+- `NOW_REGION`
+- `TZ`
+- `_HANDLER`
+- `LAMBDA_TASK_ROOT`
+- `LAMBDA_RUNTIME_DIR`
+
+Using any of these environment variable names will result in the deployment failing.
 
 export default ({ children }) => <Doc meta={meta}>{children}</Doc>
 

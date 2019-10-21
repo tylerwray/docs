@@ -7,18 +7,18 @@ import { GenericLink } from '~/components/text/link'
 export const meta = {
   title: 'Now for GitLab',
   description:
-    'Deploy each change in your GitLab projects with ZEIT Now to share and test with your colleagues. Instant share-able links to your work with each push. Automatically alias your changes to production.',
+    'Deploy each change in your GitLab projects with ZEIT Now to share and test with your colleagues. Instant share-able links to your work with each push. Automatically make your changes available from production domains.',
   editUrl: 'pages/docs/v2/advanced/now-for-gitlab.mdx',
-  lastEdited: '2019-08-22T10:47:21.000Z'
+  lastEdited: '2019-10-10T22:30:47.000Z'
 }
 
-The Now for GitLab integration automatically deploys and aliases your GitLab projects with [ZEIT Now](/now).
+The Now for GitLab integration automatically deploys your GitLab projects with [ZEIT Now](/now), providing staging URLs and automatic production domain updates.
 
 Now for GitLab provides:
 
 - Automatic deployments for every push to branches and merge requests to preview changes live.
-- Aliases for the most recent changes from the [default branch](https://docs.gitlab.com/ee/user/project/repository/branches/#default-branch).
-- Instant rollbacks when reverting changes that have already been [aliased](/docs/v2/custom-domains#deploying-with-your-domain).
+- Updates production domains with the most recent changes from the [default branch](https://docs.gitlab.com/ee/user/project/repository/branches/#default-branch).
+- Instant rollbacks when reverting changes that have been made to production domains
 
 <Image
   src={`${process.env.ASSETS}/guides/getting-started-with-now-for-gitlab/deploy-comment.png`}
@@ -80,22 +80,22 @@ Now for GitLab will **deploy each push by default**. This includes pushes and pu
 
 With each new push, if Now is already building a previous commit, it will cancel that current build to start the most recent commit, ensuring you always have the latest changes deployed as quickly as possible.
 
-### Aliasing the Default Branch
+### Updating the Production Domain
 
-If an alias is set from the project domains dashboard, pushes and merges to the [default branch](https://docs.gitlab.com/ee/user/project/repository/branches/#default-branch) (commonly "master") will be [aliased automatically](/docs/v2/custom-domains#deploying-with-your-domain) and made live to those aliases with the latest deployment made with a push.
+If production domains are set from the project domains dashboard, pushes and merges to the [default branch](https://docs.gitlab.com/ee/user/project/repository/branches/#default-branch) (commonly "master") will be made live to those domains with the latest deployment made with a push.
 
-If you decide to revert a commit that has already been aliased, the previous commit's deployment will automatically be aliased instantly; providing you with instant rollbacks.
+If you decide to revert a commit that has already updated a product domain, the previous commit's deployment will automatically be made available at the production domain instantly; providing you with instant rollbacks.
 
-### Staging Aliases for Each Merge Request
+### Staging URLs for Each Merge Request
 
-The latest push to any merge request will automatically be aliased to a unique URL based on the project name, branch, and team or username. These URLs will be given through a comment on each merge request. For more on automatic aliases for git pushes and beyond in the [Aliasing Documentation](/docs/v2/custom-domains#deploying-with-your-domain).
+The latest push to any pull request will automatically be made available at a unique staging URL based on the project name, branch, and team or username. These URLs will be given through a comment on each merge request.
 
 <Image
   src={`${process.env.ASSETS}/guides/getting-started-with-now-for-gitlab/merge-request-alias.png`}
   width={2080/2.5}
   height={1392/2.5}
 />
-<Caption style={{marginTop: '-40px'}}>A staging alias created from a merge request.</Caption>
+<Caption style={{marginTop: '-40px'}}>A staging URL created from a merge request.</Caption>
 
 ## Included Environment Variables
 

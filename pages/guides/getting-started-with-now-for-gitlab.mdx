@@ -7,15 +7,15 @@ import { GenericLink } from '~/components/text/link'
 export const meta = {
   title: 'Automatic Deployments with Now for GitLab',
   description:
-    'Setup ZEIT Now for GitLab and get automatic deployments and aliasing for each push.',
+    'Setup ZEIT Now for GitLab and get automatic deployments and staging URLs for each push.',
   published: '2019-04-01T09:03:14.819Z',
   authors: ['arunoda', 'timothy'],
   url: '/guides/getting-started-with-now-for-gitlab',
   editUrl: 'pages/guides/getting-started-with-now-for-gitlab.mdx',
-  lastEdited: '2019-08-23T14:21:42.000Z'
+  lastEdited: '2019-10-02T14:07:07.000Z'
 }
 
-The [Now for GitLab integration](/docs/v2/integrations/now-for-gitlab) provides you with automatic deployments for each push to a project, automatic aliases for pushes to the default branch, and instant rollbacks for reverts.
+The [Now for GitLab integration](/docs/v2/integrations/now-for-gitlab) provides you with automatic deployments for each push to a project, automatic staging URLs for pushes to the default branch, and instant rollbacks for reverts.
 
 This guide will walk you through how to set up the Now for GitLab integration for your projects.
 
@@ -43,7 +43,7 @@ Push this file to your GitLab project so you have one file inside of it.
 
 ## Step 2: Connect Now to Your GitLab User and Project
 
-For Now to make automatic deployments and aliases, it needs access to your GitLab account and its associated projects.
+For Now to make automatic deployments and staging URLs, it needs access to your GitLab account and its associated projects.
 
 Connect your GitLab account through your [account settings](/account).
 
@@ -65,7 +65,7 @@ With a project linked, no further setup is required on ZEIT.
 
 ## Step 3: Using Now for GitLab
 
-With configuration done, all future commits from your linked projects will have [automatic deployments for each push](#deployments-for-each-push), [merge requests](#deployments-and-staging-aliases-for-merge-requests), and [automatic aliasing to production](#deploying-to-production).
+With configuration done, all future commits from your linked projects will have [automatic deployments for each push](#deployments-for-each-push), [merge requests](#deployments-and-staging-urls-for-merge-requests), and [automatic updates for production domains](#deploying-to-production).
 
 ### Deployments For Each Push
 
@@ -93,7 +93,7 @@ Clicking the [commit](https://gitlab.com/now-examples/hello-world/commit/9fade7c
 
 Each commit will result in a unique URL just like the above.
 
-### Deployments and Staging Aliases for Merge Requests
+### Deployments and Staging URLs for Merge Requests
 
 [Merge requests](https://docs.gitlab.com/ee/user/project/merge_requests/) are a way to submit changes to a project without pushing directly to the default branch. This comes in handy when you're working on a feature that is either in progress or needs a review before being launched into production.
 
@@ -119,7 +119,7 @@ After you commit and create the merge request, you will get a [new view](https:/
 
 The pipeline information shows the status as Now builds your app. In this case, it has successfully built. It will show a different icon when Now is building the app.
 
-Below the pipeline message, a comment will present a [staging alias](/docs/v2/custom-domains#deploying-with-your-domain) that updates each time the merge request is pushed to, so you can share this link with others without having to worry about sharing the latest update.
+Below the pipeline message, a comment will present a [staging URL](/docs/v2/custom-domains#deploying-with-your-domain) that updates each time the merge request is pushed to, so you can share this link with others without having to worry about sharing the latest update.
 
 <Image
   src={`${process.env.ASSETS}/guides/getting-started-with-now-for-gitlab/merge-request-alias.png`}
@@ -127,19 +127,19 @@ Below the pipeline message, a comment will present a [staging alias](/docs/v2/cu
   height={1392/2.5}
   oversize
 />
-<Caption style={{marginTop: '-40px'}}>A staging alias created from a merge request.</Caption>
+<Caption style={{marginTop: '-40px'}}>A staging URL created from a merge request.</Caption>
 
-You can test this by creating another commit for the merge request and accessing the staging alias. You will notice that, once the commit is deployed, the staging alias will have been updated with the changes.
+You can test this by creating another commit for the merge request and accessing the staging URL. You will notice that, once the commit is deployed, the staging URL will have been updated with the changes.
 
 ## Deploying to Production
 
-Pushing or merging to the [default branch](https://docs.gitlab.com/ee/user/project/repository/branches/#default-branch) will result in a deployment, like any other branch or push. However, if you have an alias set in the **Domains** section of your project dashboard, these deployments will be automatically aliased to your configured destination.
+Pushing or merging to the [default branch](https://docs.gitlab.com/ee/user/project/repository/branches/#default-branch) will result in a deployment, like any other branch or push. However, if you have a production domain set in the **Domains** section of your project dashboard, these deployments will be automatically available at your configured destination.
 
 <Note hint>
-  You can read more about adding aliases, both staging and production, to
+  You can read more about adding domains, both staging and production, to
   deployments in the{' '}
   <GenericLink href="/docs/v2/custom-domains#deploying-with-your-domain">
-    aliasing a deployment documentation
+    custom domains documentation
   </GenericLink>
   .
 </Note>
@@ -152,13 +152,13 @@ When you push this change to the default branch, this and all subsequent commits
   height={1392/2.5}
   oversize
 />
-<Caption style={{marginTop: '-40px'}}>A staging alias created from a merge request.</Caption>
+<Caption style={{marginTop: '-40px'}}>A staging URL created from a merge request.</Caption>
 
 ## In Conclusion
 
 Through this guide, you should now have a bulletproof deployment pipeline for all of your GitLab projects, using [Now for GitLab](/docs/v2/integrations/now-for-gitlab).
 
-With every push, an automatic deployment. With every merge request, a unique staging alias. And with every update to the default branch, your changes are aliased to production.
+With every push, an automatic deployment. With every merge request, a unique staging URL. And with every update to the default branch, your changes are updated for the production domain.
 
 export default ({ children }) => <Guide meta={meta}>{children}</Guide>
 

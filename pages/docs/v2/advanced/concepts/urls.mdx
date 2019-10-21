@@ -7,10 +7,10 @@ export const meta = {
   description:
     'The concept of unique deployment URLs on ZEIT Now and how they are composed.',
   editUrl: 'pages/docs/v2/advanced/concepts/urls.mdx',
-  lastEdited: '2019-08-22T10:47:21.000Z'
+  lastEdited: '2019-10-14T12:32:29.000Z'
 }
 
-A deployment is always associated with a unique URL and [a staging alias](/docs/v2/custom-domains#deploying-with-your-domain). The unique URL has the following fundamental components:
+A deployment is always associated with a unique URL and [a staging URL](/docs/v2/custom-domains#deploying-with-your-domain). The unique URL has the following fundamental components:
 
 - The deployment subdomain, made up of:
   - The deployment name
@@ -29,7 +29,7 @@ The subdomain can be at most `63` characters.
 
 ### Project Name
 
-When a deployment is created, it must [supply a project `name`](/docs/v2/advanced/configuration#name). If a name is not specified explicitly, Now will use either the directory name or repository name.
+When a deployment is created, it must [supply a project `name`](/docs/configuration#project/name). If a name is not specified explicitly, Now will use either the directory name or repository name.
 
 The name can take up, at most, `53` characters. It is always followed by a dash `-` and then the [UID](<#uid-(unique-identifier)>).
 

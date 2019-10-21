@@ -5,7 +5,7 @@ export const meta = {
   description:
     'Documentation for the concept of how ZEIT Now deployments can utilise the ZEIT CDN to host and serve content at the edge.',
   editUrl: 'pages/docs/v2/advanced/concepts/cdn-and-global-distribution.mdx',
-  lastEdited: '2019-09-24T17:47:39.000Z'
+  lastEdited: '2019-10-09T13:03:54.000Z'
 }
 
 All users can enjoy our [Smart Content Management Network](/smart-cdn) for allowing your content to be served as fast as possible.
@@ -40,7 +40,7 @@ It is recommended that you deploy your Serverless Functions closest to the data 
 
 By default, the cache for a response of your deployment is purged once the expiration timeout defined in `s-maxage` is reached.
 
-Additionally, we also purge all caches related to a deployment when [an alias](/docs/v2/custom-domains#deploying-with-your-domain) is created or updated, as this implies that new content needs to be served, thus requiring purging the caches.
+Additionally, we also purge all caches related to a deployment when [a custom domain](/docs/v2/custom-domains) is added or updated, as this implies that new content needs to be served, thus requiring purging the caches.
 
 export default ({ children }) => <Doc meta={meta}>{children}</Doc>
 

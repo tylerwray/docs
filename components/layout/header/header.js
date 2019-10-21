@@ -276,7 +276,9 @@ class Header extends Component {
                         router.pathname.startsWith('/docs') &&
                         !router.pathname.startsWith('/docs/api') &&
                         !router.pathname.startsWith('/docs/integrations') &&
-                        !router.pathname.startsWith('/docs/now-cli')
+                        !router.pathname.startsWith('/docs/now-cli') &&
+                        !router.pathname.startsWith('/docs/builders') &&
+                        !router.pathname.startsWith('/docs/configuration')
                       }
                       onClick={handleIndexClick}
                     >
@@ -295,25 +297,34 @@ class Header extends Component {
                         active:
                           router.pathname.startsWith('/docs/api') ||
                           router.pathname.startsWith('/docs/integrations') ||
-                          router.pathname.startsWith('/docs/now-cli')
+                          router.pathname.startsWith('/docs/now-cli') ||
+                          router.pathname.startsWith('/docs/builders') ||
+                          router.pathname.startsWith('/docs/configuration')
                       })}
                     >
                       <MenuPopOver
                         title="Reference"
                         offsetArrowLeft={60}
                         primaryList={[
-                          { title: 'Platform API', url: '/docs/api' },
-                          {
-                            title: 'Integrations API',
-                            url: '/docs/integrations'
-                          },
                           {
                             title: 'Now CLI',
                             url: '/docs/now-cli'
                           },
                           {
+                            title: 'Configuration',
+                            url: '/docs/configuration'
+                          },
+                          {
                             title: 'Builders',
                             url: '/docs/builders'
+                          },
+                          {
+                            title: 'Platform API',
+                            url: '/docs/api'
+                          },
+                          {
+                            title: 'Integrations API',
+                            url: '/docs/integrations'
                           }
                         ]}
                       />
@@ -396,7 +407,9 @@ class Header extends Component {
                     router.pathname.startsWith('/docs') &&
                     !router.pathname.startsWith('/docs/api') &&
                     !router.pathname.startsWith('/docs/integrations') &&
-                    !router.pathname.startsWith('/docs/now-cli')
+                    !router.pathname.startsWith('/docs/now-cli') &&
+                    !router.pathname.startsWith('/docs/builders') &&
+                    !router.pathname.startsWith('/docs/configuration')
                   }
                   onClick={handleIndexClick}
                 >
@@ -405,7 +418,9 @@ class Header extends Component {
                 {router.pathname.startsWith('/docs') &&
                   !router.pathname.startsWith('/docs/api') &&
                   !router.pathname.startsWith('/docs/integrations') &&
-                  !router.pathname.startsWith('/docs/now-cli') && (
+                  !router.pathname.startsWith('/docs/now-cli') &&
+                  !router.pathname.startsWith('/docs/builders') &&
+                  !router.pathname.startsWith('/docs/configuration') && (
                     <div className="navigation">
                       <DocsNavbarDesktop
                         data={data}
@@ -451,6 +466,24 @@ class Header extends Component {
                   onClick={handleIndexClick}
                 >
                   Now CLI
+                </NavigationItem>
+              </div>
+              <div className="group">
+                <NavigationItem
+                  href="/docs/builders"
+                  active={router.pathname.startsWith('/docs/builders')}
+                  onClick={handleIndexClick}
+                >
+                  Builders
+                </NavigationItem>
+              </div>
+              <div className="group">
+                <NavigationItem
+                  href="/docs/configuration"
+                  active={router.pathname.startsWith('/docs/configuration')}
+                  onClick={handleIndexClick}
+                >
+                  Configuration
                 </NavigationItem>
               </div>
             </div>

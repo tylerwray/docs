@@ -10,7 +10,7 @@ export const meta = {
   title: 'Serverless Functions',
   description: 'Learn how to deploy Serverless Functions with ZEIT Now.',
   editUrl: 'pages/docs/v2/serverless-functions/introduction.mdx',
-  lastEdited: '2019-09-27T18:07:04.000Z'
+  lastEdited: '2019-10-09T12:52:23.000Z'
 }
 
 ZEIT Now deployments support various backend languages that you can deploy as Serverless functions.
@@ -76,6 +76,16 @@ You can use any of the Now examples by using the following command from [Now CLI
 
 <Snippet dark text="now init" />
 <Caption>Initializing a project with Now CLI.</Caption>
+
+## Prevent Endpoint Listing
+
+By default, all files inside of the `/api` directory will be made available as Serverless Functions.
+
+If this behavior is not desired, for example you want a utilities folder inside of the `/api` directory, you can prefix files or folders with either `_` or `.` to prevent them from being created as Serverless Functions.
+
+Therefore, if you keep your utility functions inside of `/api/_utils`, none of them will be created as Serverless Functions. This is because the parent folder is prefixed with `_`.
+
+If you kept your utility functions inside of `/api/utils`, one called `date.js` and the other `_time.js`, only `date.js` would be created as a Serverless Function.
 
 ## Path Segments
 
@@ -172,11 +182,8 @@ For more information on what to do next, we recommend the following articles:
   easier.
 </Card>
 
-<Card
-  title="Using Custom Domains"
-  href="/docs/v2/custom-domains#deploying-with-your-domain"
->
-  Once deployed, your projects can be aliased to a custom domain or specified
+<Card title="Using Custom Domains" href="/docs/v2/custom-domains">
+  Once deployed, your projects can be assigned to a custom domain or specified
   name or your choice to give it a primary place to see the latest version of
   your application.
 </Card>

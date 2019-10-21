@@ -6,7 +6,7 @@ export const meta = {
   description:
     'How to use the ZEIT Now Git Integrations for automatic deployments from your repository.',
   editUrl: 'pages/docs/v2/git-integration.mdx',
-  lastEdited: '2019-08-22T10:47:21.000Z'
+  lastEdited: '2019-10-09T13:03:54.000Z'
 }
 
 ZEIT Now provides integrations for your [GitHub](https://github.com) and [GitLab](https://gitlab.com) projects, allowing for **automatic deployments on every branch push** and merge to the default branch.
@@ -14,8 +14,8 @@ ZEIT Now provides integrations for your [GitHub](https://github.com) and [GitLab
 In addition, the Now Git integrations provide the following benefits:
 
 - Deployments for every push in branches and pull requests to preview changes live
-- Aliases for the most recent changes from the master branch
-- Instant rollbacks when reverting changes that have been aliased
+- Production domains updated for the most recent changes from the master branch
+- Instant rollbacks when reverting changes assigned to a production domain
 
 The easiest way to use a Git integration is to think of your **master branch as production**. Every time a pull request is made to the master branch, Now will **create a unique deployment**, allowing you to **view the changes in a staging environment before merging**.
 
@@ -35,11 +35,8 @@ To select a repository or project to use with the integration, select the **New 
 
 For more information on what to do next, we recommend the following articles:
 
-<Card
-  title="Aliasing Your Projects"
-  href="/docs/v2/custom-domains#deploying-with-your-domain"
->
-  Once deployed, your projects can be aliased to a custom domain or specified
+<Card title="Using Custom Domains" href="/docs/v2/custom-domains">
+  Once deployed, your projects can be assigned to a custom domain or specified
   name or your choice to give it a primary place to see the latest version of
   your application.
 </Card>

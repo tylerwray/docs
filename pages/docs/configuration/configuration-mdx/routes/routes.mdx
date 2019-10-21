@@ -1,0 +1,659 @@
+import { InlineCode } from '~/components/text/code'
+import Caption from '~/components/text/caption'
+import Card from '~/components/card'
+import Note from '~/components/text/note'
+import { GenericLink } from '~/components/text/link'
+import { Code } from '~/components/text/code'
+import Example from '~/components/example'
+
+export const meta = {
+  editUrl: 'pages/docs/configuration/configuration-mdx/routes/routes.mdx',
+  lastEdited: '2019-10-14T12:32:29.000Z'
+}
+
+# Routes
+
+ZEIT Now uses Routes to define the behavior of how a request is handled by the routing layer. For example, you might use a Route to proxy a URL to another, redirect a client, or apply a header with the response to a request.
+
+By default, routing is defined by the filesystem of your deployment. For example, if a user makes a request to `/123.png`, and your [`now.json` file](/docs/configuration#project/routes) does not contain any routes with a valid `src` matching that path, it will fallback to the filesystem and serve `/123.png` if it exists.
+
+<Note>
+  For Serverless Function routes, you can configure an{' '}
+  <InlineCode>/api</InlineCode> directory to provide filesystem routing and
+  handle dynamic routing with{' '}
+  <GenericLink href="/docs/v2/serverless-functions/introduction/#path-segments">
+    path segments, without the need for configuration
+  </GenericLink>
+  .
+</Note>
+
+A Route can be defined within a project's [`now.json` configuration file](/docs/configuration#project/routes) as an object within an array assigned to the `routes` property, like the following which creates a simple proxy from one path to another:
+
+<Example>
+  <Code lang="json">{`{
+  "routes": [{ "src": "/about", "dest": "/about.html" }]
+}`}</Code>
+  <Caption>
+    An example <InlineCode>now.json</InlineCode> file with a{' '}
+    <InlineCode>routes</InlineCode> property that proxies one path to another
+    upon request.
+  </Caption>
+</Example>
+
+ZEIT Now Routes have multiple properties for each route object that help define the behavior of a response to each request to a particular path.
+
+## src
+
+**Type**: String supporting [PCRE Regex](https://www.pcre.org/original/doc/html/pcrepattern.html) and [Route Parameters](#route-parameters) like `/product/(?<id>[^/]+)`.
+
+For each route, `src` is required to set the path which the behavior will affect.
+
+The following example shows a `now.json` configuration that takes a `src` path and proxies it to a [destination `dest` path](#dest).
+
+<Example>
+  <Code lang="json">{`{
+  "routes": [{ "src": "/about", "dest": "/about.html" }]
+}`}</Code>
+  <Caption>
+    An example <InlineCode>now.json</InlineCode> file with a{' '}
+    <InlineCode>routes</InlineCode> property that proxies one path to another
+    upon request.
+  </Caption>
+</Example>
+
+## dest
+
+**Type**: String
+
+`dest` is used to proxy the [`src`](#src) path to another path, such as another URL or Now hosted Serverless Function.
+
+[The example for the `src` property](#src) shows how both methods work together to create a proxy.
+
+<Example>
+  <Code lang="json">{`{
+  "routes": [
+    { "src": "/about", "dest": "https://about.me" },
+    { "src": "/action", "dest": "my-serverless-function-action/index" }
+  ]
+}`}</Code>
+<Caption>
+  An example <InlineCode>now.json</InlineCode> file with{' '}
+  <InlineCode>routes</InlineCode> properties that proxy paths to another upon
+  request.
+</Caption>
+
+<Note>
+  You can point the <InlineCode>dest</InlineCode> path to any URL, Now hosted
+  Serverless Function, or even non-Now hosted URLs as shown in the code above.
+  If you don't perform any proxying, you can safely remove{' '}
+  <InlineCode>dest</InlineCode>.
+</Note>
+
+<Code lang="json">{`{
+  "routes": [{ "src": "/about" }]
+}`}</Code>
+
+<Caption>
+  This will route to <InlineCode>/about</InlineCode> without proxying, but
+  routes like this are usually redundant with{' '}
+  <GenericLink href="#wildcard-routes">handle filesystem</GenericLink>.
+</Caption>
+</Example>
+
+## headers
+
+**Type**: Object
+
+The `headers` property is an object supporting [HTTP headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers) as the keys, with the intended value as the key's value.
+
+An example of using the `headers` property to add [shared caching](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control#Expiration) headers to all files in an `images` directory:
+
+<Example>
+  <Code lang="json">{`{
+  "routes": [
+    {
+      "src": "/images/(.*)",
+      "headers": { "cache-control": "s-maxage=604800" },
+      "dest": "/images/$1"
+    }
+  ]
+}`}</Code>
+
+<Caption>
+  Setting <InlineCode>cache-control</InlineCode> headers for all paths under an{' '}
+  <InlineCode>images</InlineCode> directory with routes.
+</Caption>
+</Example>
+
+<Note>
+  You can also add custom headers to your <InlineCode>routes</InlineCode>, these
+  are defined in the same way.
+</Note>
+
+## continue
+
+**Type**: Boolean
+
+The `continue` property allows routing to continue even though the `src` was matched.
+
+For example, you can use this property in combination with [the `headers` property](#headers) to append headers to a broader group of routes instead of applying it to every route.
+
+<Example>
+  <Code lang="json">{`{
+  "routes": [
+    {
+      "src": "/blog.*",
+      "headers": { "Cache-Control": "max-age=3600" },
+      "continue": true
+    },
+    {
+      "src": "/blog/([^/]+)",
+      "dest": "/blog?slug=$1"
+    }
+  ]
+}`}</Code>
+
+<Caption>
+  In this case, the <InlineCode>Cache-Control</InlineCode> header will be
+  applied to any route starting with <InlineCode>/blog</InlineCode>.
+</Caption>
+</Example>
+
+## status
+
+**Type**: Integer
+
+The `status` property defines the status code that Now should respond with when a path is requested.
+
+For example, you can use this property in combination with [the `headers` property](#headers) to create a redirect with the initial status code of 301 (Moved Permanently).
+
+<Example>
+  <Code lang="json">{`{
+  "routes": [
+    {
+      "src": "/about.html",
+      "status": 301,
+      "headers": { "Location": "/about-us.html" }
+    }
+  ]
+}`}</Code>
+
+<Caption>
+  Redirecting one path to another using the <InlineCode>status</InlineCode>{' '}
+  property to provide a{' '}
+  <GenericLink href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status">
+    HTTP status code
+  </GenericLink>
+  .
+</Caption>
+</Example>
+
+<Note>
+  In a redirect case as shown above, the <InlineCode>Location</InlineCode>{' '}
+  property can also point to non-Now hosted URLs.
+</Note>
+
+Read more about redirecting your `www.` subdomain to your root domain:
+
+<Card title="www. Redirect Guide" href="/guides/redirect-from-www">
+  Create a redirect from the www. subdomain to your root domain.
+</Card>
+
+## methods
+
+**Type**: Array
+
+The `methods` property can be used to define what [HTTP request methods](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods) a particular path accepts.
+
+The value of this property can be any [HTTP request method](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods), with the default being that the path can accept any method.
+
+As an example, you can use this property when you have an API endpoint and only want to allow `GET` or `POST` request methods:
+
+<Example>
+  <Code lang="json">{`{
+  "routes": [
+    {
+      "src": "/api/user.js",
+      "methods": ["POST", "GET"],
+      "dest": "/api/user.js"
+    }
+  ],
+  "builds": [{ "src": "*.js", "use": "@now/node" }]
+}`}</Code>
+
+<Caption>
+  Accepting only <InlineCode>POST</InlineCode> and <InlineCode>GET</InlineCode>{' '}
+  HTTP request methods on an API endpoint.
+</Caption>
+</Example>
+
+<Note>
+  The above example uses the{' '}
+  <GenericLink href="/docs/v2/deployments/official-builders/node-js-now-node/">
+    @now/node
+  </GenericLink>{' '}
+  Builder as an example of a <InlineCode>now.json</InlineCode> configuration
+  that tells Now to build JavaScript files with Node.js and outputs them as{' '}
+  <GenericLink href="/docs/v2/advanced/concepts/serverless-functions/">
+    Serverless Functions
+  </GenericLink>
+  .
+</Note>
+
+## Advanced
+
+### Cascading Order
+
+Routes are applied in the order they are listed in the `routes` array. Take the following configuration; for example:
+
+<Example>
+  <Code lang="json">{`{
+  "routes": [
+    { "src": "/(.*)", "dest": "/" },
+    { "src": "/first-page", "dest": "/first-page.html" }
+  ]
+}`}</Code>
+
+<Caption>
+  An incorrect example <InlineCode>now.json</InlineCode> file that will match
+  all
+  <InlineCode>routes</InlineCode> and proxy them to <InlineCode>/</InlineCode>
+</Caption>
+</Example>
+
+In the example configuration above, since the first route matches all possible paths, the second route will not be used. The order of these routes would have to switch for the latter route to apply to the `/first-page` path.
+
+The correct configuration for all routes to take affect would be the following:
+
+```json
+{
+  "routes": [
+    { "src": "/first-page", "dest": "/first-page.html" },
+    { "src": "/(.*)", "dest": "/" }
+  ]
+}
+```
+
+<Caption>
+  A correct example <InlineCode>now.json</InlineCode> file that will match all
+  <InlineCode>routes</InlineCode>, only proxying to <InlineCode>/</InlineCode> if
+  there are no matches.
+</Caption>
+
+This type of configuration can be seen in [single-page applications](https://en.wikipedia.org/wiki/Single-page_application) where custom paths need to route to the `index.html` file.
+
+### Route Parameters
+
+<Note>
+  <b>This method is for advanced usecases</b> when using route parameters and
+  path segments. For most cases, please see{' '}
+  <GenericLink href="/docs/v2/serverless-functions/introduction/#path-segments">
+    the Serverless Functions documentation on path segments
+  </GenericLink>{' '}
+  for the recommended method, using the filesystem.
+</Note>
+
+Using [PCRE Named Subpatterns](https://www.pcre.org/original/doc/html/pcrepattern.html#SEC16), or capture groups, you can capture part of a path and use it in either the [`dest`](#dest) or [`headers`](#headers) properties.
+
+Using route parameters enables you to change the format of your URLs easily without needing complicated routing code.
+
+For example, if you are using URL parameters but want to use a custom URL path you can use the following:
+
+```json
+{
+  "routes": [{ "src": "/product/(?<id>[^/]+)", "dest": "/product?id=$id" }]
+}
+```
+
+<Caption>
+  Using a URL parameter in <InlineCode>src</InlineCode> and proxying it as a
+  custom URL path in <InlineCode>dest</InlineCode>.
+</Caption>
+
+This will take a URL, like `/product/532004` and proxies it to `/product?id=532004` with the user seeing your custom URL in their browser.
+
+<Note>
+  Both <InlineCode>^</InlineCode>, asserting the start of the path string, and{' '}
+  <InlineCode>$</InlineCode>, asserting the end of the path string, are implied
+  and are not necessary to write.
+</Note>
+
+As another example, if you want to redirect from all paths under a certain directory but want to keep the path in the new location, you can use the following:
+
+```json
+{
+  "routes": [
+    {
+      "src": "/posts/(.*)",
+      "status": 301,
+      "headers": { "Location": "/blog/$1" }
+    }
+  ]
+}
+```
+
+<Caption>
+  Redirecting from all paths in the <InlineCode>posts</InlineCode> directory but
+  keeping the path in the new location.
+</Caption>
+
+If you are using a Next.js app and want to learn more about using custom routes with ZEIT Now, read our guide:
+
+<Card
+  title="Deploying with Custom Next.js Routes"
+  href="/guides/custom-next-js-server-to-routes"
+>
+  Custom Routes with Next.js and ZEIT Now.
+</Card>
+
+### Wildcard Routes
+
+Sometimes, you will have wildcard routes that overlap with other routes. For example:
+
+<Example>
+  <Code lang="json">{`{
+  "routes": [
+    { "src": "/about" },
+    { "src": "/contact" },
+    { "src": "/([^/]+)", "dest": "/blog?slug=$1" }
+  ]
+}`}</Code>
+
+<Caption>
+  A <InlineCode>now.json</InlineCode> file where filesystem routes are
+  explicitly defined.
+</Caption>
+</Example>
+
+You might find that there are many routes without a `dest`. These routes can be handled without being explicitly defined by using handle filesystem. Handle filesystem works the same as if you hardcoded all the routes in its place.
+
+<Example>
+  <Code lang="json">{`{
+  "routes": [
+    { "handle": "filesystem" },
+    { "src": "/([^/]+)", "dest": "/blog?slug=$1" }
+  ]
+}`}</Code>
+
+<Caption>
+  A <InlineCode>now.json</InlineCode> file, using handle filesystem to route to
+  filesystem routes.
+</Caption>
+</Example>
+
+In this example, handle filesystem expands to route `/about` and `/contact`.
+
+### Custom 404
+
+The `routes` array is processed before attempting a match. For example, this allows you to send a `404` status code for specific route patterns:
+
+<Example>
+  <Code lang="json">{`{
+  "version": 2,
+  "routes": [{ "src": "/build/stats", "status": 404, "dest": "/404" }]
+}`}</Code>
+
+<Caption>
+  A <InlineCode>now.json</InlineCode> file, setting a{' '}
+  <InlineCode>404</InlineCode> status code for the{' '}
+  <InlineCode>/build/stats</InlineCode> route.
+</Caption>
+</Example>
+
+This would return a `404` status code for the `/build/stats` route.
+
+To provide a custom 404 route, you can rely on the filesystem, providing a custom error page if there are no matches. The code below shows an example of how to do this:
+
+```json
+{
+  "version": 2,
+  "routes": [
+    { "handle": "filesystem" },
+    { "src": "/(.*)", "status": 404, "dest": "/404" }
+  ]
+}
+```
+
+<Caption>
+  A <InlineCode>now.json</InlineCode> file, setting a{' '}
+  <InlineCode>404</InlineCode> status code for any routes not matched in the
+  filesystem.
+</Caption>
+
+In the snippet above, precedence is given to the filesystem, routing only to `/404` if there is no match.
+
+### SPA Fallback
+
+A common pattern with single-page applications (SPAs) is to route everything towards a single file with the application parsing the path to handle the routing itself. Most SPAs have assets to serve as well, so you should handle the filesystem before rewriting the path:
+
+```json
+{
+  "version": 2,
+  "routes": [
+    { "handle": "filesystem" },
+    { "src": "/.*", "dest": "/index.html" }
+  ]
+}
+```
+
+<Caption>
+  A <InlineCode>now.json</InlineCode> file, providing a fallback to{' '}
+  <InlineCode>index.html</InlineCode> after checking for matches against
+  filesystem routes.
+</Caption>
+
+In the example above, routing will take place based on the filesystem first, allowing for correct routing of assets and Serverless Functions, before falling back to the `index.html` file.
+
+### Intercepting Routes
+
+Routes can be intercepted by placing them either before or after `"handle": "filesystem"`, this can be used to change the behavior of how your routes work.
+
+For example, say the directory structure of a user's project looks like this:
+
+```
+project/
+  about.html
+  contact.html
+  blog.js
+  index.html
+```
+
+<Caption>An example project directory structure.</Caption>
+
+If you want to create a route that **does not interfere with the other files in the filesystem**, you should add `"handle": "filesystem"` before:
+
+```json
+{
+  "version": 2,
+  "routes": [
+    { "handle": "filesystem" },
+    { "src": "/(?<slug>[^/]+)", "dest": "/blog?slug=$slug" }
+  ]
+}
+```
+
+<Caption>
+  A <InlineCode>now.json</InlineCode> file, providing a{' '}
+  <InlineCode>/blog</InlineCode> route after checking for matches against
+  filesystem routes.
+</Caption>
+
+This is the equivalent of writing the routes below except when you add a new file, you don't need to change any config:
+
+```json
+{
+  "version": 2,
+  "routes": [
+    { "src": "/about.html", "dest": "/about.html" },
+    { "src": "/index.html", "dest": "/index.html" },
+    { "src": "/contact.html", "dest": "/contact.html" },
+    { "src": "/secret.html", "dest": "/secret.html" },
+    { "src": "/(?<slug>[^/]+)", "dest": "/blog?slug=$slug" }
+  ]
+}
+```
+
+<Caption>
+  A <InlineCode>now.json</InlineCode> file, expanded to show the effect of using
+  the filesystem to handle routing.
+</Caption>
+
+If you want to append headers to **block some of those paths**, you need a route that comes before `"handle": "filesystem"`:
+
+```json
+{
+  "version": 2,
+  "routes": [
+    {
+      "src": "/about.html",
+      "headers": { "Cache-Control": "max-age=600" },
+      "continue": true
+    },
+    { "src": "/secret.html", "status": 404, "dest": "/404" },
+    { "handle": "filesystem" },
+    { "src": "/(?<slug>[^/]+)", "dest": "/blog?slug=$slug" }
+  ]
+}
+```
+
+<Caption>
+  A <InlineCode>now.json</InlineCode> file that will continue matching routes
+  after <InlineCode>/about.html</InlineCode> is matched.
+</Caption>
+
+By using `"continue": true`, routes will continue to be matched, rather than stopping at the first match.
+
+### Using continue
+
+There are some cases where you might want to continue routing after making a match. This is useful when scoping URLs or appending headers.
+
+#### Global Headers with continue
+
+A common usage for `"continue": true` is to add global headers to routes, this is shown in the example:
+
+```json
+{
+  "version": 2,
+  "routes": [
+    {
+      "src": "/.*",
+      "headers": { "Cache-Control": "max-age=3600" },
+      "continue": true
+    },
+    {
+      "src": "/blog.*",
+      "headers": { "Cache-Control": "max-age=600" },
+      "continue": true
+    },
+    { "src": "/blog/([^/]+)", "dest": "/post?slug=$1" }
+  ]
+}
+```
+
+<Caption>
+  A <InlineCode>now.json</InlineCode> file using{' '}
+  <InlineCode>continue</InlineCode> to add global headers.
+</Caption>
+
+In this example, `/test` would be cached for `3600`, `/blog/whatever` would be cached for `600`. It's important to note when using `continue` and headers, if a header is already set, it is overridden.
+
+#### dest and continue
+
+When you need to rewrite the URL without matching, you should use `"continue": true`.
+
+```json
+{
+  "version": 2,
+  "routes": [
+    {
+      "src": "/test",
+      "headers": { "Cache-Control": "max-age: 600" },
+      "continue": true
+    },
+    { "src": "/(.*)", "dest": "/src/public/$1", "continue": true },
+    { "src": "/src/public/test", "dest": "/src/function/test" }
+  ]
+}
+```
+
+<Caption>
+  A <InlineCode>now.json</InlineCode> file using{' '}
+  <InlineCode>continue</InlineCode> to rewrite a URL without matching.
+</Caption>
+
+In this example, when requesting `/test`, it will look for a response at `/src/public/test`. Any routes that follow the `dest` + `continue` route will match against the new path. For example, `/test` would match all 3 routes.
+
+### Common Regex
+
+When using the `.` character in a [PCRE Regex](https://en.wikipedia.org/wiki/Perl_Compatible_Regular_Expressions), you should keep in mind that in regex, it matches anything. A literal `.` is denoted `\\.`. Slashes do not need to be escaped because the regular expression is enclosed in quotes.
+
+Incorrect:
+
+```json
+{ "src": "\\/test\\/file.json", "status": 404, "dest": "/404" }
+```
+
+<Caption>
+  An incorrect example of a <InlineCode>now.json</InlineCode> route.
+</Caption>
+
+Considering this example, `/test/file.json` would match, but `/test/file-json` would too. This is not intended. The `\\/` slashes are distracting and needless.
+
+Correct:
+
+```json
+{ "src": "/test/file\\.json", "status": 404, "dest": "/404" }
+```
+
+<Caption>
+  A correct example of a <InlineCode>now.json</InlineCode> route.
+</Caption>
+
+### Catch-All Except
+
+A common pattern for URL slugs is catch-all except:
+
+```json
+{ "src": "/blog/([^/]+)", "dest": "/blog?post=$1" }
+```
+
+<Caption>
+  A <InlineCode>now.json</InlineCode> route using a catch-all except regex.
+</Caption>
+
+Anything that is not a `/` will match in `$1`. This allows `/blog/post` to work, while not allowing `/blog/post/edit`.
+
+### Negative Lookahead
+
+When using catch-alls, it might make sense to exclude certain patterns instead of just a character. A negative lookahead might be useful with a directory structure similar to this:
+
+```
+project/
+  blog/
+    index.html
+    post.html
+  www/
+    index.html
+    about.html
+```
+
+<Caption>An example project directory structure.</Caption>
+
+In order to make `/` use `www/index.html`, you have to create a route:
+
+```json
+{
+  "version": 2,
+  "routes": [{ "src": "/(?!blog/?)(.*)", "dest": "/www/$1", "continue": true }]
+}
+```
+
+<Caption>
+  A <InlineCode>now.json</InlineCode> route using a negative lookahead.
+</Caption>
+
+`(?!blog/?)` is a negative lookahead and ensures the route doesn't start with `/blog/`.
+
+### Limits
+
+There is a limit of 256 route objects within a `routes` array. If there are more than this limit, the deployment will fail.

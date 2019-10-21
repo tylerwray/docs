@@ -12,14 +12,14 @@ export const meta = {
   authors: ['timothy'],
   url: '/guides/redirect-from-www',
   editUrl: 'pages/guides/redirect-from-www.mdx',
-  lastEdited: '2019-09-13T14:50:12.000Z'
+  lastEdited: '2019-10-14T12:32:29.000Z'
 }
 
 Redirecting is useful for a variety of situations, including redirecting a visitor that goes to your domain with `www.` prefixing the URL to [your domain](/docs/v2/custom-domains) without that prefix.
 
-Now provides configuration to help make redirecting easier through [the `routes` property](/docs/v2/advanced/configuration#routes) within a [`now.json` file](/docs/v2/advanced/configuration).
+Now provides configuration to help make redirecting easier through [the `routes` property](/docs/configuration#project/routes) within a [`now.json` file](/docs/configuration).
 
-To redirect visitors from the `www.` subdomain to your naked domain, you can create a `now.json` file with the aforementioned configuration property in a new folder to deploy as a separate deployment to the one that is [aliased](/docs/v2/custom-domains#deploying-with-your-domain) to your naked domain.
+To redirect visitors from the `www.` subdomain to your naked domain, you can create a `now.json` file with the aforementioned configuration property in a new folder to deploy as a separate deployment to the one that is being used as a [production domain](/docs/v2/custom-domains#deploying-with-your-domain).
 
 <Note type="warning">
   This guide only applies for custom domains and will not work with the{' '}
@@ -57,9 +57,9 @@ Next, create a `now.json` file in that directory with the following content:
 
 The above configuration uses a few properties to configure the deployment:
 
-- `version`: The [version property](/docs/v2/advanced/configuration#version) specifies the Now platform version to use, in this case, we are using the [latest version 2.0](/docs/v2/platform/overview/#versioning).
-- `alias`: The [alias property](/docs/v2/advanced/configuration#alias) defines a single or set of aliases to assign the deployment to, using [the production aliasing environment](/docs/v2/custom-domains#deploying-with-your-domain).
-- `routes`: The [routes property](/docs/v2/advanced/configuration#routes) allows Now to route your deployment as you intend it and configure it to be routed using a source and destination, or by way of a source, status, and headers.
+- `version`: The [version property](/docs/configuration#project/version) specifies the Now platform version to use, in this case, we are using the [latest version 2.0](/docs/v2/platform/overview/#versioning).
+- `alias`: The [alias property](/docs/configuration#project/alias) defines a single or set of domains to assign the deployment to, using [the production domain](/docs/v2/custom-domains#deploying-with-your-domain).
+- `routes`: The [routes property](/docs/configuration#project/routes) allows Now to route your deployment as you intend it and configure it to be routed using a source and destination, or by way of a source, status, and headers.
 
 With this configuration, you are allowing Now to understand how to route the visitor with the `routes` property from the source, comprising of a PCRE regex capture group `/(.*)`, a [HTTP status of 301](https://en.wikipedia.org/wiki/HTTP_301) (Moved Permanently), and a `Location` header that directs to the naked domain with the captured path appended via `$1`.
 
@@ -73,11 +73,11 @@ Using Now CLI, you can deploy the project from your terminal using the following
 
 <Snippet dark text="now" />
 
-To push your deployment into production, deploy and alias it with the [production aliasing target](/docs/v2/custom-domains#deploying-with-your-domain):
+To push your deployment into production using a [production domain](/docs/v2/custom-domains#deploying-with-your-domain):
 
 <Snippet dark text="now --prod" />
 
-Now, when visiting either the production alias (www.your-domain.com), a [staging alias](/docs/v2/custom-domains#deploying-with-your-domain), or a [deployment URL](/docs/v2/advanced/concepts/urls/), the visitor will get redirected to the location set as defined by the [`routes` property](/docs/v2/deployments/routes/) in the `now.json` file.
+Now, when visiting either the production domain (www.your-domain.com), a [staging URL](/docs/v2/custom-domains#deploying-with-your-domain), or a [deployment URL](/docs/v2/advanced/concepts/urls/), the visitor will get redirected to the location set as defined by the [`routes` property](/docs/configuration#routes) in the `now.json` file.
 
 export default ({ children }) => <Guide meta={meta}>{children}</Guide>
 

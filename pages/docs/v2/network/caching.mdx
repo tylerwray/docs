@@ -7,7 +7,7 @@ export const meta = {
   description:
     'A guide for how ZEIT Now caches and how to control that caching.',
   editUrl: 'pages/docs/v2/network/caching.mdx',
-  lastEdited: '2019-09-24T17:47:39.000Z'
+  lastEdited: '2019-10-14T12:32:29.000Z'
 }
 
 Our [Smart CDN](/smart-cdn) caches your content at the edge in order to serve data to your users as fast as possible.
@@ -29,7 +29,7 @@ Static files are **automatically cached at the edge** after the first request. T
 
 Static files are cached for 31 days. However, when you redeploy the cache is effectively invalidated so we always serve the latest version.
 
-By default we return a `Cache-Control` header containing `public, max-age=0, must-revalidate` to prevent clients (e.g. browsers) from caching the file locally. This gives you the most flexibility as users get the latest file from our Global CDN immediately after deploying. This can be overridden with the [routes](/docs/v2/advanced/routes/#headers) property in your `now.json` file.
+By default we return a `Cache-Control` header containing `public, max-age=0, must-revalidate` to prevent clients (e.g. browsers) from caching the file locally. This gives you the most flexibility as users get the latest file from our Global CDN immediately after deploying. This can be overridden with the [Routes](/docs/configuration#routes/headers) property in your `now.json` file.
 
 ## Serverless Functions (Lambdas)
 

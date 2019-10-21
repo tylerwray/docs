@@ -12,7 +12,7 @@ export const meta = {
   description:
     "See what's changed in the latest iteration of the ZEIT Now Platform.",
   editUrl: 'pages/docs/v2/advanced/platform/changes-in-now-2-0.mdx',
-  lastEdited: '2019-09-24T17:47:39.000Z'
+  lastEdited: '2019-10-14T12:32:29.000Z'
 }
 
 The ZEIT Now Platform 2.0 simplifies and streamlines the deployment of static and serverless workloads. In this guide we will walk you through the key differences between Now 1.0 and 2.0, and the improvements this brings.
@@ -135,7 +135,7 @@ While it's still very useful to think about what happens when an [instance of a 
 
 All static assets and caches are served from our [Global CDN](/docs/v2/advanced/concepts/cdn-and-global-distribution) **by default**. When it comes to code invocation with [Serverless Functions](/docs/v2/advanced/concepts/serverless-functions), it makes sense to think about whether the code is executed in a single region or multiple.
 
-We support the [`regions`](/docs/v2/advanced/configuration#regions) parameter in `now.json` to this end. When you make a deployment and Serverless Functions are produced in the [build steps](/docs/v2/build-step), we deploy them to the specified regions.
+We support the [`regions`](/docs/configuration#project/regions) parameter in `now.json` to this end. When you make a deployment and Serverless Functions are produced in the [build steps](/docs/v2/build-step), we deploy them to the specified regions.
 
 <Note hint>
   For the best Serverless Function performance, we recommend using the region{' '}
@@ -232,7 +232,7 @@ The `files` property in `now.json` is similarly deprecated, as to retain a singu
 **Additions:**
 
 - [`version`](/docs/v2/advanced/platform/overview#versioning) to specify the platform version the deployment is known to work with
-- [`routes`](/docs/v2/advanced/configuration#routes) to define routes and rewrites
+- [`routes`](/docs/configuration#project/routes) to define routes and rewrites
 - [`builds`](/docs/v2/advanced/builders) to define parallel build tasks
 
 **Removals:**
@@ -258,7 +258,7 @@ Additionally, some environment variables keys are now reserved. You can see a fu
 **Removals:**
 
 - ~~`--links`~~ is no longer supported when deploying. The feature had very niche use-cases and was limited in effectiveness
-- ~~`now scale`~~ is no longer necessary for 2.0 and deprecated. If you wish to change the regions your Serverless Functions get deployed to, use the [`regions`](/docs/v2/advanced/configuration#regions) config and re-deploy
+- ~~`now scale`~~ is no longer necessary for 2.0 and deprecated. If you wish to change the regions your Serverless Functions get deployed to, use the [`regions`](/docs/configuration#project/regions) config and re-deploy
 - Custom providers are removed, as we shift the strategy to executing the cross-provider logic from our backend instead
 
 ## Migration Examples
@@ -287,11 +287,8 @@ Our [support team and community](/chat) are ready to answer and welcome all your
   Deploy any of your applications with ZEIT Now.
 </Card>
 
-<Card
-  title="Aliasing"
-  href="/docs/v2/custom-domains#deploying-with-your-domain"
->
-  Learn more about aliasing to your deployments.
+<Card title="Custom Domains" href="/docs/v2/custom-domains">
+  Learn more about using custom domains with your deployments.
 </Card>
 
 <Card title="www. Redirect" href="/guides/redirect-from-www">

@@ -106,6 +106,11 @@
       "headers": { "Location": "/docs/builders" }
     },
     {
+      "src": "/docs/(integrations|now-cli)/v2(.*)",
+      "status": 301,
+      "headers": { "Location": "/docs/$1/$2" }
+    },
+    {
       "src": "/docs/v2/deployments/(routes|configuration|concepts)(.*)",
       "status": 301,
       "headers": { "Location": "/docs/v2/advanced/$1$2" }
@@ -125,14 +130,14 @@
       }
     },
     {
-      "src": "/docs/v2/deployments/configuration(.*)",
+      "src": "/docs/v2/(deployments|advanced)/configuration(.*)",
       "status": 301,
-      "headers": { "Location": "/docs/v2/advanced/configuration/$1" }
+      "headers": { "Location": "/docs/configuration$2" }
     },
     {
-      "src": "/docs/v2/deployments/routes(.*)",
+      "src": "/docs/v2/deployments/routes.*",
       "status": 301,
-      "headers": { "Location": "/docs/v2/advanced/routes/$1" }
+      "headers": { "Location": "/docs/configuration#routes" }
     },
     {
       "src": "/docs/v2/deployments/builds/?",
@@ -216,9 +221,9 @@
       "headers": { "Location": "/examples/express" }
     },
     {
-      "src": "/docs/v2/platform/global-configuration/(.*)/?",
+      "src": "/docs/v2/platform/global-configuration.*",
       "status": 301,
-      "headers": { "Location": "/docs/v2/advanced/global-configuration/$1" }
+      "headers": { "Location": "/docs/configuration#global" }
     },
     {
       "src": "/docs/v2/platform/(.*)/?",

@@ -9,12 +9,12 @@ export const meta = {
   title: 'Projects',
   description: 'Setting up projects with a list of deployments on ZEIT Now.',
   editUrl: 'pages/docs/v2/advanced/platform/projects.mdx',
-  lastEdited: '2019-08-21T15:24:05.000Z'
+  lastEdited: '2019-10-09T13:03:54.000Z'
 }
 
-A project is a logical structure that groups deployments and aliases inside of an account or team, based on the name of the project. This structure allows easier tracking and managing of deployments.
+A project is a logical structure that groups deployments and [custom domains](/docs/v2/custom-domains) inside of an account or team, based on the name of the project. This structure allows easier tracking and managing of deployments.
 
-The projects structure enables faster locating of [deployments logs, source](/docs/v2/advanced/concepts/special-paths), and [aliases](/docs/v2/custom-domains#deploying-with-your-domain).
+The projects structure enables faster locating of [deployments logs](/docs/v2/advanced/concepts/special-paths#logs-view), [source code](/docs/v2/advanced/concepts/special-paths#source-view), and [custom domains](/docs/v2/custom-domains).
 
 ## Creating a Project
 
@@ -71,8 +71,9 @@ You can remove a project and all of the deployments contained within it with the
 
 <Note alert label="Note">
   This will also delete the deployments from the project. If you have any
-  deployments that are aliased and do not want them to be removed, make sure to
-  deploy them under a different project and alias them there first.
+  deployments that are assigned to a custom domain and do not want them to be
+  removed, make sure to deploy and assign them to the custom domain under a
+  different project first.
 </Note>
 
 export default ({ children }) => <Doc meta={meta}>{children}</Doc>

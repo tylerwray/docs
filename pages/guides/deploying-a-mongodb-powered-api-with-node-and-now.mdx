@@ -17,7 +17,7 @@ export const meta = {
     process.env.ASSETS
   }/guides/deploying-a-mongodb-powered-api-with-node-and-now/card.png`,
   editUrl: 'pages/guides/deploying-a-mongodb-powered-api-with-node-and-now.mdx',
-  lastEdited: '2019-08-23T14:21:42.000Z'
+  lastEdited: '2019-10-14T12:32:29.000Z'
 }
 
 In this guide, we will walk you through creating and [deploying](/docs/v2/deployments/basics/) a [Node.js](https://nodejs.org/) API powered by [MongoDB](https://www.mongodb.com/), on [ZEIT Now](/now).
@@ -89,7 +89,7 @@ To use your MongoDB connection string without hard-coding it in your project, yo
   string.
 </Note>
 
-Finally, set up [the `now.json` configuration file](/docs/v2/advanced/configuration) that instructs Now to make available the [Secret](/docs/v2/deployments/environment-variables-and-secrets#securing-environment-variables-using-secrets) you defined:
+Finally, set up [the `now.json` configuration file](/docs/configuration) that instructs Now to make available the [Secret](/docs/v2/deployments/environment-variables-and-secrets#securing-environment-variables-using-secrets) you defined:
 
 ```json
 {
@@ -103,7 +103,7 @@ Finally, set up [the `now.json` configuration file](/docs/v2/advanced/configurat
 
 <Caption>
   A{' '}
-  <GenericLink href="/docs/v2/advanced/configuration">
+  <GenericLink href="/docs/configuration">
     <InlineCode>now.json</InlineCode> configuration file
   </GenericLink>{' '}
   for development and deployment.
@@ -235,32 +235,12 @@ The next and final step is to deploy your app with a single command.
 
 With Now, you can deploy your app to [different environments](/docs/v2/custom-domains#deploying-with-your-domain), depending on what stage your app is at; either staging or production.
 
-To deploy to a unique alias, use the following [Now CLI](/download) command from your terminal:
+To deploy your MongoDB API, use the following [Now CLI](/download) command from your terminal:
 
 <Snippet dark text="now" />
 <Caption>Deploying with Now CLI in one command.</Caption>
 
-<Note hint>
-  See more ways to deploy and alias from the{' '}
-  <GenericLink href="/docs/v2/custom-domains#deploying-with-your-domain">
-    Aliasing Documentation.
-  </GenericLink>
-</Note>
-
-For [production deployments](/docs/v2/custom-domains#deploying-with-your-domain), you can deploy to an alias of your choice. To do so, add an `alias` to your `now.json` file:
-
-```json
-{
-  ...
-  "alias": "my-mongodb-api"
-  ...
-}
-```
-
-<Caption>
-  Extending a <InlineCode>now.json</InlineCode> file with an{' '}
-  <InlineCode>alias</InlineCode> property.
-</Caption>
+To use your domain for [production deployments](/docs/v2/custom-domains#deploying-with-your-domain), [add a custom domain](https://zeit.co/docs/v2/custom-domains/#adding-a-domain) to your project.
 
 Now, deploy your project to a production environment using the following command:
 
@@ -269,7 +249,7 @@ Now, deploy your project to a production environment using the following command
 
 <Note>
   For optimal performance,{' '}
-  <GenericLink href="/docs/v2/advanced/configuration/#regions">
+  <GenericLink href="/docs/configuration#project/regions">
     deploy your API to the closest region, or regions
   </GenericLink>
   , of where your MongoDB cluster is located in. You can see the regions Now supports
@@ -278,15 +258,15 @@ Now, deploy your project to a production environment using the following command
   </GenericLink>.
 </Note>
 
-When complete, Now CLI will provide you with the URL your project has been deployed and aliased to. In the case above, the alias was set to `my-mongodb-api.now.sh`.
+When complete, Now CLI will provide you with the URL your project has been deployed to. In the case above, the production domain was set to `my-mongodb-api.now.sh`.
 
-You can view the aliased deployment from this guide, using the API path, here: <https://my-mongodb-api.now.sh/api/users.js>
+You can view the deployment from this guide, using the API path, here: <https://my-mongodb-api.now.sh/api/users.js>
 
 ## Deploying Automatically with Git
 
 Instead of deploying manually through your terminal, you can also get **automatic deployments with each git push** when you use [Now for GitHub](/github) or [Now for GitLab](/gitlab).
 
-Push to any branch, pull, or merge request and get a fresh deployment to review. Merging into the default branch results in an automatic alias to production. No extra work needed.
+Push to any branch, pull, or merge request and get a fresh deployment to review. Merging into the default branch results in an automatic update of the production domain. No extra work needed.
 
 export default ({ children }) => <Guide meta={meta}>{children}</Guide>
 

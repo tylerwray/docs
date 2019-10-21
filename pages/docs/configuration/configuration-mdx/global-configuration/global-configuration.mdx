@@ -1,0 +1,74 @@
+import Card from '~/components/card'
+import Example from '~/components/example'
+import { Code, InlineCode } from '~/components/text/code'
+import { P } from '~/components/text'
+import { GenericLink } from '~/components/text/link'
+import Note from '~/components/text/note'
+
+export const meta = {
+  editUrl:
+    'pages/docs/configuration/configuration-mdx/global-configuration/global-configuration.mdx',
+  lastEdited: '2019-10-14T12:32:29.000Z'
+}
+
+# Global
+
+Using the following files and configuration options, you can configure [Now CLI](/download) under your system user.
+
+There are two global configuration files; `config.json` and `auth.json`. By default, these files are held in a directory named `.now` within the user's home directory. For example on Unix based systems they will be found at `~/.now/*.json`.
+
+## config.json
+
+This file is used for global configuration of ZEIT Now deployments. Now CLI uses this file as a way to co-ordinate how deployments should be treated, consistently.
+
+The first option is a single `_` that gives a description to the file, if a user should find themselves looking through it without context.
+
+The following options are all of the options that can be used by users to configure their Now deployments globally on their system for that user profile:
+
+### currentTeam
+
+**Type**: `String`.
+
+**Valid values**: A [team ID](/docs/api/#endpoints/teams/list-all-your-teams).
+
+This option tells [Now CLI](/download) which context is currently active. If this property exists and contains a team ID, that team is used as the scope for deployments, otherwise if this property does not exist, the user's personal account is used.
+
+<Example>
+  <Code lang="json">{`{
+  "currentTeam": "team_ofwUZockJlL53hINUGCc1ONW"
+}`}</Code>
+</Example>
+
+### api
+
+**Type**: `String`.
+
+**Valid values**: [An API Origin URL](/docs/api/#api-basics/server-specs/origins).
+
+This option selects which API Origin [Now CLI](/download) should use when performing an action requiring the API.
+
+<Example>
+  <Code lang="json">{`{
+  "api": "https://api-sfo1.zeit.co"
+}`}</Code>
+</Example>
+
+### collectMetrics
+
+**Type**: `Boolean`.
+
+**Valid values**: `true` (default), `false`.
+
+This option defines whether [Now CLI](/download) should collect anonymous metrics about which commands are invoked the most, how long they take to run, and which errors customers are running into.
+
+<Example>
+  <Code lang="json">{`{
+  "collectMetrics": true
+}`}</Code>
+</Example>
+
+## auth.json
+
+This file should not be edited manually. It exists to contain the authentication information for the ZEIT Now clients.
+
+In the case that you are uploading your global configuration setup to a potentially insecure destination, we highly recommend ensuring that this file will not be uploaded, as it allows an attacker to gain access to your provider accounts.

@@ -1,0 +1,108 @@
+import Snippet from '~/components/snippet'
+import Caption from '~/components/text/caption'
+import { InlineCode } from '~/components/text/code'
+
+export const meta = {
+  editUrl: 'pages/docs/now-cli/now-cli-mdx/commands/now.mdx',
+  lastEdited: '2019-10-15T22:03:42.000Z'
+}
+
+## Now
+
+The `now` command is used to deploy projects and can be used from either the root of the project directory or by providing a path to it.
+
+### Basic Usage
+
+<Snippet dark text="now" />
+<Caption>Using the <InlineCode>now</InlineCode> command from the root of a project directory.</Caption>
+
+### Extended Usage
+
+<Snippet dark text="now [path-to-project]" />
+<Caption>Using the <InlineCode>now</InlineCode> command and supplying a path to the root directory of the project.</Caption>
+
+### Global Options
+
+The following [global options](#options) can be passed when using the `now` command:
+
+- `--debug`
+- `--force`
+- `--help`
+
+For more information on global options and their usage, refer to the [options section](#options).
+
+### Unique Options
+
+These are options that only apply to the `now` command, therefore, more information is provided.
+
+#### Build Env
+
+The `--build-env` option, shorthand `-b`, can be used to provide environment variables to the [build step](/docs/v2/build-step).
+
+##### Usage Example
+
+<Snippet dark text="now --build-env [key1=value1 key2=value2 key3=value3]" />
+<Caption>Using the <InlineCode>now</InlineCode> command with the <InlineCode>--build-env</InlineCode> option.</Caption>
+
+#### Env
+
+The `--env` option, shorthand `-e`, can be used to provide environment variables at [run time](/docs/v2/serverless-functions/env-and-secrets).
+
+##### Usage Example
+
+<Snippet dark text="now --env [key1=value1 key2=value2 key3=value3]" />
+<Caption>Using the <InlineCode>now</InlineCode> command with the <InlineCode>--env</InlineCode> option.</Caption>
+
+#### Name
+
+The `--name` option, shorthand `-n`, can be used to provide a project name for a deployment.
+
+##### Usage Example
+
+<Snippet dark text="now --name foo" />
+<Caption>Using the <InlineCode>now</InlineCode> command with the <InlineCode>--name</InlineCode> option.</Caption>
+
+#### No Clipboard
+
+The `--no-clipboard` option, shorthand `-C`, can be used to prevent Now CLI from copying the deployment URL to the clipboard.
+
+##### Usage Example
+
+<Snippet dark text="now --no-clipboard" />
+<Caption>Using the <InlineCode>now</InlineCode> command with the <InlineCode>--no-clipboard</InlineCode> option.</Caption>
+
+#### Prod
+
+The `--prod` option can be used to create a deployment for a production domain specified in the project dashboard.
+
+##### Usage Example
+
+<Snippet dark text="now --prod" />
+<Caption>Using the <InlineCode>now</InlineCode> command with the <InlineCode>--prod</InlineCode> option.</Caption>
+
+#### Public
+
+The `--public` option can be used to ensures the source code is publicly available at the `/_src` path.
+
+##### Usage Example
+
+<Snippet dark text="now --public" />
+<Caption>Using the <InlineCode>now</InlineCode> command with the <InlineCode>--public</InlineCode> option.</Caption>
+
+#### Regions
+
+The `--regions` option can be used to specify which regions the deployments [Serverless Functions](/docs/v2/serverless-functions/introduction) should run in.
+
+##### Usage Example
+
+<Snippet dark text="now --regions sfo1" />
+<Caption>Using the <InlineCode>now</InlineCode> command with the <InlineCode>--regions</InlineCode> option.</Caption>
+
+#### Version
+
+The `--version` option can be used to verify the version of [Now CLI](/download) currently being used.
+
+##### Usage Example
+
+<Snippet dark text="now --version" />
+<Caption>Using the <InlineCode>now</InlineCode> command with the <InlineCode>--version</InlineCode> option.</Caption>

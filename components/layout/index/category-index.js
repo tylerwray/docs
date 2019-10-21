@@ -52,7 +52,7 @@ class CategoryIndex extends Component {
                 ref={this.handleRef}
                 href={as || href}
               >
-                {category.title} →
+                {category.title}
               </a>
             ) : (
               <span>{category.title}</span>

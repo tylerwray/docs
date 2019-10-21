@@ -36,7 +36,13 @@ The limit of request is per endpoint basis so you could continue using another e
   <Code lang="json">{`{
   "error": {
     "code": "rate_limited",
-    "message": "Rate limit exceeded",
+    "message": "The rate limit of 6 exceeded for 'api-www-user-update-username'. Try again in 7 days",
+    "limit": {
+      "remaining": 0,
+      "reset": 1571432075,
+      "resetMs": 1571432075563,
+      "total": 6
+    }
   }
 }`}</Code>
 </Example>
@@ -69,13 +75,13 @@ This errors is similar to the HTTP 500 Internal Server Error error code.
 
 ### Resource Not Found
 
-The endpoint you're requesting does not handle the method you defined. The error message will contain the methods the endpoint responds to.
+The requested resource could not be found
 
 <Example>
   <Code lang="json">{`{
   "error": {
-    "code": "method_unknown",
-    "message": "This endpoint only responds to METHOD"
+    "code": "not_found",
+    "message": "Could not find the RESOURCE: ID"
   }
 }`}</Code>
 </Example>

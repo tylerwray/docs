@@ -1,9 +1,17 @@
 // This is a development script executed in the build step of pages
 const fs = require('fs')
 const path = require('path')
+const prettier = require('prettier')
 
 const DOMAIN = 'https://zeit.co'
-const SITE_PATHS = ['/docs', '/docs/api', '/docs/integrations']
+const SITE_PATHS = [
+  '/docs',
+  '/docs/api',
+  '/docs/integrations',
+  '/docs/now-cli',
+  '/docs/configuration',
+  '/docs/builders'
+]
 const META = /export\s+const\s+meta\s+=\s+({[\s\S]*?\n})/
 const SITEMAP_PATH = 'public/sitemap.xml'
 const GUIDES_PATH = 'lib/data/guides.json'
@@ -36,7 +44,8 @@ function recursiveReadDirSync(dir, arr = [], rootDir = dir) {
 
 function isV2Page(pagePath) {
   return (
-    !pagePath.includes('api-docs-mdx') &&
+    !pagePath.includes('-mdx/') &&
+    !pagePath.includes('.DS_Store') &&
     SITE_PATHS.some(
       dir =>
         pagePath.startsWith(dir + '/index') || pagePath.startsWith(dir + '/v2')
@@ -117,7 +126,9 @@ function generateSiteMap() {
     `sitemap.xml with ${nodes.length} entries was written to ${SITEMAP_PATH}`
   )
 
-  fs.writeFileSync(GUIDES_PATH, JSON.stringify(guidesMeta, null, 2))
+  const guidesJson = JSON.stringify(guidesMeta, null, 2)
+
+  fs.writeFileSync(GUIDES_PATH, prettier.format(guidesJson, { parser: 'json' }))
 
   console.log(
     `guides.json with ${
