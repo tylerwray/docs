@@ -2,27 +2,86 @@ import Doc from '~/components/layout/docs'
 import { GenericLink } from '~/components/text/link'
 import { Image } from '~/components/media'
 import Caption from '~/components/text/caption'
+import Snippet from '~/components/snippet'
+import Note from '~/components/text/note'
+import { InlineCode } from '~/components/text/code'
 
 export const meta = {
   title: 'Deployments',
   description: 'Understanding and making deployments with ZEIT Now.',
   editUrl: 'pages/docs/v2/advanced/platform/deployments.mdx',
-  lastEdited: '2019-10-18T21:54:04.000Z'
+  lastEdited: '2019-10-21T10:17:46.000Z'
 }
 
-A deployment is the end result of building your project and making it available to visitors.
+A deployment is the end result of building your Project and making it available to visitors.
 
 This section contains information about making, managing and understanding the behavior of deployments.
 
 ## Making Deployments
 
-### Git integration
+There are multiple ways to make deployments with ZEIT Now depending on your use case.
+
+When making deployments, the Project will be uploaded and transformed into a production ready output through the use of a [Build Step](/docs/v2/build-step).
+
+Once the build step has completed successfully, a new, [immutable](https://en.wikipedia.org/wiki/Immutable_object) deployment will be made available at the [staging domain](/docs/v2/advanced/platform/deployments/#staging).
+
+### Git Integration
+
+You can make deployments with Git by using either the [Now for GitHub](/docs/v2/advanced/now-for-github/) or [Now for GitLab](/docs/v2/advanced/now-for-gitlab/) integrations.
+
+When using these integrations, every push to a branch will provide you with a [staging domain](/docs/v2/advanced/platform/deployments/#staging) to view your changes.
+
+When merging to the default branch (commonly `master`), a production deployment will be made, making the updates available at the [production domain](/docs/v2/advanced/platform/deployments/#production).
 
 ### Now CLI
 
+By using [Now CLI](/download), you are able to deploy Projects with **a single command** from your terminal.
+
+To make a [staging deployment](/docs/v2/advanced/platform/deployments/#staging), use the `now` command:
+
+<Snippet dark text="now" />
+<Caption>Making a staging deployment with the <InlineCode>now</InlineCode> command.</Caption>
+
+<Note>
+  The first deployment for a <strong>Project</strong> is always both a{' '}
+  <GenericLink href="/docs/v2/advanced/platform/deployments/#staging">
+    staging
+  </GenericLink>{' '}
+  and{' '}
+  <GenericLink href="/docs/v2/advanced/platform/deployments/#production">
+    production
+  </GenericLink>{' '}
+  deployment.
+</Note>
+
+To make a [production deployment](/docs/v2/advanced/platform/deployments/#staging), use the `now --prod` command:
+
+<Snippet dark text="now --prod" />
+<Caption>Making a production deployment with the <InlineCode>now</InlineCode> command.</Caption>
+
+### Deploy Hooks
+
+[Deploy Hooks](/docs/v2/advanced/deploy-hooks/) allow you to create URLs that accept HTTP POST requests in order to trigger deployments, to re-run the [Build Step](/docs/v2/build-step), from outside of ZEIT.
+
+To create a Deploy Hook, visit the settings page of your Project, there you will be able to choose the branch to deploy when the HTTP endpoint receives a POST request.
+
+<Note>
+  Due to their mechanics, the usage of Deploy Hooks requires a{' '}
+  <GenericLink href="/docs/v2/git-integration/">Git Integration</GenericLink> to
+  be installed.
+</Note>
+
+You can find more information about Deploy Hooks in the [documentation](/docs/v2/advanced/deploy-hooks/).
+
 ### Now API
 
+The ZEIT Now API can be used to make deployments by making a HTTP POST request to the relevant endpoint, including the files you wish to deploy as the body.
+
+You can find more information about the Now API in the [API Reference](/docs/api/#endpoints/deployments).
+
 ## Managing Deployments
+
+You can manage your deployments either via the [ZEIT Dashboard](/dashboard) or [Now CLI](/download).
 
 ### ZEIT Dashboard
 
@@ -38,7 +97,7 @@ There are two types of deployment on the ZEIT Now platform, **staging** and **pr
 
 By making a **staging deployment**, the **staging domain** will be updated to reflect that of the latest deployment made.
 
-The **staging domain** is provided either by the deployment output from Now CLI or on a pull request when using a git integration and contains the name of the user or team the project belongs to.
+The **staging domain** is provided either by the deployment output from Now CLI or on a pull request when using a git integration and contains the name of the user or team the Project belongs to.
 
 ### Production
 
@@ -46,7 +105,7 @@ The **staging domain** is provided either by the deployment output from Now CLI 
 
 By making a **production deployment**, the **production domain(s)** will be updated to reflect that of the latest deployment made.
 
-The **production domain(s)** are defined from the **Domains** tab of a project on the ZEIT Dashboard.
+The **production domain(s)** are defined from the **Domains** tab of a Project on the ZEIT Dashboard.
 
 ## Special Paths
 
