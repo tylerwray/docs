@@ -10,18 +10,18 @@ export const meta = {
   title: 'Deployments',
   description: 'Understanding and making deployments with ZEIT Now.',
   editUrl: 'pages/docs/v2/advanced/platform/deployments.mdx',
-  lastEdited: '2019-10-21T10:17:46.000Z'
+  lastEdited: '2019-10-21T10:30:32.000Z'
 }
 
-A deployment is the end result of building your Project and making it available to visitors.
+A deployment is the end result of building your [Project](/docs/v2/advanced/platform/projects/) and making it available through a live URL.
 
-This section contains information about making, managing and understanding the behavior of deployments.
+This section contains information about making, managing, and understanding the behavior of deployments.
 
 ## Making Deployments
 
-There are multiple ways to make deployments with ZEIT Now depending on your use case.
+There are multiple ways to make deployments with ZEIT Now, these include via a [Git Integration](#git-integration), [Now CLI](#now-cli), [Deploy Hooks](deploy-hooks), and the [Now API](#now-api).
 
-When making deployments, the Project will be uploaded and transformed into a production ready output through the use of a [Build Step](/docs/v2/build-step).
+When making deployments, the [Project](/docs/v2/advanced/platform/projects/) will be uploaded and transformed into a production ready output through the use of a [Build Step](/docs/v2/build-step).
 
 Once the build step has completed successfully, a new, [immutable](https://en.wikipedia.org/wiki/Immutable_object) deployment will be made available at the [staging domain](/docs/v2/advanced/platform/deployments/#staging).
 
@@ -35,7 +35,7 @@ When merging to the default branch (commonly `master`), a production deployment 
 
 ### Now CLI
 
-By using [Now CLI](/download), you are able to deploy Projects with **a single command** from your terminal.
+By using [Now CLI](/download), you are able to deploy [Projects](/docs/v2/advanced/platform/projects/) with **a single command** from your terminal.
 
 To make a [staging deployment](/docs/v2/advanced/platform/deployments/#staging), use the `now` command:
 
@@ -63,7 +63,7 @@ To make a [production deployment](/docs/v2/advanced/platform/deployments/#stagin
 
 [Deploy Hooks](/docs/v2/advanced/deploy-hooks/) allow you to create URLs that accept HTTP POST requests in order to trigger deployments, to re-run the [Build Step](/docs/v2/build-step), from outside of ZEIT.
 
-To create a Deploy Hook, visit the settings page of your Project, there you will be able to choose the branch to deploy when the HTTP endpoint receives a POST request.
+To create a Deploy Hook, visit the settings page of your [Project](/docs/v2/advanced/platform/projects/), there you will be able to choose the branch to deploy when the HTTP endpoint receives a POST request.
 
 <Note>
   Due to their mechanics, the usage of Deploy Hooks requires a{' '}
@@ -97,7 +97,7 @@ There are two types of deployment on the ZEIT Now platform, **staging** and **pr
 
 By making a **staging deployment**, the **staging domain** will be updated to reflect that of the latest deployment made.
 
-The **staging domain** is provided either by the deployment output from Now CLI or on a pull request when using a git integration and contains the name of the user or team the Project belongs to.
+The **staging domain** is provided either by the deployment output from Now CLI or on a pull request when using a git integration and contains the name of the user or team the [Project](/docs/v2/advanced/platform/projects/) belongs to.
 
 ### Production
 
