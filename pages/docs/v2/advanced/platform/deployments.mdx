@@ -10,7 +10,7 @@ export const meta = {
   title: 'Deployments',
   description: 'Understanding and making deployments with ZEIT Now.',
   editUrl: 'pages/docs/v2/advanced/platform/deployments.mdx',
-  lastEdited: '2019-10-21T10:38:07.000Z'
+  lastEdited: '2019-10-21T10:47:24.000Z'
 }
 
 A deployment is the end result of building your [Project](/docs/v2/advanced/platform/projects/) and making it available through a live URL.
@@ -29,9 +29,9 @@ Once the build step has completed successfully, a new, [immutable](https://en.wi
 
 You can make deployments with Git by using either the [Now for GitHub](/docs/v2/advanced/now-for-github/) or [Now for GitLab](/docs/v2/advanced/now-for-gitlab/) integrations.
 
-When using these integrations, every push to a branch will provide you with a [staging domain](/docs/v2/advanced/platform/deployments/#staging) to view your changes.
+When using these integrations, every push to a branch will provide you with a [staging deployment](/docs/v2/advanced/platform/deployments/#staging) to view your changes.
 
-When merging to the default branch (commonly `master`), a production deployment will be made, making the updates available at the [production domain](/docs/v2/advanced/platform/deployments/#production).
+When merging to the default branch (commonly `master`), a [production deployment](/docs/v2/advanced/platform/deployments/#production) will be made.
 
 ### Now CLI
 
@@ -109,9 +109,15 @@ You can manage your deployments either via the [ZEIT Dashboard](/dashboard) or [
 
 ### ZEIT Dashboard
 
-The [ZEIT Dashboard](/dashboard) is the easiest way for you to manage your deployments,
+The [ZEIT Dashboard](/dashboard) is the easiest way for you to manage your deployments.
+
+Through the ZEIT Dashboard, you can find a variety of settings including a **Domains** tab, where you can add [custom domains](/docs/v2/custom-domains/) to your Project.
 
 ### Now CLI
+
+The [Now CLI](/download) provides an alternative way to manage your deployments.
+
+You can find a full list of all the commands available in the [Now CLI Reference](/docs/now-cli/).
 
 ## Special Paths
 
