@@ -13,15 +13,15 @@ export const meta = {
   lastEdited: '2019-10-22T08:05:40.000Z'
 }
 
-A deployment is the end result of building your [Project](/docs/v2/advanced/platform/projects/) and making it available through a live URL.
+A deployment is the result of building your [Project](/docs/v2/advanced/platform/projects/) and making it available through a live URL.
 
 This section contains information about making, managing, and understanding the behavior of deployments.
 
 ## Making Deployments
 
-There are multiple ways to make deployments with ZEIT Now, these include via a [Git Integration](#git-integration), [Now CLI](#now-cli), [Deploy Hooks](deploy-hooks), and the [Now API](#now-api).
+There are multiple ways to make deployments with ZEIT Now; these include via a [Git Integration](#git-integration), [Now CLI](#now-cli), [Deploy Hooks](#deploy-hooks), and the [Now API](#now-api).
 
-When making deployments, the [Project](/docs/v2/advanced/platform/projects/) will be uploaded and transformed into a production ready output through the use of a [Build Step](/docs/v2/build-step).
+When making deployments, the [Project](/docs/v2/advanced/platform/projects/) will be uploaded and transformed into a production-ready output through the use of a [Build Step](/docs/v2/build-step).
 
 Once the build step has completed successfully, a new, [immutable](https://en.wikipedia.org/wiki/Immutable_object) deployment will be made available at the [staging domain](/docs/v2/advanced/platform/deployments/#staging).
 
@@ -35,7 +35,7 @@ When merging to the default branch (commonly `master`), a [production deployment
 
 ### Now CLI
 
-By using [Now CLI](/download), you are able to deploy [Projects](/docs/v2/advanced/platform/projects/) with **a single command** from your terminal.
+By using [Now CLI](/download), you can deploy [Projects](/docs/v2/advanced/platform/projects/) with **a single command** from your terminal.
 
 To make a [staging deployment](/docs/v2/advanced/platform/deployments/#staging), use the `now` command:
 
@@ -61,14 +61,14 @@ To make a [production deployment](/docs/v2/advanced/platform/deployments/#stagin
 
 ### Deploy Hooks
 
-[Deploy Hooks](/docs/v2/advanced/deploy-hooks/) allow you to create URLs that accept HTTP POST requests in order to trigger deployments, to re-run the [Build Step](/docs/v2/build-step), from outside of ZEIT.
+[Deploy Hooks](/docs/v2/advanced/deploy-hooks/) allow you to create URLs that accept HTTP POST requests to trigger deployments, re-running the [Build Step](/docs/v2/build-step), from outside of ZEIT.
 
 There are many use cases for Deploy Hooks, for example, rebuilding your site to reflect changes in a Headless CMS or scheduling deployments with Cron Jobs.
 
-To create a Deploy Hook, visit the settings page of your [Project](/docs/v2/advanced/platform/projects/), there you will be able to choose the branch to deploy when the HTTP endpoint receives a POST request.
+To create a Deploy Hook, visit the settings page of your [Project](/docs/v2/advanced/platform/projects/) where you can choose the branch to deploy when the HTTP endpoint receives a POST request.
 
 <Note>
-  Due to their mechanics, the usage of Deploy Hooks requires a{' '}
+  Deploy Hooks require a{' '}
   <GenericLink href="/docs/v2/git-integration/">Git Integration</GenericLink> to
   be installed.
 </Note>
@@ -77,13 +77,13 @@ You can find more information about Deploy Hooks in the [documentation](/docs/v2
 
 ### Now API
 
-The [ZEIT Now API](/docs/api/) can be used to make deployments by making a HTTP POST request to the relevant endpoint, including the files you wish to deploy as the body.
+The [ZEIT Now API](/docs/api/) can be used to make deployments by making an HTTP POST request to the relevant endpoint, including the files you wish to deploy as the body.
 
 You can find more information about the Now API in the [API Reference](/docs/api/#endpoints/deployments).
 
 ## Deployment Types
 
-There are two types of deployment on the ZEIT Now platform, **staging** and **production**.
+There are two types of deployment on the ZEIT Now platform: **staging** and **production**.
 
 ### Staging
 
@@ -91,13 +91,13 @@ There are two types of deployment on the ZEIT Now platform, **staging** and **pr
 
 By making a **staging deployment**, the **staging domain** will be updated to reflect that of the latest deployment made.
 
-The **staging domain** is provided either by the deployment output from Now CLI or on a pull request when using a git integration and contains the name of the user or team the [Project](/docs/v2/advanced/platform/projects/) belongs to.
+The **staging domain** is provided either by the deployment output from Now CLI or on a pull or merge request when using a git integration and contains the name of the user or team to which the [Project](/docs/v2/advanced/platform/projects/) belongs.
 
 ### Production
 
 **Production deployments** are made in two different circumstances. Each time you merge to the default branch (commonly `master`) or make a deployment using the `now --prod` command, this is a **production deployment**.
 
-By making a **production deployment**, the **production domain(s)** will be updated to reflect that of the latest deployment made.
+By making a **production deployment**, the **production domain(s)** will be updated to reflect that of the latest deployment.
 
 The **production domain(s)** are defined from the **Domains** tab of a Project on the ZEIT Dashboard.
 
@@ -111,7 +111,7 @@ You can manage your deployments either via the [ZEIT Dashboard](/dashboard) or [
 
 The [ZEIT Dashboard](/dashboard) is the easiest way for you to manage your deployments.
 
-Through the ZEIT Dashboard, you can find a variety of settings including a **Domains** tab, where you can add [custom domains](/docs/v2/custom-domains/) to your Project.
+Through the ZEIT Dashboard, you can find a variety of settings; including a **Domains** tab where you can add [custom domains](/docs/v2/custom-domains/) to your Project.
 
 ### Now CLI and API
 
@@ -128,11 +128,11 @@ All deployment URLs have two special pathnames:
 
 ### Source view
 
-By appending `/_src` to a [deployment URL](/docs/v2/advanced/concepts/urls) or [custom domain](/docs/v2/custom-domains), the deployment inspector will be open and you'll be able to browse your deployment sources and [build](/docs/v2/advanced/builders) outputs.
+By appending `/_src` to a deployment URL or [custom domain](/docs/v2/custom-domains), the deployment inspector will be open and you'll be able to browse your deployment sources and [build](/docs/v2/advanced/builders) outputs.
 
 ### Logs view
 
-By appending `/_logs` to a [deployment URL](/docs/v2/advanced/concepts/urls) or [custom domain](/docs/v2/custom-domains), you will be able to see a realtime stream of logs from your deployment build processes and serverless invocations.
+By appending `/_logs` to a deployment URL or [custom domain](/docs/v2/custom-domains), you will be able to see a realtime stream of logs from your deployment build processes and serverless invocations.
 
 ### Security considerations
 
