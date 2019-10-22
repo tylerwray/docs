@@ -4,11 +4,10 @@ import Card from '~/components/card'
 import Note from '~/components/text/note'
 import { GenericLink } from '~/components/text/link'
 import { Code } from '~/components/text/code'
-import Example from '~/components/example'
 
 export const meta = {
   editUrl: 'pages/docs/configuration/configuration-mdx/routes/routes.mdx',
-  lastEdited: '2019-10-14T12:32:29.000Z'
+  lastEdited: '2019-10-17T14:44:04.000Z'
 }
 
 # Routes
@@ -29,16 +28,14 @@ By default, routing is defined by the filesystem of your deployment. For example
 
 A Route can be defined within a project's [`now.json` configuration file](/docs/configuration#project/routes) as an object within an array assigned to the `routes` property, like the following which creates a simple proxy from one path to another:
 
-<Example>
-  <Code lang="json">{`{
+<Code lang="json">{`{
   "routes": [{ "src": "/about", "dest": "/about.html" }]
 }`}</Code>
-  <Caption>
+<Caption>
     An example <InlineCode>now.json</InlineCode> file with a{' '}
     <InlineCode>routes</InlineCode> property that proxies one path to another
     upon request.
   </Caption>
-</Example>
 
 ZEIT Now Routes have multiple properties for each route object that help define the behavior of a response to each request to a particular path.
 
@@ -50,16 +47,14 @@ For each route, `src` is required to set the path which the behavior will affect
 
 The following example shows a `now.json` configuration that takes a `src` path and proxies it to a [destination `dest` path](#dest).
 
-<Example>
-  <Code lang="json">{`{
+<Code lang="json">{`{
   "routes": [{ "src": "/about", "dest": "/about.html" }]
 }`}</Code>
-  <Caption>
+<Caption>
     An example <InlineCode>now.json</InlineCode> file with a{' '}
     <InlineCode>routes</InlineCode> property that proxies one path to another
     upon request.
   </Caption>
-</Example>
 
 ## dest
 
@@ -69,8 +64,7 @@ The following example shows a `now.json` configuration that takes a `src` path a
 
 [The example for the `src` property](#src) shows how both methods work together to create a proxy.
 
-<Example>
-  <Code lang="json">{`{
+<Code lang="json">{`{
   "routes": [
     { "src": "/about", "dest": "https://about.me" },
     { "src": "/action", "dest": "my-serverless-function-action/index" }
@@ -98,7 +92,6 @@ The following example shows a `now.json` configuration that takes a `src` path a
   routes like this are usually redundant with{' '}
   <GenericLink href="#wildcard-routes">handle filesystem</GenericLink>.
 </Caption>
-</Example>
 
 ## headers
 
@@ -108,8 +101,7 @@ The `headers` property is an object supporting [HTTP headers](https://developer.
 
 An example of using the `headers` property to add [shared caching](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control#Expiration) headers to all files in an `images` directory:
 
-<Example>
-  <Code lang="json">{`{
+<Code lang="json">{`{
   "routes": [
     {
       "src": "/images/(.*)",
@@ -123,7 +115,6 @@ An example of using the `headers` property to add [shared caching](https://devel
   Setting <InlineCode>cache-control</InlineCode> headers for all paths under an{' '}
   <InlineCode>images</InlineCode> directory with routes.
 </Caption>
-</Example>
 
 <Note>
   You can also add custom headers to your <InlineCode>routes</InlineCode>, these
@@ -138,8 +129,7 @@ The `continue` property allows routing to continue even though the `src` was mat
 
 For example, you can use this property in combination with [the `headers` property](#headers) to append headers to a broader group of routes instead of applying it to every route.
 
-<Example>
-  <Code lang="json">{`{
+<Code lang="json">{`{
   "routes": [
     {
       "src": "/blog.*",
@@ -157,7 +147,6 @@ For example, you can use this property in combination with [the `headers` proper
   In this case, the <InlineCode>Cache-Control</InlineCode> header will be
   applied to any route starting with <InlineCode>/blog</InlineCode>.
 </Caption>
-</Example>
 
 ## status
 
@@ -167,8 +156,7 @@ The `status` property defines the status code that Now should respond with when 
 
 For example, you can use this property in combination with [the `headers` property](#headers) to create a redirect with the initial status code of 301 (Moved Permanently).
 
-<Example>
-  <Code lang="json">{`{
+<Code lang="json">{`{
   "routes": [
     {
       "src": "/about.html",
@@ -186,7 +174,6 @@ For example, you can use this property in combination with [the `headers` proper
   </GenericLink>
   .
 </Caption>
-</Example>
 
 <Note>
   In a redirect case as shown above, the <InlineCode>Location</InlineCode>{' '}
@@ -209,8 +196,7 @@ The value of this property can be any [HTTP request method](https://developer.mo
 
 As an example, you can use this property when you have an API endpoint and only want to allow `GET` or `POST` request methods:
 
-<Example>
-  <Code lang="json">{`{
+<Code lang="json">{`{
   "routes": [
     {
       "src": "/api/user.js",
@@ -225,7 +211,6 @@ As an example, you can use this property when you have an API endpoint and only 
   Accepting only <InlineCode>POST</InlineCode> and <InlineCode>GET</InlineCode>{' '}
   HTTP request methods on an API endpoint.
 </Caption>
-</Example>
 
 <Note>
   The above example uses the{' '}
@@ -246,8 +231,7 @@ As an example, you can use this property when you have an API endpoint and only 
 
 Routes are applied in the order they are listed in the `routes` array. Take the following configuration; for example:
 
-<Example>
-  <Code lang="json">{`{
+<Code lang="json">{`{
   "routes": [
     { "src": "/(.*)", "dest": "/" },
     { "src": "/first-page", "dest": "/first-page.html" }
@@ -259,7 +243,6 @@ Routes are applied in the order they are listed in the `routes` array. Take the 
   all
   <InlineCode>routes</InlineCode> and proxy them to <InlineCode>/</InlineCode>
 </Caption>
-</Example>
 
 In the example configuration above, since the first route matches all possible paths, the second route will not be used. The order of these routes would have to switch for the latter route to apply to the `/first-page` path.
 
@@ -350,8 +333,7 @@ If you are using a Next.js app and want to learn more about using custom routes 
 
 Sometimes, you will have wildcard routes that overlap with other routes. For example:
 
-<Example>
-  <Code lang="json">{`{
+<Code lang="json">{`{
   "routes": [
     { "src": "/about" },
     { "src": "/contact" },
@@ -363,12 +345,10 @@ Sometimes, you will have wildcard routes that overlap with other routes. For exa
   A <InlineCode>now.json</InlineCode> file where filesystem routes are
   explicitly defined.
 </Caption>
-</Example>
 
 You might find that there are many routes without a `dest`. These routes can be handled without being explicitly defined by using handle filesystem. Handle filesystem works the same as if you hardcoded all the routes in its place.
 
-<Example>
-  <Code lang="json">{`{
+<Code lang="json">{`{
   "routes": [
     { "handle": "filesystem" },
     { "src": "/([^/]+)", "dest": "/blog?slug=$1" }
@@ -379,7 +359,6 @@ You might find that there are many routes without a `dest`. These routes can be 
   A <InlineCode>now.json</InlineCode> file, using handle filesystem to route to
   filesystem routes.
 </Caption>
-</Example>
 
 In this example, handle filesystem expands to route `/about` and `/contact`.
 
@@ -387,8 +366,7 @@ In this example, handle filesystem expands to route `/about` and `/contact`.
 
 The `routes` array is processed before attempting a match. For example, this allows you to send a `404` status code for specific route patterns:
 
-<Example>
-  <Code lang="json">{`{
+<Code lang="json">{`{
   "version": 2,
   "routes": [{ "src": "/build/stats", "status": 404, "dest": "/404" }]
 }`}</Code>
@@ -398,7 +376,6 @@ The `routes` array is processed before attempting a match. For example, this all
   <InlineCode>404</InlineCode> status code for the{' '}
   <InlineCode>/build/stats</InlineCode> route.
 </Caption>
-</Example>
 
 This would return a `404` status code for the `/build/stats` route.
 

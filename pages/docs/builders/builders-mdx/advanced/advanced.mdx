@@ -1,14 +1,13 @@
 import Snippet from '~/components/snippet'
 import Caption from '~/components/text/caption'
 import { InlineCode, Code } from '~/components/text/code'
-import Example from '~/components/example'
 import { GenericLink } from '~/components/text/link'
 import Note from '~/components/text/note'
 import Tag from '~/components/text/tag'
 
 export const meta = {
   editUrl: 'pages/docs/builders/builders-mdx/advanced/advanced.mdx',
-  lastEdited: '2019-10-14T12:32:29.000Z'
+  lastEdited: '2019-10-17T14:44:04.000Z'
 }
 
 # Advanced Usage
@@ -643,24 +642,21 @@ Most Builders use static analysis to determine which source files should be incl
 
 For example, the Node Builder looks at calls to `require()` or `fs.readFile()` in order to determine which files to include automatically.
 
-<Example>
-  <Code lang="javascript">{`// index.js
+<Code lang="javascript">{`// index.js
 const { readFileSync } = require('fs');
 const { join } = require('path');
 const file = readFileSync(join(__dirname, 'config', 'ci.yml'), 'utf8');
 `}</Code>
-  <Caption>
+<Caption>
     This <InlineCode>/index.js</InlineCode> file reads the contents of{' '}
     <InlineCode>/config/ci.yml</InlineCode>.<br />
     The use of <InlineCode>__dirname</InlineCode> is necessary to read a file relative
     to the current file.
   </Caption>
-</Example>
 
 In some cases, you may wish to include templates or views that are not able to be statically analyzed. Builders provide a configuration for `includeFiles` that accepts an array of globs that will always be included in the Serverless Functions output.
 
-<Example>
-  <Code lang="json">{`{
+<Code lang="json">{`{
   "builds": [
     {
       "src": "index.js",
@@ -674,15 +670,14 @@ In some cases, you may wish to include templates or views that are not able to b
     }
   ]
 }`}</Code>
-  <Caption>
-    Using the{' '}
-    <GenericLink href="/docs/v2/deployments/official-builders/node-js-now-node/">
-      @now/node Builder
-    </GenericLink>{' '}
-    and configuring the <InlineCode>includeFiles</InlineCode> within a{' '}
-    <GenericLink href="/docs/configuration#project/builds">
-      now.json configuration file
-    </GenericLink>
-    .
-  </Caption>
-</Example>
+<Caption>
+  Using the{' '}
+  <GenericLink href="/docs/v2/deployments/official-builders/node-js-now-node/">
+    @now/node Builder
+  </GenericLink>{' '}
+  and configuring the <InlineCode>includeFiles</InlineCode> within a{' '}
+  <GenericLink href="/docs/configuration#project/builds">
+    now.json configuration file
+  </GenericLink>
+  .
+</Caption>

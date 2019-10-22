@@ -1,4 +1,3 @@
-import Example from '~/components/example'
 import { Code } from '~/components/text/code'
 import { HelpLink } from '~/components/text/link'
 import Endpoint from '~/components/api/endpoint'
@@ -6,7 +5,7 @@ import Request from '~/components/api/request'
 
 export const meta = {
   editUrl: 'pages/docs/api/v2/api-docs-mdx/endpoints/certificates.mdx',
-  lastEdited: '2019-03-22T02:48:37.000Z'
+  lastEdited: '2019-10-17T14:44:04.000Z'
 }
 
 ## Certificates
@@ -36,12 +35,11 @@ This is the format of each item in the `certs` list.
 | **expiration** | <HelpLink href="#api-basics/types">Date</HelpLink>            | The date when the certificate is going to expire.             |
 | **autoRenew**  | <HelpLink href="#api-basics/types">Boolean</HelpLink>         | If the certificate is going to be automatically renewed.      |
 
-<Example>
-  <span>Example request:</span>
+##### Example Request
 
 <Request url="https://api.zeit.co/v3/now/certs" auth />
 
-Example successful (**200**) response:
+##### Example Response
 
 <Code lang="json">{`{
   "certs": [
@@ -54,7 +52,6 @@ Example successful (**200**) response:
     }
   ]
 }`}</Code>
-</Example>
 
 ### Get a single certificate
 
@@ -73,12 +70,11 @@ certificate id specified in the URL.
 | **expiration** | <HelpLink href="#api-basics/types">Date</HelpLink>            | The date when the certificate is going to expire.             |
 | **autoRenew**  | <HelpLink href="#api-basics/types">Boolean</HelpLink>         | If the certificate is going to be automatically renewed.      |
 
-<Example>
-  <span>Example request:</span>
+##### Example Request
 
 <Request url="https://api.zeit.co/v3/now/certs/oAjf6y9pxZgCJyQfrclN" auth />
 
-Example successful (200) response:
+##### Example Response
 
 <Code lang="json">{`{
   "cns": ["wow.zeit.co"],
@@ -87,7 +83,6 @@ Example successful (200) response:
   "expiration": "2016-12-16T16:00:00.000Z",
   "autoRenew": true
 }`}</Code>
-</Example>
 
 ### Create a new certificate
 
@@ -111,8 +106,7 @@ The body should contain \`domains\` array and it may contain \`renew\` field to 
 | **uid**        | <HelpLink href="#api-basics/types">ID</HelpLink>           | The unique identifier of the issued certificate. |
 | **created_at** | <HelpLink href="#api-basics/types">Date</HelpLink>         | The date when the certificate was created.       |
 
-<Example>
-  <span>Example request:</span>
+##### Example Request
 
 <Request
   method="POST"
@@ -127,13 +121,12 @@ The body should contain \`domains\` array and it may contain \`renew\` field to 
   }}
 />
 
-Example successful (**200**) response:
+##### Example Response
 
 <Code lang="json">{`{
   "uid": "zWsFytQUFlkUWaR7nWdwS7xR"
   "created_at": 2016-06-01T21:03:10.420Z"
 }`}</Code>
-</Example>
 
 ### Submit a certificate
 
@@ -157,8 +150,7 @@ The body should contain `cert`, private `key`, and `ca` chain fields in PEM form
 | -------------- | ---------------------------------------------------------- | ------------------------------------------ |
 | **created_at** | <HelpLink href="#api-basics/types">Date</HelpLink>         | The date when the certificate was created. |
 
-<Example>
-  <span>Example request:</span>
+##### Example Request
 
 <Request
   method="PUT"
@@ -174,12 +166,11 @@ The body should contain `cert`, private `key`, and `ca` chain fields in PEM form
   }}
 />
 
-Example successful (**200**) response:
+##### Example Response
 
 <Code lang="json">{`{
   "created_at": 2016-06-01T21:03:10.420Z"
 }`}</Code>
-</Example>
 
 ### Delete a certificate
 
@@ -189,12 +180,10 @@ Delete an existing certificate entry. If the certificate entry was
 removed successfully the endpoint will return with code **200** and
 an empty body; Otherwise an error object is returned.
 
-<Example>
-  <span>Example request:</span>
+##### Example Request
 
 <Request
-    method="DELETE"
-    url="https://api.zeit.co/v3/now/certs/zWsFytQUFlkUWaR7nWdwS7xR"
-    auth
-  />
-</Example>
+  method="DELETE"
+  url="https://api.zeit.co/v3/now/certs/zWsFytQUFlkUWaR7nWdwS7xR"
+  auth
+/>

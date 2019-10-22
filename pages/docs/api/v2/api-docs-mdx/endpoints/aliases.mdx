@@ -1,12 +1,12 @@
-import Example from '~/components/example'
 import { Code, InlineCode } from '~/components/text/code'
 import { HelpLink } from '~/components/text/link'
 import Endpoint from '~/components/api/endpoint'
 import Request from '~/components/api/request'
+import Caption from '~/components/text/caption'
 
 export const meta = {
   editUrl: 'pages/docs/api/v2/api-docs-mdx/endpoints/aliases.mdx',
-  lastEdited: '2019-09-09T09:00:22.000Z'
+  lastEdited: '2019-10-17T14:44:04.000Z'
 }
 
 ## Aliases
@@ -48,12 +48,11 @@ This is the format of the `deployment` described above.
 | **id**  | <HelpLink href="#api-basics/types">ID</HelpLink>           | The deployment unique identifier. |
 | **url** | <HelpLink href="#api-basics/types">String</HelpLink>       | The deployment unique URL.        |
 
-<Example>
-  <span>Example request:</span>
+##### Example Request
 
 <Request url="https://api.zeit.co/v2/now/aliases" auth />
 
-Example successful (**200**) response:
+##### Example Response
 
 <Code lang="json">{`{
   "aliases": [
@@ -83,7 +82,6 @@ Example successful (**200**) response:
     }
   ]
 }`}</Code>
-</Example>
 
 ### Get a Single Alias
 
@@ -106,8 +104,7 @@ Get the information for a specific alias by passing either the alias `id` or `na
 | **projectId**    | <HelpLink href="#api-basics/types">ID</HelpLink>           | The unique identifier of the project.                      |
 | **deploymentId** | <HelpLink href="#api-basics/types">ID</HelpLink>           | The unique identifier of the deployment.                   |
 
-<Example>
-  <span>Example request:</span>
+##### Example Request
 
 <Request
   method="GET"
@@ -115,7 +112,7 @@ Get the information for a specific alias by passing either the alias `id` or `na
   auth
 />
 
-Example successful (**200**) response:
+##### Example Response
 
 <Code lang="json">{`{
   "uid": "2WjyKQmM8ZnGcJsPWMrHRHrE",
@@ -128,7 +125,6 @@ Example successful (**200**) response:
   "projectId": "QmPMW4P9rKjheg6k3MckC7yZjRwMB6FdE8SZBerRvHWnYs",
   "deploymentId": "dpl_2MfpYzxMJiiPVRs7ZYqo8US9dynT"
 }`}</Code>
-</Example>
 
 ### Remove an Alias
 
@@ -143,8 +139,7 @@ You can obtain this id from the list of aliases.
 | ---------- | ---------------------------------------------------------- | -------------------------------------- |
 | **status** | <HelpLink href="#api-basics/types">String</HelpLink>       | If the alias was successfully removed. |
 
-<Example>
-  <span>Example request:</span>
+##### Example Request
 
 <Request
   method="DELETE"
@@ -152,12 +147,11 @@ You can obtain this id from the list of aliases.
   auth
 />
 
-Example successful (**200**) response:
+##### Example Response
 
 <Code lang="json">{`{
   "status": "SUCCESS"
 }`}</Code>
-</Example>
 
 ### Purge Alias in Now CDN
 
@@ -171,17 +165,15 @@ Purges [the CDN](/docs/v2/domains-and-aliases/cdn) of content from the given ali
 | ---------- | ---------------------------------------------------------- | ----------------------------------------------------------------- |
 | **status** | <HelpLink href="#api-basics/types">String</HelpLink>       | The status of the purge request. The value should be `REQUESTED`. |
 
-<Example>
-<span>Example of a <InlineCode>PURGE</InlineCode> request:</span>
+##### Example `PURGE` Request
 
 <Request method="PURGE" url="https://api.zeit.co/v2/now/aliases/:id" auth />
 
-Example of a successful (**200**) response:
+##### Example Response
 
 <Code lang="json">{`{
   "status": "REQUESTED"
 }`}</Code>
-</Example>
 
 ### List aliases by deployment
 
@@ -207,15 +199,14 @@ This is the format of each item in the `aliases` list.
 | **alias**   | <HelpLink href="#api-basics/types">String</HelpLink>       | The alias name, it could be a `.now.sh` subdomain or a custom domain. |
 | **created** | <HelpLink href="#api-basics/types">String</HelpLink>       | The date when the alias was created.                                  |
 
-<Example>
-  <span>Example request:</span>
+##### Example Request
 
 <Request
   url="https://api.zeit.co/v2/now/deployments/7Npest0z1zW5QVFfNDBId4BW/aliases"
   auth
 />
 
-Example successful (**200**) response:
+##### Example Response
 
 <Code lang="json">{`{
   "aliases": [
@@ -226,7 +217,6 @@ Example successful (**200**) response:
     }
   ]
 }`}</Code>
-</Example>
 
 ### Assign an alias to a deployment
 
@@ -252,8 +242,7 @@ If the desired alias was used before it will be removed from the old deployment 
 | **uid**     | <HelpLink href="#api-basics/types">ID</HelpLink>           | The unique identifier of the alias.                                                                       |
 | **created** | <HelpLink href="#api-basics/types">Date</HelpLink>         | The date when the alias was created.                                                                      |
 
-<Example>
-  <span>Example request:</span>
+##### Example Request
 
 <Request
   method="POST"
@@ -267,14 +256,15 @@ If the desired alias was used before it will be removed from the old deployment 
   }}
 />
 
-Example successful (**200**) response for new alias:
+##### Example Response (new alias)
 
 <Code lang="json">{`{
   "uid": "2WjyKQmM8ZnGcJsPWMrHRHrE",
   "created": "2016-06-02T21:01:40.950Z"
 }`}</Code>
 
-Example successful (**200**) response for alias with existing deployment
+##### Example Response (alias with existing deployment)
+
 (<InlineCode>oldId</InlineCode> is the id of the previous deployment):
 
 <Code lang="json">{`{
@@ -282,4 +272,3 @@ Example successful (**200**) response for alias with existing deployment
   "uid": "2WjyKQmM8ZnGcJsPWMrHRHrE",
   "created": "2016-06-02T21:01:40.950Z"
 }`}</Code>
-</Example>
