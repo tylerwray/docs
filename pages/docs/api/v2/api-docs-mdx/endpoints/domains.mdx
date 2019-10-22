@@ -527,7 +527,7 @@ In case of a successful purchase the returns with code 200 and an empty body.
   url="https://api.zeit.co/v4/domains/buy"
   headers={{
     Authorization: `Bearer ${
-      props.testingtoken ? props.testingtoken.token : '$token'
+      props.testingtoken ? props.testingtoken.token : '<TOKEN>'
     }`,
     'Content-Type': 'application/json'
   }}
