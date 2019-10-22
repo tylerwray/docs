@@ -1,3 +1,3 @@
 import redirect from '~/lib/redirect'
 
-export default redirect('/guides/upgrade-to-2-0')
+export default redirect('/guides/migrate-to-zeit-now/')

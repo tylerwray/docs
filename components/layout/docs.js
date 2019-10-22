@@ -152,7 +152,7 @@ class withDoc extends React.Component {
                       the version 2 documentation
                     </GenericLink>
                     . If you have yet to upgrade, see the{' '}
-                    <GenericLink href="/guides/upgrade-to-2-0">
+                    <GenericLink href="/guides/migrate-to-zeit-now/">
                       upgrade guide
                     </GenericLink>
                     .

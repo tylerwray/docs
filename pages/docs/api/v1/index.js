@@ -200,7 +200,7 @@ class APIPage extends Component {
                         the version 2 API reference
                       </GenericLink>
                       . If you have yet to upgrade, see the{' '}
-                      <GenericLink href="/guides/upgrade-to-2-0">
+                      <GenericLink href="/guides/migrate-to-zeit-now/">
                         upgrade guide
                       </GenericLink>
                       .
