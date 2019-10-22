@@ -1,8 +1,24 @@
 import Link from 'next/link'
 import { H4 } from '~/components/text'
 import { Image } from '~/components/media'
+import { useAmp } from 'next/amp'
 
 export default function({ quickstart, icons, href, deployUrl }) {
+  const isAmp = useAmp()
+
+  const Icon = ({ source }) =>
+    !isAmp ? (
+      <img alt={`Icon for ${quickstart}`} src={source} />
+    ) : (
+      <amp-img
+        layout="responsive"
+        alt={`Icon for ${quickstart}`}
+        height="48"
+        width="48"
+        src={source}
+      />
+    )
+
   return (
     <div className="quickstart">
       <Link href={href}>
@@ -12,18 +28,18 @@ export default function({ quickstart, icons, href, deployUrl }) {
               icons.map(icon =>
                 typeof icon === 'object' ? (
                   <span key={icon.src} style={{ backgroundColor: icon.color }}>
-                    <img alt={`Icon for ${quickstart}`} src={icon.src} />
+                    <Icon source={icon.src} />
                   </span>
                 ) : (
-                  <img alt={`Icon for ${quickstart}`} key={icon} src={icon} />
+                  <Icon source={icon} key={icon} />
                 )
               )
             ) : typeof icons === 'object' ? (
               <span style={{ backgroundColor: icons.color }}>
-                <img alt={`Icon for ${quickstart}`} src={icons.src} />
+                <Icon source={icons.src} />
               </span>
             ) : (
-              <img alt={`Icon for ${quickstart}`} src={icons} />
+              <Icon source={icons} />
             )}
           </span>
           <H4>{quickstart}</H4>
@@ -93,16 +109,16 @@ export default function({ quickstart, icons, href, deployUrl }) {
         }
 
         .quickstart-icons > span:not(:last-child),
-        .quickstart-icons > img:not(:last-child) {
+        .quickstart-icons > :global(img:not(:last-child)) {
           margin-right: 8px;
         }
 
-        .quickstart-icons > span img {
+        .quickstart-icons > span :global(img) {
           width: 100%;
           max-height: 100%;
         }
 
-        .quickstart-icons > img {
+        .quickstart-icons > :global(img) {
           width: 48px;
           height: 48px;
         }
