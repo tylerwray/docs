@@ -7,7 +7,7 @@ export const meta = {
   description:
     'A guide for how ZEIT Now caches and how to control that caching.',
   editUrl: 'pages/docs/v2/network/caching.mdx',
-  lastEdited: '2019-10-14T12:32:29.000Z'
+  lastEdited: '2019-10-22T21:51:28.000Z'
 }
 
 Our [Smart CDN](/smart-cdn) caches your content at the edge in order to serve data to your users as fast as possible.
@@ -41,7 +41,7 @@ In order for our CDN to cache the response of a Serverless Function, you need to
 
 Where `N` is the number of seconds the response should be cached. The response must also be cacheable as detailed above.
 
-You can read more about the suggested way to define the `Cache-Control` header [here](/docs/v2/advanced/concepts/cdn-and-global-distribution/#smart-cdn).
+You can read more about the suggested way to define the `Cache-Control` header [here](/docs/v2/network/caching/).
 
 ## Stale-While-Revalidate
 

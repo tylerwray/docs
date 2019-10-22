@@ -13,7 +13,7 @@ export const meta = {
   authors: ['msweeneydev', 'timothy', 'skllcrn'],
   url: '/guides/migrate-to-zeit-now',
   editUrl: 'pages/guides/migrate-to-zeit-now.mdx',
-  lastEdited: '2019-09-24T17:47:39.000Z'
+  lastEdited: '2019-10-22T21:51:28.000Z'
 }
 
 This guide highlights a set of common scenarios and how they are deployed with ZEIT Now.
@@ -69,7 +69,7 @@ app.get('/teams/data', function(req, res) {
 
 With serverless, functionality is split into separate files, called [Serverless Functions](/docs/v2/serverless-functions/introduction). Instead of a file or process growing monolithically, this gives us the ability to break down the app into independently scalable parts.
 
-When a path is requested, the Serverless Function for that path is [invoked](/docs/v2/advanced/concepts/serverless-functions). This avoids the whole app from having to wait and watch for requests, saving on time and resources.
+When a path is requested, the Serverless Function for that path is [invoked](/docs/v2/serverless-functions/introduction/). This avoids the whole app from having to wait and watch for requests, saving on time and resources.
 
 #### Step 1: Creating an API Directory
 

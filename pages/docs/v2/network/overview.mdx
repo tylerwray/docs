@@ -5,7 +5,7 @@ export const meta = {
   description:
     'The ZEIT Network layer sits in-between the internet and your deployments. It routes the users requests to the correct files of the requested deployment.',
   editUrl: 'pages/docs/v2/network/overview.mdx',
-  lastEdited: '2019-09-24T17:47:39.000Z'
+  lastEdited: '2019-10-22T21:51:28.000Z'
 }
 
 The ZEIT Network layer sits in-between the internet and your Now deployments. This type of network topology is sometimes called a [Content Delivery Network](https://en.wikipedia.org/wiki/Content_delivery_network) or CDN.
@@ -14,7 +14,7 @@ The ZEIT Network has many responsibilities, but most importantly, it is responsi
 
 ## Regions
 
-In order to route requests as fast as possible, the Network layer is running in dozens of locations across the world. In all of these locations (called **Regions**), you can create **Deployments** that create [Builds](/docs/v2/advanced/builders/) outputting **[Serverless Functions](/docs/v2/advanced/concepts/serverless-functions/)** and/or **Static Files.** The full list of regions can be found [here](/docs/v2/platform/regions-and-providers/).
+In order to route requests as fast as possible, the Network layer is running in dozens of locations across the world. In all of these locations (called **Regions**), you can create **Deployments** that create [Builds](/docs/v2/advanced/builders/) outputting **[Serverless Functions](/docs/v2/serverless-functions/introduction/)** and/or **Static Files.** The full list of regions can be found [here](/docs/v2/platform/regions-and-providers/).
 
 In turn, the Network layer will automatically forward incoming requests to the closest location in which your **Serverless Function** is running (**Static Files** are always distributed across the whole network, thus not location-specific).
 

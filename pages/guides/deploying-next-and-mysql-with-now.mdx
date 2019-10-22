@@ -18,7 +18,7 @@ export const meta = {
     process.env.ASSETS
   }/guides/deploying-next-mysql-with-now/deploying-next-mysql-with-now.png`,
   editUrl: 'pages/guides/deploying-next-and-mysql-with-now.mdx',
-  lastEdited: '2019-10-14T12:32:29.000Z'
+  lastEdited: '2019-10-22T21:51:28.000Z'
 }
 
 In this guide, we will walk you through creating and [deploying](/docs/v2/deployments/basics/) a [Next.js](https://nextjs.org/) app with the most popular open source database in the world, [MySQL](https://www.mysql.com/), on [ZEIT Now](/docs/v2).
@@ -91,7 +91,7 @@ When this is complete, add [`serverless-mysql`](https://github.com/jeremydaly/se
 
 Adding [`serverless-mysql`](https://github.com/jeremydaly/serverless-mysql) to the project will allow you to make connections to your MySQL database. In addition to this, it also **manages connections**, ensuring you do not 'max out' the available connections.
 
-Managing MySQL connections is an essential part of using it **successfully in a serverless environment**. This is because [Serverless Functions](/docs/v2/advanced/concepts/serverless-functions/) will create multiple database connections as traffic increases. Therefore, all connections can be consumed quickly unless managed correctly - this is **all handled for you** by [`serverless-mysql`](https://github.com/jeremydaly/serverless-mysql).
+Managing MySQL connections is an essential part of using it **successfully in a serverless environment**. This is because [Serverless Functions](/docs/v2/serverless-functions/introduction/) will create multiple database connections as traffic increases. Therefore, all connections can be consumed quickly unless managed correctly - this is **all handled for you** by [`serverless-mysql`](https://github.com/jeremydaly/serverless-mysql).
 
 <Note>
   Using <InlineCode>sql-template-strings</InlineCode> is strongly recommended to
@@ -178,7 +178,7 @@ Your `db.js` file performs the following functions:
   prevents your app from exhausting all available connections.
 </Note>
 
-Now you have a reusable database connection, perfectly suited for a [serverless](/docs/v2/advanced/concepts/serverless-functions/) environment.
+Now you have a reusable database connection, perfectly suited for a [serverless](/docs/v2/serverless-functions/introduction/) environment.
 
 ## Step 4: Creating Your Node.js API
 
@@ -239,7 +239,7 @@ Your `index.js` file performs the following functions:
   </GenericLink>.
 </Note>
 
-That is all the API code required to successfully use pagination in a [serverless](/docs/v2/advanced/concepts/serverless-functions/) environment.
+That is all the API code required to successfully use pagination in a serverless environment.
 
 Next, create a `profile.js` file in your `/profiles` directory containing the code below:
 

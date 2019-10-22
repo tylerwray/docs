@@ -143,7 +143,7 @@
     "url": "/guides/deploying-next-and-mysql-with-now",
     "image": "undefined/guides/deploying-next-mysql-with-now/deploying-next-mysql-with-now.png",
     "editUrl": "pages/guides/deploying-next-and-mysql-with-now.mdx",
-    "lastEdited": "2019-10-14T12:32:29.000Z"
+    "lastEdited": "2019-10-22T21:51:28.000Z"
   },
   {
     "title": "Create and Deploy a Next.js and Prismic App with ZEIT Now",
@@ -309,7 +309,7 @@
     "authors": ["msweeneydev"],
     "url": "/guides/handling-node-request-body",
     "editUrl": "pages/guides/handling-node-request-body.mdx",
-    "lastEdited": "2019-09-24T17:47:39.000Z"
+    "lastEdited": "2019-10-22T21:51:28.000Z"
   },
   {
     "title": "Migrate to ZEIT Now",
@@ -318,7 +318,7 @@
     "authors": ["msweeneydev", "timothy", "skllcrn"],
     "url": "/guides/migrate-to-zeit-now",
     "editUrl": "pages/guides/migrate-to-zeit-now.mdx",
-    "lastEdited": "2019-09-24T17:47:39.000Z"
+    "lastEdited": "2019-10-22T21:51:28.000Z"
   },
   {
     "title": "Prevent Uploading Source Paths with `.nowignore` on ZEIT Now",
@@ -336,7 +336,7 @@
     "authors": ["timothy"],
     "url": "/guides/redirect-from-www",
     "editUrl": "pages/guides/redirect-from-www.mdx",
-    "lastEdited": "2019-10-14T12:32:29.000Z"
+    "lastEdited": "2019-10-22T21:51:28.000Z"
   },
   {
     "title": "Setup a GoDaddy Domain with ZEIT Now",

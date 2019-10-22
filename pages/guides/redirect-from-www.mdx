@@ -12,7 +12,7 @@ export const meta = {
   authors: ['timothy'],
   url: '/guides/redirect-from-www',
   editUrl: 'pages/guides/redirect-from-www.mdx',
-  lastEdited: '2019-10-14T12:32:29.000Z'
+  lastEdited: '2019-10-22T21:51:28.000Z'
 }
 
 Redirecting is useful for a variety of situations, including redirecting a visitor that goes to your domain with `www.` prefixing the URL to [your domain](/docs/v2/custom-domains) without that prefix.
@@ -77,7 +77,7 @@ To push your deployment into production using a [production domain](/docs/v2/cus
 
 <Snippet dark text="now --prod" />
 
-Now, when visiting either the production domain (www.your-domain.com), a [staging URL](/docs/v2/custom-domains#deploying-with-your-domain), or a [deployment URL](/docs/v2/advanced/concepts/urls/), the visitor will get redirected to the location set as defined by the [`routes` property](/docs/configuration#routes) in the `now.json` file.
+Now, when visiting either the production domain (www.your-domain.com), a [staging URL](/docs/v2/custom-domains#deploying-with-your-domain), or a deployment URL, the visitor will get redirected to the location set as defined by the [`routes` property](/docs/configuration#routes) in the `now.json` file.
 
 export default ({ children }) => <Guide meta={meta}>{children}</Guide>
 
