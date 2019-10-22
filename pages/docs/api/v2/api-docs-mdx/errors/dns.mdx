@@ -1,9 +1,8 @@
-import Example from '~/components/example'
 import { Code } from '~/components/text/code'
 
 export const meta = {
   editUrl: 'pages/docs/api/v2/api-docs-mdx/errors/dns.mdx',
-  lastEdited: '2019-01-04T22:52:33.000Z'
+  lastEdited: '2019-10-17T14:44:04.000Z'
 }
 
 ## DNS Errors
@@ -14,24 +13,20 @@ These error code could happen when using any [DNS related endpoint](#endpoints/d
 
 The DNS record key `name` is required and was not provided. It should be either a subdomain or `@` for the domain itself.
 
-<Example>
-  <Code lang="json">{`{
+<Code lang="json">{`{
   "error": {
     "code": "missing_name",
     "message": "Missing \`name\` parameter"
   }
 }`}</Code>
-</Example>
 
 ### Missing DNS Record Type
 
 The DNS record key `name` is required and was not provided. It could be [any valid DNS record](https://en.wikipedia.org/wiki/List_of_DNS_record_types).
 
-<Example>
-  <Code lang="json">{`{
+<Code lang="json">{`{
   "error": {
     "code": "missing_type",
     "message": "Missing \`type\` parameter"
   }
 }`}</Code>
-</Example>

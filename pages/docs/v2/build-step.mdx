@@ -18,7 +18,7 @@ export const meta = {
   title: 'Build Step',
   description: 'Providing ZEIT Now with a build step.',
   editUrl: 'pages/docs/v2/build-step.mdx',
-  lastEdited: '2019-10-14T14:21:56.000Z'
+  lastEdited: '2019-10-22T15:47:35.000Z'
 }
 
 When you make a deployment with ZEIT Now, the first step is the build step. Now recognizes a custom `build` script, with that build script outputting your app into the `public` directory.
@@ -141,6 +141,12 @@ process.env.VARIABLE_NAME
 </Caption>
 
 Now, whenever the `process.env.VARIABLE_NAME` key is used, it will provide the application's build step with the value declared by the referenced **Now Secret**.
+
+### Updating Environment Variables
+
+Environment variables are made available to the build step, meaning that they do not update in the application unless it is redeployed.
+
+If you change the value of a [Now Secret](#adding-secrets) or environment variable and want your application to be aware of this, you should create a new deployment.
 
 ### Reserved Variables
 

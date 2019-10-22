@@ -1,7 +1,6 @@
 import Doc from '~/components/layout/docs'
 import { Image } from '~/components/media'
 import Caption from '~/components/text/caption'
-import Example from '~/components/example'
 import Note from '~/components/text/note'
 import { Code } from '~/components/text/code'
 import { GenericLink } from '~/components/text/link'
@@ -11,14 +10,14 @@ export const meta = {
   description:
     'Deploy Hooks allow you to create URLs that accept HTTP POST requests to trigger deployments. Each URL correspond to a branch of a GitHub or GitLab repository linked to the project.',
   editUrl: 'pages/docs/v2/advanced/deploy-hooks.mdx',
-  lastEdited: '2019-08-27T12:25:33.000Z'
+  lastEdited: '2019-10-17T14:44:04.000Z'
 }
 
 Deploy Hooks allow you to create URLs that accept HTTP POST requests in order to trigger deployments, to re-run the [Build Step](/docs/v2/build-step), from outside ZEIT. These URLs are uniquely linked to your project, repository, and branch, so there is no need to use any authentication mechanism or provide any payload to the POST request.
 
 This feature allows you to integrate ZEIT Now deployments with other systems getting:
 
-- Automatic deploments by hooking into content changes in Headless CMSs.
+- Automatic deployments by hooking into content changes in Headless CMSs.
 - Scheduled deployments by configuring Cron Jobs to trigger the deploy hook.
 - Forced deployments by using a terminal or any other system.
 
@@ -53,12 +52,11 @@ Once you have selected a branch and chosen a name from the "Deploy Hook" setting
 
 To trigger a Deploy Hook, send a POST request to the provided URL. Use the following example's command from your terminal with your own Deploy Hook to test.
 
-<Example>
-  <span>Example Deploy Hook trigger HTTP POST request.</span>
+#### Example Request
 
 <Code>{`curl -X POST https://api.zeit.co/v1/integrations/deploy/QmcwKGEbAyFtfybXBxvuSjFT54dc5dRLmAYNB5jxxXsbeZ/hUg65Lj4CV`}</Code>
 
-Example successful (**200**) response:
+#### Example Response
 
 <Code lang="json">{`{
   "job": {
@@ -69,7 +67,6 @@ Example successful (**200**) response:
 }
 `}</Code>
 <Caption>Information for a successful Deploy Hook job.</Caption>
-</Example>
 
 <Note>
   You do not need to add any authorization header or use any token as the URL

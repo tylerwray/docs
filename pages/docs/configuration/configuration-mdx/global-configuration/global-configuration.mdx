@@ -1,5 +1,4 @@
 import Card from '~/components/card'
-import Example from '~/components/example'
 import { Code, InlineCode } from '~/components/text/code'
 import { P } from '~/components/text'
 import { GenericLink } from '~/components/text/link'
@@ -8,7 +7,7 @@ import Note from '~/components/text/note'
 export const meta = {
   editUrl:
     'pages/docs/configuration/configuration-mdx/global-configuration/global-configuration.mdx',
-  lastEdited: '2019-10-14T12:32:29.000Z'
+  lastEdited: '2019-10-17T14:44:04.000Z'
 }
 
 # Global
@@ -33,11 +32,9 @@ The following options are all of the options that can be used by users to config
 
 This option tells [Now CLI](/download) which context is currently active. If this property exists and contains a team ID, that team is used as the scope for deployments, otherwise if this property does not exist, the user's personal account is used.
 
-<Example>
-  <Code lang="json">{`{
+<Code lang="json">{`{
   "currentTeam": "team_ofwUZockJlL53hINUGCc1ONW"
 }`}</Code>
-</Example>
 
 ### api
 
@@ -47,11 +44,9 @@ This option tells [Now CLI](/download) which context is currently active. If thi
 
 This option selects which API Origin [Now CLI](/download) should use when performing an action requiring the API.
 
-<Example>
-  <Code lang="json">{`{
+<Code lang="json">{`{
   "api": "https://api-sfo1.zeit.co"
 }`}</Code>
-</Example>
 
 ### collectMetrics
 
@@ -61,11 +56,9 @@ This option selects which API Origin [Now CLI](/download) should use when perfor
 
 This option defines whether [Now CLI](/download) should collect anonymous metrics about which commands are invoked the most, how long they take to run, and which errors customers are running into.
 
-<Example>
-  <Code lang="json">{`{
+<Code lang="json">{`{
   "collectMetrics": true
 }`}</Code>
-</Example>
 
 ## auth.json
 
