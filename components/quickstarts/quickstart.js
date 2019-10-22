@@ -1,38 +1,50 @@
 import Link from 'next/link'
-import { H5 } from '~/components/text'
+import { H4 } from '~/components/text'
+import { Image } from '~/components/media'
 
-export default function Topic({ topic, icons, href }) {
+export default function({ quickstart, icons, href, deployUrl }) {
   return (
-    <div className="topic">
+    <div className="quickstart">
       <Link href={href}>
         <a>
-          <span className="topic-icons">
+          <span className="quickstart-icons">
             {Array.isArray(icons) ? (
               icons.map(icon =>
                 typeof icon === 'object' ? (
                   <span key={icon.src} style={{ backgroundColor: icon.color }}>
-                    <img alt={`Icon for ${topic}`} src={icon.src} />
+                    <img alt={`Icon for ${quickstart}`} src={icon.src} />
                   </span>
                 ) : (
-                  <img alt={`Icon for ${topic}`} key={icon} src={icon} />
+                  <img alt={`Icon for ${quickstart}`} key={icon} src={icon} />
                 )
               )
             ) : typeof icons === 'object' ? (
               <span style={{ backgroundColor: icons.color }}>
-                <img alt={`Icon for ${topic}`} src={icons.src} />
+                <img alt={`Icon for ${quickstart}`} src={icons.src} />
               </span>
             ) : (
-              <img alt={`Icon for ${topic}`} src={icons} />
+              <img alt={`Icon for ${quickstart}`} src={icons} />
             )}
           </span>
-          <H5>{topic}</H5>
+          <H4>{quickstart}</H4>
           <span className="note">Read the guide</span>
+          {deployUrl && (
+            <a href={deployUrl} className="deploy-button">
+              <Image
+                src="https://zeit.co/button"
+                width={104}
+                height={36}
+                align="left"
+              />
+            </a>
+          )}
         </a>
       </Link>
       <style jsx>{`
-        .topic :global(a) {
+        .quickstart > :global(a) {
           border-radius: 4px;
           border: 1px solid var(--accents-2);
+          color: var(--accents-6);
           padding: 24px;
           display: flex;
           flex-direction: column;
@@ -40,27 +52,35 @@ export default function Topic({ topic, icons, href }) {
           text-decoration: none;
         }
 
-        .topic :global(a:hover) {
+        .quickstart > :global(a:hover) {
           box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.12);
           border-color: transparent;
         }
 
-        .topic-icons {
+        .quickstart .deploy-button {
+          margin-top: 24px;
+        }
+
+        .quickstart :global(figure) {
+          margin: 0;
+        }
+
+        .quickstart-icons {
           display: flex;
           width: 100%;
         }
 
-        .topic :global(a:hover h5) {
+        .quickstart :global(a:hover h4) {
           color: var(--geist-link-color);
         }
 
-        .topic :global(h5) {
+        .quickstart :global(h4) {
           margin-bottom: 8px;
           margin-top: 24px;
           transition: color 0.1s ease;
         }
 
-        .topic-icons span {
+        .quickstart-icons span {
           width: 48px;
           height: 48px;
           border-radius: 50%;
@@ -72,17 +92,17 @@ export default function Topic({ topic, icons, href }) {
           padding: 8px;
         }
 
-        .topic-icons > span:not(:last-child),
-        .topic-icons > img:not(:last-child) {
+        .quickstart-icons > span:not(:last-child),
+        .quickstart-icons > img:not(:last-child) {
           margin-right: 8px;
         }
 
-        .topic-icons > span img {
+        .quickstart-icons > span img {
           width: 100%;
           max-height: 100%;
         }
 
-        .topic-icons > img {
+        .quickstart-icons > img {
           width: 48px;
           height: 48px;
         }

@@ -1,0 +1,127 @@
+import Doc from '~/components/layout/docs'
+import Quickstarts, { Quickstart } from '~/components/quickstarts'
+
+export const meta = {
+  title: 'Quickstarts',
+  description:
+    'An introduction to the ZEIT Now platform and how to get started deploying any kind of application.',
+  editUrl: 'pages/docs/v2/quickstarts.mdx',
+  lastEdited: '2019-10-22T10:40:49.000Z'
+}
+
+Quickstarts let you get started quickly. The following quickstarts are paired with guides and a deploy button, based on [ZEIT Now examples](https://github.com/zeit/now-examples), to help you get going with your project as fast as possible.
+
+<Quickstarts>
+  <Quickstart
+    quickstart="Next.js"
+    href="/guides/deploying-nextjs-with-now/"
+    icons={`${process.env.ASSETS}/topics/icons/next.svg`}
+    deployUrl="https://zeit.co/new/project?template=https://github.com/zeit/now-examples/tree/master/nextjs"
+  />
+  <Quickstart
+    quickstart="Gatsby"
+    href="/guides/deploying-gatsby-with-now/"
+    icons={`${process.env.ASSETS}/topics/icons/gatsby.svg`}
+    deployUrl="https://zeit.co/new/project?template=https://github.com/zeit/now-examples/tree/master/gatsby"
+  />
+  <Quickstart
+    quickstart="Vue.js"
+    href="/guides/deploying-vuejs-to-now/"
+    icons={`${process.env.ASSETS}/topics/icons/vue.svg`}
+    deployUrl="https://zeit.co/new/project?template=https://github.com/zeit/now-examples/tree/master/vue"
+  />
+  <Quickstart
+    quickstart="Angular"
+    href="/guides/deploying-angular-with-now/"
+    icons={`${process.env.ASSETS}/topics/icons/angular.svg`}
+    deployUrl="https://zeit.co/new/project?template=https://github.com/zeit/now-examples/tree/master/angular"
+  />
+  <Quickstart
+    quickstart="Create React App"
+    href="/guides/deploying-react-with-now-cra/"
+    icons={{
+      src: `${process.env.ASSETS}/topics/icons/react.svg`,
+      color: '#20232a'
+    }}
+    deployUrl="https://zeit.co/new/project?template=https://github.com/zeit/now-examples/tree/master/create-react-app"
+  />
+  <Quickstart
+    quickstart="Charge"
+    href="/guides/deploying-charge-with-now/"
+    icons={`${process.env.ASSETS}/topics/icons/charge.svg`}
+    deployUrl="https://zeit.co/new/project?template=https://github.com/zeit/now-examples/tree/master/charge"
+  />
+  <Quickstart
+    quickstart="Hugo"
+    href="/guides/deploying-hugo-with-now/"
+    icons={{
+      src: `${process.env.ASSETS}/topics/icons/hugo.svg`,
+      color: '#0a1921'
+    }}
+    deployUrl="https://zeit.co/new/project?template=https://github.com/zeit/now-examples/tree/master/Hugo"
+  />
+  <Quickstart
+    quickstart="VuePress"
+    href="/guides/deploying-vuepress-to-now/"
+    icons={`${process.env.ASSETS}/topics/icons/vue.svg`}
+    deployUrl="https://zeit.co/new/project?template=https://github.com/zeit/now-examples/tree/master/vuepress"
+  />
+  <Quickstart
+    quickstart="MDX Deck"
+    href="/guides/deploying-mdx-deck-with-zeit-now"
+    icons={`${process.env.ASSETS}/topics/icons/mdx-deck.png`}
+    deployUrl="https://zeit.co/new/project?template=https://github.com/zeit/now-examples/tree/master/mdx-deck"
+  />
+  <Quickstart
+    quickstart="Ember.js"
+    href="/guides/deploying-ember-with-zeit-now"
+    icons={`${process.env.ASSETS}/topics/icons/ember.png`}
+    deployUrl="https://zeit.co/new/project?template=https://github.com/zeit/now-examples/tree/master/ember"
+  />
+  <Quickstart
+    quickstart="Docusaurus"
+    href="/guides/deploying-docusaurus-with-zeit-now"
+    icons={{
+      src: `${process.env.ASSETS}/topics/icons/docusaurus.svg`,
+      color: '#2b3137'
+    }}
+    deployUrl="https://zeit.co/new/project?template=https://github.com/zeit/now-examples/tree/master/docusaurus"
+  />
+  <Quickstart
+    quickstart="Gridsome"
+    href="/guides/deploying-gridsome-with-zeit-now"
+    icons={{
+      src: `${process.env.ASSETS}/topics/icons/gridsome.svg`,
+      color: '#0d2538'
+    }}
+    deployUrl="https://zeit.co/new/project?template=https://github.com/zeit/now-examples/tree/master/ember"
+  />
+  <Quickstart
+    quickstart="Preact"
+    href="/guides/deploying-preact-with-zeit-now"
+    icons={`${process.env.ASSETS}/topics/icons/preact.svg`}
+    deployUrl="https://zeit.co/new/project?template=https://github.com/zeit/now-examples/tree/master/preact"
+  />
+  <Quickstart
+    quickstart="Nuxt.js"
+    href="/guides/deploying-nuxtjs-with-zeit-now"
+    icons={`${process.env.ASSETS}/topics/icons/nuxt.svg`}
+    deployUrl="https://zeit.co/new/project?template=https://github.com/zeit/now-examples/tree/master/nuxt"
+  />
+  <Quickstart
+    quickstart="Eleventy"
+    href="/guides/deploying-eleventy-with-zeit-now"
+    icons={{
+      src: `${process.env.ASSETS}/topics/icons/eleventy.png`,
+      color: '#222'
+    }}
+    deployUrl="https://zeit.co/new/project?template=https://github.com/zeit/now-examples/tree/master/eleventy"
+  />
+
+</Quickstarts>
+
+export default ({ children }) => <Doc meta={meta}>{children}</Doc>
+
+export const config = {
+  amp: 'hybrid'
+}
