@@ -15,8 +15,8 @@ export const meta = {
 
 With ZEIT Now, you can deploy Serverless Functions, which are pieces of code written with [backend languages](/docs/v2/serverless-functions/supported-languages/#supported-languages) that take an HTTP request and provide a response.
 
-You can use Serverless Functions to handle user authentication, form submission, database queries, custom
-slack commands, and more.
+You can use Serverless Functions to handle user authentication, form submission, run database queries, call
+slack API's, and more.
 
 ## Creating Serverless Functions
 
@@ -78,14 +78,14 @@ module.exports = (req, res) => {
   .
 </Caption>
 
-The above example echoes the `body`, path `query`, and `cookie`s, passed with the request object, as a JSON object using helper methods provided through the [Request and Response](/docs/v2/serverless-functions/supported-languages/#node.js-request-and-response-objects).
+The above example echoes the `body`, path `query`, and `cookie`s, passed with the request object, as a JSON object using helper methods provided through the [Request and Response](/docs/v2/serverless-functions/supported-languages/#node.js-request-and-response-objects) objects.
 
-Then, all you need to do, to have a live API, is deploy with [Now CLI](/download) from your terminal:
+Then, to test your API just deploy with [Now CLI](/download) from your terminal:
 
 <Snippet dark text="now" />
 <Caption>One-command deployment with <GenericLink href="/download">Now CLI</GenericLink>.</Caption>
 
-The resulting deployment will contain your Node.js Serverless Function and will provide you with a URL like the following, with your API ready to go: <https://node-echo-api.now-examples.now.sh/api/?name=zeit>
+The resulting deployment will be ready to go with your Node.js Serverless Function. It will provide you with a URL like the following: <https://node-echo-api.now-examples.now.sh/api/?name=zeit>
 
 ### More Examples and Supported Languages
 
@@ -102,11 +102,15 @@ You can use any of the Now examples by using the following command from [Now CLI
 
 By default, all files inside of the `/api` directory will be made available as Serverless Functions.
 
-If this behavior is not desired, for example you want a utilities folder inside of the `/api` directory, you can prefix files or folders with either `_` or `.` to prevent them from being created as Serverless Functions.
+If this behavior is not desired, you can prefix files or folders with either `_` or `.` to prevent them from being created as Serverless Functions.
 
-Therefore, if you keep your utility functions inside of `/api/_utils`, none of them will be created as Serverless Functions. This is because the parent folder is prefixed with `_`.
-
-If you kept your utility functions inside of `/api/utils`, one called `date.js` and the other `_time.js`, only `date.js` would be created as a Serverless Function.
+Here are some examples of which files will become Serverless Functions:
+```js
+`api/utils` // ✅ all files inside utils
+`api/_utils` // ❌ NO files inside _utils
+`api/utils/_time.js // ❌ `api/utils/_time` endpoint is NOT created
+`api/utils/date.js // ✅ `api/utils/date` endpoint created
+```
 
 ## Path Segments
 
